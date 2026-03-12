@@ -1,0 +1,26 @@
+.score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #84FF65;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  font-size: 36px;
+  font-weight: bold;
+  color: #2e2e2e;
+}
+
+.score-label {
+  text-align: center;
+  color: #777;
+  margin-top: -10px;
+}
+
+.score-compare {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  color: #555;
+}
