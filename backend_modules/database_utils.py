@@ -12,11 +12,12 @@ from pathlib import Path
 from dotenv import load_dotenv
 from supabase import create_client, Client
 
-# .env 파일 탐색: 프로젝트 루트 순으로 확인
-# 구조: 민석+혁준/backend_modules/database_utils.py
-_ROOT = Path(__file__).resolve().parent.parent  # 민석+혁준/
+# .env 파일 탐색: 모듈 디렉토리 → 프로젝트 루트 순으로 확인
+_MODULE_DIR = Path(__file__).resolve().parent      # backend_modules/
+_ROOT       = _MODULE_DIR.parent                   # kpmg7th_EDM_final/
 _ENV_PATHS = [
-    _ROOT / ".env",
+    _MODULE_DIR / ".env",   # backend_modules/.env (우선 탐색)
+    _ROOT       / ".env",   # kpmg7th_EDM_final/.env (fallback)
 ]
 
 def _load_env() -> None:
