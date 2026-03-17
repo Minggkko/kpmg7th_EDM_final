@@ -29,6 +29,8 @@ import MyPage from "./pages/MyPage";
 import ReportGenerate from "./pages/ReportGenerate";
 import StandardDataView from "./pages/StandardDataView";
 import ConsistencyCheck from "./pages/ConsistencyCheck";
+import UnverifiedResult from "./pages/UnverifiedResult";
+import ConsistencyCheck from "./pages/ConsistencyCheck";
 
 import "./App.css";
 
@@ -138,6 +140,8 @@ function App() {
         <Route path="/report-download" element={<ReportDownload isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
         <Route path="/report-generate" element={<ReportGenerate isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
         <Route path="/mypage" element={<MyPage isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
+        <Route path="/consistency-check" element={<ConsistencyCheck isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
+        <Route path="/unverified-result" element={<UnverifiedResult isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
         <Route path="/consistency-check" element={<ConsistencyCheck isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
 
       </Routes>
