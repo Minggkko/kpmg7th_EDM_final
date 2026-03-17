@@ -113,7 +113,7 @@ function ReportDraft({ isLoggedIn, onLogout }) {
             </div>
             <button
               style={s.nextBtn}
-              onClick={() => navigate("/report-download", { state: { fileName } })}
+              onClick={() => navigate("/report-download", { state: { fileName, standard: selectedStandard, generatedSections: edits } })}
             >
               다운로드 →
             </button>
@@ -217,7 +217,7 @@ function ReportDraft({ isLoggedIn, onLogout }) {
             <button style={s.secBtn} onClick={() => navigate(-1)}>← 이전</button>
             <button
               style={s.nextBtn}
-              onClick={() => navigate("/report-download", { state: { fileName } })}
+              onClick={() => navigate("/report-download", { state: { fileName, standard: selectedStandard, generatedSections: edits } })}
             >
               보고서 다운로드 →
             </button>
@@ -230,7 +230,7 @@ function ReportDraft({ isLoggedIn, onLogout }) {
 }
 
 const s = {
-  page: { minHeight: "100vh", background: "#F5F5F3", fontFamily: "'Inter', sans-serif", display: "flex", flexDirection: "column" },
+  page: { minHeight: "100vh", background: "#f8f9fa", fontFamily: "'Inter', sans-serif", display: "flex", flexDirection: "column" },
   body: { display: "flex", flex: 1 },
   main: { flex: 1, padding: "44px 48px" },
   header: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 28 },

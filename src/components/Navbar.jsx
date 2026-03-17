@@ -2,18 +2,16 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar({ isLoggedIn, onLogout }) {
   const navigate = useNavigate();
+
   const handleStartNow = () => {
-
-  const isLogin = localStorage.getItem("login");
-
-  if (isLogin === "true") {
-    navigate("/esg-select");
-  } else {
-    alert("로그인이 필요한 서비스입니다.");
-    navigate("/login");
-  }
-
-};
+    const isLogin = localStorage.getItem("login");
+    if (isLogin === "true") {
+      navigate("/esg-select");
+    } else {
+      alert("로그인이 필요한 서비스입니다.");
+      navigate("/login");
+    }
+  };
 
   return (
     <header style={styles.header}>
@@ -53,7 +51,17 @@ function Navbar({ isLoggedIn, onLogout }) {
         </a>
       </nav>
 
+      {/* ✅ 마이페이지 + 로그인/회원가입/Start Now 를 하나의 그룹으로 묶음 */}
       <div style={styles.navButtons}>
+        {isLoggedIn && (
+          <button
+            onClick={() => navigate("/mypage")}
+            style={styles.mypageBtn}
+          >
+            마이페이지
+          </button>
+        )}
+
         {isLoggedIn ? (
           <a
             onClick={() => {
@@ -87,8 +95,8 @@ function Navbar({ isLoggedIn, onLogout }) {
             <button
               style={styles.demoBtn}
               onClick={handleStartNow}
-              onMouseEnter={e => (e.currentTarget.style.background = "#492828")}
-              onMouseLeave={e => (e.currentTarget.style.background = "#656D3F")}
+              onMouseEnter={e => (e.currentTarget.style.background = "#5C6B2E")}
+              onMouseLeave={e => (e.currentTarget.style.background = "#84934A")}
             >
               Start Now
             </button>
@@ -137,7 +145,18 @@ const styles = {
   navButtons: {
     display: "flex",
     alignItems: "center",
-    gap: 18,
+    gap: 12,
+  },
+
+  mypageBtn: {
+    background: "transparent",
+    color: "#5C6B2E",
+    border: "1.5px solid #A8C070",
+    borderRadius: 8,
+    padding: "7px 16px",
+    fontSize: 13,
+    fontWeight: 600,
+    cursor: "pointer",
   },
 
   loginBtn: {
@@ -161,7 +180,7 @@ const styles = {
   },
 
   demoBtn: {
-    background: "#84934A",  // 앱 테마색
+    background: "#84934A",
     color: "#ffffff",
     border: "none",
     padding: "10px 22px",

@@ -58,6 +58,8 @@ function ReportDownload({ isLoggedIn, onLogout }) {
   const navigate = useNavigate();
   const location = useLocation();
   const fileName = location.state?.fileName || "uploaded_file.pdf";
+  const generatedSections = location.state?.generatedSections || {};
+  const stateStandard = location.state?.standard || null;
 
   const [selectedFormats, setSelectedFormats] = useState(["pdf"]);
   const [selectedStandard, setSelectedStandard] = useState("GRI");
@@ -70,12 +72,111 @@ function ReportDownload({ isLoggedIn, onLogout }) {
     );
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
+    if (selectedFormats.length === 0) return;
     setDownloading(true);
-    setTimeout(() => {
+    try {
+      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+        import("html2canvas"),
+        import("jspdf").then(m => ({ jsPDF: m.jsPDF })),
+      ]);
+
+      const today = new Date();
+      const dateStr = `${today.getFullYear()}. ${String(today.getMonth()+1).padStart(2,"0")}. ${String(today.getDate()).padStart(2,"0")}.`;
+
+      const container = document.createElement("div");
+      container.style.cssText = `
+        position:fixed; left:-9999px; top:0;
+        width:794px; background:white; padding:60px 64px;
+        font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+        color:#1a1a1a; font-size:14px; line-height:1.85; box-sizing:border-box;
+      `;
+      const esgSections = [
+        { id: "env_carbon", category: "환경 (E)", metric: "온실가스 배출량", standard: "GRI 305-1", data: { value: "12,450 tCO₂e", change: "-3.2%", year: 2023 } },
+        { id: "env_energy", category: "환경 (E)", metric: "에너지 사용량", standard: "GRI 302-1", data: { value: "84,200 MWh", renewable: "18.4%", year: 2023 } },
+        { id: "env_water", category: "환경 (E)", metric: "용수 사용량", standard: "GRI 303-5", data: { value: "19,200 톤", recycleRate: "62%", year: 2023 } },
+        { id: "soc_employee", category: "사회 (S)", metric: "임직원 현황", standard: "GRI 2-7", data: { total: "2,340명", female: "18.2%", permanent: "94.2%", year: 2023 } },
+        { id: "soc_safety", category: "사회 (S)", metric: "산업 안전", standard: "GRI 403-9", data: { rate: "0.42%", avg: "0.58%", year: 2023 } },
+        { id: "gov_board", category: "지배구조 (G)", metric: "이사회 독립성", standard: "GRI 2-9", data: { independence: "62.5%", audit: "100%", year: 2023 } },
+        { id: "gov_ethics", category: "지배구조 (G)", metric: "윤리 경영", standard: "GRI 205-3", data: { violations: "3건", training: "98.7%", year: 2023 } },
+      ];
+      const hasContent = Object.keys(generatedSections).length > 0;
+
+      container.innerHTML = `
+        <div style="width:100%;height:6px;background:#5C6B2E;margin-bottom:40px;border-radius:2px;"></div>
+        <div style="font-size:10px;color:#5C6B2E;font-weight:700;letter-spacing:0.1em;margin-bottom:8px;">지속가능경영보고서 · ${selectedStandard} 기준 · 초안</div>
+        <div style="font-size:28px;font-weight:700;color:#1a1a1a;margin-bottom:6px;">ESG 보고서 초안</div>
+        <div style="font-size:13px;color:#666;margin-bottom:4px;">${selectedStandard} 기준 ESG 지속가능경영보고서 초안입니다.</div>
+        <div style="font-size:11px;color:#aaa;margin-bottom:28px;">생성일: ${dateStr} &nbsp;|&nbsp; 원본 파일: ${fileName}</div>
+        <div style="height:1px;background:linear-gradient(90deg,#5C6B2E,#C8D4A0,transparent);margin-bottom:32px;"></div>
+
+        ${hasContent ? `
+          ${esgSections.map(sec => `
+            <div style="margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid #eee;">
+              <div style="font-size:10px;font-weight:700;color:#5C6B2E;letter-spacing:0.1em;margin-bottom:3px;">${sec.category}</div>
+              <div style="font-size:11px;color:#aaa;margin-bottom:4px;">${sec.standard}</div>
+              <div style="font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:10px;">${sec.metric}</div>
+              <div style="background:#FAFDF5;border-left:4px solid #5C6B2E;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#333;line-height:1.85;margin-bottom:10px;">
+                ${generatedSections[sec.id] || "초안이 생성되지 않았습니다."}
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                ${Object.entries(sec.data).map(([k,v]) => `<span style="background:#f5f5f0;border:1px solid #e0ddd6;border-radius:4px;padding:2px 8px;font-size:11px;color:#666;">${k}: ${v}</span>`).join("")}
+              </div>
+            </div>
+          `).join("")}
+        ` : `
+          <div style="font-size:16px;font-weight:700;margin-bottom:16px;">목차</div>
+          ${previewSections.map((sec, i) => `
+            <div style="display:flex;justify-content:space-between;padding:10px 14px;margin-bottom:6px;background:${i%2===0?'#fafaf8':'white'};border-radius:6px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="width:22px;height:22px;border-radius:50%;background:rgba(92,107,46,0.12);color:#5C6B2E;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">${i+1}</span>
+                <span style="font-size:13px;font-weight:500;">${sec.label}</span>
+              </div>
+              <span style="font-size:12px;color:#aaa;">${sec.pages}</span>
+            </div>
+          `).join("")}
+        `}
+
+        <div style="margin-top:32px;padding:14px 18px;background:#FAFDF5;border:1px solid #A8C070;border-radius:8px;font-size:11px;color:#5C6B2E;line-height:1.7;">
+          ※ 본 초안은 AI가 자동 생성한 내용으로, 공식 제출 전 ESG 전문가의 검토 및 수정이 반드시 필요합니다.<br/>
+          생성 기준서: ${selectedStandard} &nbsp;|&nbsp; 생성일: ${dateStr}
+        </div>
+        <div style="margin-top:28px;padding-top:12px;border-top:1px solid #eee;display:flex;justify-content:space-between;font-size:10px;color:#bbb;">
+          <span>ESG 지속가능경영보고서 초안</span><span>${dateStr}</span>
+        </div>
+      `;
+      document.body.appendChild(container);
+      await document.fonts.ready;
+      await new Promise(r => setTimeout(r, 400));
+
+      const canvas = await html2canvas(container, {
+        scale: 2, useCORS: true, backgroundColor: "#ffffff", width: 794,
+      });
+      document.body.removeChild(container);
+
+      const imgData = canvas.toDataURL("image/png");
+      for (const fmtId of selectedFormats) {
+        const fmt = formats.find(f => f.id === fmtId);
+        const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+        const pdfW = 210, pdfH = 297;
+        const imgH = (canvas.height * pdfW) / canvas.width;
+        let posY = 0;
+        while (posY < imgH) {
+          if (posY > 0) pdf.addPage();
+          pdf.addImage(imgData, "PNG", 0, -posY, pdfW, imgH);
+          posY += pdfH;
+        }
+        const todayStr = `${today.getFullYear()}${String(today.getMonth()+1).padStart(2,"0")}${String(today.getDate()).padStart(2,"0")}`;
+        pdf.save(`ESG_보고서_${selectedStandard}_${todayStr}.pdf`);
+      }
+
       setDownloading(false);
       setDone(true);
-    }, 2000);
+    } catch (e) {
+      console.error("다운로드 오류:", e);
+      alert("다운로드 중 오류: " + e.message);
+      setDownloading(false);
+    }
   };
 
   return (
@@ -232,7 +333,7 @@ function ReportDownload({ isLoggedIn, onLogout }) {
 }
 
 const s = {
-  page: { minHeight: "100vh", background: "#F5F5F3", fontFamily: "'Inter', sans-serif", display: "flex", flexDirection: "column" },
+  page: { minHeight: "100vh", background: "#f8f9fa", fontFamily: "'Inter', sans-serif", display: "flex", flexDirection: "column" },
   body: { display: "flex", flex: 1 },
   main: { flex: 1, padding: "44px 48px" },
   header: { marginBottom: 28 },

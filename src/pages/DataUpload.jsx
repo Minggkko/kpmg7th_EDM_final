@@ -18,7 +18,7 @@ function DataUpload({ isLoggedIn, onLogout }) {
 
   const handleStart = () => {
     if (!file) return;
-    navigate("/data-process", {
+    navigate("/anomaly-result", {
       state: { fileName: file.name }
     });
   };
@@ -42,7 +42,7 @@ function DataUpload({ isLoggedIn, onLogout }) {
 
           <label style={styles.uploadBox}>
 
-            <UploadCloud size={48} color="#9ca3af" />
+            <UploadCloud size={48} color="#aeb784" />
 
             <p style={styles.uploadText}>
               파일을 드래그하거나 클릭하여 업로드
@@ -89,8 +89,8 @@ const styles = {
 
   page: {
     minHeight: "100vh",
-    background: "#F5F5F3",
-    fontFamily: "'Inter', sans-serif",
+    background: "#FAF8F0",
+    fontFamily: "'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
     display: "flex",
     flexDirection: "column",
   },
@@ -118,7 +118,7 @@ const styles = {
   },
 
   uploadBox: {
-    border: "2px dashed #d1d5db",
+    border: "2px dashed #c8be96",
     borderRadius: 16,
     padding: "80px",
     textAlign: "center",
@@ -158,7 +158,7 @@ const styles = {
     padding: "15px 32px",
     borderRadius: 12,
     border: "none",
-    background: "#d1d5db",
+    background: "#c8be96",
     color: "#ffffff",
     fontWeight: 600,
     fontSize: 16,

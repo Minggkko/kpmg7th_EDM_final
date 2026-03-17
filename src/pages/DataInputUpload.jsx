@@ -198,7 +198,7 @@ function DataInputUpload({ isLoggedIn, onLogout }) {
 }
 
 const s = {
-  page: { minHeight: "100vh", background: "#F5F5F3", fontFamily: "'Inter', sans-serif", display: "flex", flexDirection: "column" },
+  page: { minHeight: "100vh", background: "#f8f9fa", fontFamily: "'Inter', sans-serif", display: "flex", flexDirection: "column" },
   body: { display: "flex", flex: 1 },
   main: { flex: 1, padding: "44px 48px" },
   header: { marginBottom: 28 },

@@ -140,17 +140,17 @@ function IssueSelect({ isLoggedIn, onLogout }) {
                     onClick={() => toggleIssue(issue.title)}
                     style={{
                       ...styles.issueCard,
-                      borderColor: active ? "#84934A" : "#e5e5e5",
-                      background: active ? "rgba(132,147,74,0.06)" : "white",
+                      borderColor: active ? "#41431b" : "#e5e5e5",
+                      background: active ? "rgba(65,67,27,0.06)" : "white",
                     }}
                   >
                     <div style={styles.issueLeft}>
                       <div
                         style={{
                           ...styles.checkCircle,
-                          background: active ? "#84934A" : "white",
-                          color: active ? "white" : "#84934A",
-                          borderColor: "#84934A",
+                          background: active ? "#41431b" : "white",
+                          color: active ? "white" : "#41431b",
+                          borderColor: "#41431b",
                         }}
                       >
                         {active ? "✓" : ""}
@@ -202,7 +202,7 @@ function IssueSelect({ isLoggedIn, onLogout }) {
 const styles = {
   page: {
     minHeight: "100vh",
-    background: "#F5F5F3",
+    background: "#faf8f0",
     fontFamily: "'Inter', sans-serif",
     display: "flex",
     flexDirection: "column",
@@ -237,8 +237,8 @@ const styles = {
     marginBottom: 28,
   },
   selectedTypeCard: {
-    border: "1.5px solid #dfe5cf",
-    background: "rgba(132,147,74,0.05)",
+    border: "1.5px solid #c8c9a8",
+    background: "rgba(65,67,27,0.05)",
     borderRadius: 14,
     padding: "18px 20px",
     marginBottom: 24,
@@ -252,7 +252,7 @@ const styles = {
     width: 36,
     height: 36,
     borderRadius: 10,
-    background: "#84934A",
+    background: "#41431b",
     color: "white",
     fontSize: 16,
     fontWeight: 700,
@@ -345,7 +345,7 @@ const styles = {
     cursor: "pointer",
   },
   primaryBtn: {
-    background: "#84934A",
+    background: "#41431b",
     color: "white",
     border: "none",
     borderRadius: 8,

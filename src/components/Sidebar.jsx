@@ -6,7 +6,9 @@ import {
   Upload,
   Settings,
   FileText,
-  BookOpen
+  BookOpen,
+  Database,
+  ShieldCheck
 } from "lucide-react";
 
 const steps = [
@@ -14,8 +16,10 @@ const steps = [
   { label: "중대성 이슈 선택", path: "/issue-select", step: "issue", icon: ClipboardList },
   { label: "대시보드", path: "/dashboard", step: "dashboard", icon: BarChart3 },
   { label: "데이터 업로드", path: "/data-upload", step: "upload", icon: Upload },
+  { label: "표준화 데이터 조회", path: "/standard-data", step: "standard", icon: Database },
+  { label: "정합성 검증", path: "/consistency-check", step: "consistency", icon: ShieldCheck },
   { label: "데이터 분석", path: "/data-process", step: "process", icon: Settings },
-  { label: "레포트 생성", path: "/report", step: "report", icon: FileText }
+  { label: "레포트 생성", path: "/report-generate", step: "report", icon: FileText }
 ];
 
 const extra = [

@@ -48,7 +48,7 @@ return(
 
 const styles={
 
-page:{minHeight:"100vh",background:"#F5F5F3",display:"flex",flexDirection:"column"},
+page:{minHeight:"100vh",background:"#f8f9fa",display:"flex",flexDirection:"column"},
 
 body:{display:"flex",flex:1},
 

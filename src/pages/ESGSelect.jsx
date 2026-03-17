@@ -60,9 +60,9 @@ function ESGSelect({ isLoggedIn, onLogout }) {
                     key={cat.id}
                     style={{
                       ...styles.card,
-                      borderColor: isSelected ? "#84934A" : "#e0e0e0",
+                      borderColor: isSelected ? "#41431b" : "#e0e0e0",
                       background: isSelected
-                        ? "rgba(132,147,74,0.04)"
+                        ? "rgba(65,67,27,0.04)"
                         : "white",
                     }}
                   >
@@ -70,7 +70,7 @@ function ESGSelect({ isLoggedIn, onLogout }) {
                       <div
                         style={{
                           ...styles.letterBadge,
-                          background: isSelected ? "#84934A" : "#b5c077",
+                          background: isSelected ? "#41431b" : "#aeb784",
                         }}
                       >
                         {cat.letter}
@@ -84,15 +84,15 @@ function ESGSelect({ isLoggedIn, onLogout }) {
                       type="button"
                       style={{
                         ...styles.selectBtn,
-                        background: isSelected ? "#84934A" : "white",
-                        color: isSelected ? "white" : "#84934A",
-                        border: "1.5px solid #84934A",
+                        background: isSelected ? "#41431b" : "white",
+                        color: isSelected ? "white" : "#41431b",
+                        border: "1.5px solid #41431b",
                       }}
                       onClick={() => setSelected(cat.id)}
                       onMouseEnter={(e) => {
                         if (!isSelected) {
                           e.currentTarget.style.background =
-                            "rgba(132,147,74,0.1)";
+                            "rgba(174,183,132,0.15)";
                         }
                       }}
                       onMouseLeave={(e) => {
@@ -119,7 +119,7 @@ function ESGSelect({ isLoggedIn, onLogout }) {
               style={styles.homeBtn}
               onClick={() => navigate("/")}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "#656D3F";
+                e.currentTarget.style.borderColor = "#aeb784";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = "#ccc";
@@ -138,10 +138,10 @@ function ESGSelect({ isLoggedIn, onLogout }) {
               disabled={!selected}
               onClick={handleNext}
               onMouseEnter={(e) => {
-                if (selected) e.currentTarget.style.background = "#656D3F";
+                if (selected) e.currentTarget.style.background = "#aeb784";
               }}
               onMouseLeave={(e) => {
-                if (selected) e.currentTarget.style.background = "#84934A";
+                if (selected) e.currentTarget.style.background = "#41431b";
               }}
             >
               다음: 이슈 선택 →
@@ -156,7 +156,7 @@ function ESGSelect({ isLoggedIn, onLogout }) {
 const styles = {
   page: {
     minHeight: "100vh",
-    background: "#F5F5F3",
+    background: "#faf8f0",
     fontFamily: "'Inter', sans-serif",
     display: "flex",
     flexDirection: "column",
@@ -269,7 +269,7 @@ const styles = {
     transition: "border-color 0.2s",
   },
   nextBtn: {
-    background: "#84934A",
+    background: "#41431b",
     color: "white",
     border: "none",
     borderRadius: 8,

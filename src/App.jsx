@@ -22,9 +22,13 @@ import DataInputRequest from "./pages/DataInputRequest";
 import DataInputUpload from "./pages/DataInputUpload";
 import DataAggregation from "./pages/DataAggregation";
 
-// ✅ SR 보고서 2본
+// SR 보고서
 import ReportDraft from "./pages/ReportDraft";
 import ReportDownload from "./pages/ReportDownload";
+import MyPage from "./pages/MyPage";
+import ReportGenerate from "./pages/ReportGenerate";
+import StandardDataView from "./pages/StandardDataView";
+import ConsistencyCheck from "./pages/ConsistencyCheck";
 
 import "./App.css";
 
@@ -41,7 +45,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         <Route path="/signup" element={<SignUp />} />
 
         <Route
@@ -122,16 +125,20 @@ function App() {
           }
         />
 
-        {/* 데이터 수집 5본 */}
+        {/* 데이터 수집 */}
         <Route path="/data-view" element={<DataViewPage isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
         <Route path="/anomaly-result" element={<AnomalyResult isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
         <Route path="/data-input-request" element={<DataInputRequest isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
         <Route path="/data-input-upload" element={<DataInputUpload isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
         <Route path="/data-aggregation" element={<DataAggregation isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
+        <Route path="/standard-data" element={<StandardDataView isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
 
-        {/* ✅ SR 보고서 2본 */}
+        {/* SR 보고서 */}
         <Route path="/report-draft" element={<ReportDraft isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
         <Route path="/report-download" element={<ReportDownload isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
+        <Route path="/report-generate" element={<ReportGenerate isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
+        <Route path="/mypage" element={<MyPage isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
+        <Route path="/consistency-check" element={<ConsistencyCheck isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
 
       </Routes>
     </BrowserRouter>

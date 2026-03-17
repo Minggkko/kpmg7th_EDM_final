@@ -35,8 +35,16 @@ function AnalysisDashboard({ isLoggedIn, onLogout }) {
   const location = useLocation();
   const fileName = location.state?.fileName || "uploaded_file.pdf";
 
+  // 이상치 검증 결과 받기
+  const anomalyItems = location.state?.anomalyItems || [];
+  const anomalyChecked = location.state?.checkedCount ?? anomalyItems.filter(i => i.checked).length;
+  const anomalyTotal = location.state?.totalCount ?? anomalyItems.length;
+  const highRiskCount = anomalyItems.filter(i => i.risk === "높음").length;
+  const midRiskCount = anomalyItems.filter(i => i.risk === "중간").length;
+  const lowRiskCount = anomalyItems.filter(i => i.risk === "낮음").length;
+
   return (
-    <div style={{ minHeight: "100vh", background: "#F5F5F3", fontFamily: "'Inter', sans-serif", display: "flex", flexDirection: "column" }}>
+    <div style={{ minHeight: "100vh", background: "#f8f9fa", fontFamily: "'Inter', sans-serif", display: "flex", flexDirection: "column" }}>
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
 
       <div style={{ display: "flex", flex: 1 }}>
@@ -55,7 +63,7 @@ function AnalysisDashboard({ isLoggedIn, onLogout }) {
             </div>
             <div className="header-actions">
               <button className="ghost-btn" onClick={() => navigate("/data-upload")}>데이터 다시 업로드</button>
-              <button className="primary-btn" onClick={() => navigate("/report")}>ESG 리포트 생성</button>
+              <button className="primary-btn" onClick={() => navigate("/report-generate")}>ESG 리포트 생성</button>
             </div>
           </div>
 
@@ -76,12 +84,12 @@ function AnalysisDashboard({ isLoggedIn, onLogout }) {
                   <strong>80</strong>
                 </div>
                 <div className="mini-stat">
-                  <span className="mini-stat-label">탐지 리스크</span>
-                  <strong>3건</strong>
+                  <span className="mini-stat-label">이상치 탐지</span>
+                  <strong>{anomalyTotal}건</strong>
                 </div>
                 <div className="mini-stat">
-                  <span className="mini-stat-label">분석 상태</span>
-                  <strong>완료</strong>
+                  <span className="mini-stat-label">검토 완료</span>
+                  <strong>{anomalyChecked}/{anomalyTotal}</strong>
                 </div>
               </div>
             </section>
@@ -92,21 +100,22 @@ function AnalysisDashboard({ isLoggedIn, onLogout }) {
               </div>
               <div className="risk-summary-main">
                 <div>
-                  <p className="risk-summary-label">우선 확인 필요</p>
-                  <h3>환경 데이터 누락</h3>
+                  <p className="risk-summary-label">이상치 검증 결과</p>
+                  <h3>높음 {highRiskCount}건 · 중간 {midRiskCount}건 · 낮음 {lowRiskCount}건</h3>
                 </div>
-                <span className="risk-badge high">High</span>
+                <span className="risk-badge high">High {highRiskCount}</span>
               </div>
               <p className="risk-summary-desc">
-                월별 배출량 데이터가 일부 비어 있어 최종 보고서 정확도에 영향을 줄 수 있습니다.
+                AI가 탐지한 이상치 {anomalyTotal}건 중 {anomalyChecked}건이 검토 완료되었습니다.
+                {highRiskCount > 0 ? ` 높음 위험도 항목 ${highRiskCount}건을 우선 확인하세요.` : ''}
               </p>
               <div className="risk-progress-wrap">
                 <div className="risk-progress-head">
-                  <span>리스크 대응 진행률</span>
-                  <span>62%</span>
+                  <span>이상치 검토 진행률</span>
+                  <span>{anomalyTotal > 0 ? Math.round((anomalyChecked / anomalyTotal) * 100) : 0}%</span>
                 </div>
                 <div className="progress-bar">
-                  <div className="progress-fill" style={{ width: "62%" }} />
+                  <div className="progress-fill" style={{ width: `${anomalyTotal > 0 ? Math.round((anomalyChecked / anomalyTotal) * 100) : 0}%` }} />
                 </div>
               </div>
             </section>
@@ -159,11 +168,30 @@ function AnalysisDashboard({ isLoggedIn, onLogout }) {
               <div className="panel-header">
                 <div>
                   <p className="panel-eyebrow">Risk List</p>
-                  <h3>세부 리스크</h3>
+                  <h3>이상치 탐지 목록</h3>
                 </div>
+                <span className="panel-note">{anomalyTotal}건 탐지</span>
               </div>
               <div className="risk-list">
-                {risks.map((risk) => (
+                {anomalyItems.length > 0 ? anomalyItems.map((item) => (
+                  <div key={item.id} className="risk-list-item" style={{ borderLeftColor: item.risk === '높음' ? '#991b1b' : item.risk === '중간' ? '#d97706' : '#16a34a' }}>
+                    <div className="risk-list-top">
+                      <h4>{item.dpName}</h4>
+                      <span className={`risk-badge ${item.risk === '높음' ? 'high' : item.risk === '중간' ? 'medium' : 'low'}`}>{item.risk}</span>
+                    </div>
+                    <p>
+                      {item.checked ? '✅ 검토 완료' : '⏳ 검토 필요'} · {item.unit}
+                      {item.modifiedValue && (
+                        <span style={{ marginLeft: 8, color: '#5C6B2E', fontWeight: 600 }}>
+                          → 수정값: {item.modifiedValue} {item.unit}
+                        </span>
+                      )}
+                    </p>
+                    {item.modifiedReason && (
+                      <p style={{ marginTop: 4, fontSize: 12, color: '#888' }}>사유: {item.modifiedReason}</p>
+                    )}
+                  </div>
+                )) : risks.map((risk) => (
                   <div key={risk.title} className="risk-list-item">
                     <div className="risk-list-top">
                       <h4>{risk.title}</h4>
