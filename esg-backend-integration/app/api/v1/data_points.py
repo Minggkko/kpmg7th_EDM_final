@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, Query
+from fastapi.security import HTTPBearer
 from app.schemas.data_point import (
     DataPointCreate, DataPointResponse,
     SynonymCreate, SynonymResponse
@@ -7,6 +8,7 @@ from app.schemas.common import APIResponse, PaginatedResponse
 from app.services.supabase_service import DataPointService
 from app.core.dependencies import get_current_user
 
+security = HTTPBearer() 
 router = APIRouter()
 
 
