@@ -36,11 +36,11 @@ app.include_router(raw_data.router,    prefix="/api/v1/raw-data",    tags=["RawD
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["Auth"])
 
 # EDM 파이프라인 라우터
-app.include_router(outliers.router,     prefix="/api/v1/outliers",     tags=["EDM-Outliers"],     dependencies=[Depends(get_current_user)])
-app.include_router(evidence.router,     prefix="/api/v1/evidence",     tags=["EDM-Evidence"],     dependencies=[Depends(get_current_user)])
-app.include_router(finalization.router, prefix="/api/v1/finalization", tags=["EDM-Finalization"], dependencies=[Depends(get_current_user)])
-app.include_router(dashboard.router,    prefix="/api/v1/dashboard",    tags=["EDM-Dashboard"],    dependencies=[Depends(get_current_user)])
-app.include_router(audit.router,        prefix="/api/v1/audit",        tags=["EDM-Audit"],        dependencies=[Depends(get_current_user)])
+app.include_router(outliers.router,     prefix="/api/v1/outliers",     tags=["Outliers"],     dependencies=[Depends(get_current_user)])
+app.include_router(evidence.router,     prefix="/api/v1/evidence",     tags=["Evidence"],     dependencies=[Depends(get_current_user)])
+app.include_router(finalization.router, prefix="/api/v1/finalization", tags=["Finalization"], dependencies=[Depends(get_current_user)])
+app.include_router(dashboard.router,    prefix="/api/v1/dashboard",    tags=["Dashboard"],    dependencies=[Depends(get_current_user)])
+app.include_router(audit.router,        prefix="/api/v1/audit",        tags=["Audit"],        dependencies=[Depends(get_current_user)])
 
 @app.get("/health", tags=["Health"])
 async def health_check():

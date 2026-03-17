@@ -3,7 +3,9 @@ from app.schemas.indicator import IndicatorCreate, IndicatorResponse
 from app.schemas.common import APIResponse, PaginatedResponse
 from app.services.supabase_service import IndicatorService
 from app.core.dependencies import get_current_user
+from fastapi.security import HTTPBearer
 
+security = HTTPBearer()  # ← 이 줄 추가
 router = APIRouter()
 
 
