@@ -125,7 +125,7 @@ class MappingService:
 
         return {
             "source_type":                row["source_type"],
-            "source_name":                row["source_name"],
+            "site_id":                    row["site_id"],
             "reporting_date":             row["reporting_date"],
             "metric_name":                matched["name"],
             "data_point_id":              matched["id"],
@@ -136,15 +136,16 @@ class MappingService:
             "v_status":                   0 if unit_ok else 99,
             "standardization_confidence": confidence,
             "updated_by":                 "system:standardization",
+            "raw_data_id":                row.get("id"),
         }
 
-    async def run_mapping(self, source_type=None, source_name=None):
+    async def run_mapping(self, source_type=None, site_id=None):
         sb = await self._get_supabase()
         query = sb.table("raw_data").select("*")
         if source_type:
             query = query.eq("source_type", source_type)
-        if source_name:
-            query = query.eq("source_name", source_name)
+        if site_id:
+            query = query.eq("site_id", site_id)
         raw_rows = (await query.execute()).data
 
         success, skipped_parse, skipped_match, unit_error = 0, 0, 0, 0
@@ -182,7 +183,7 @@ class MappingService:
 
             result = {
                 "source_type":                row["source_type"],
-                "source_name":                row["source_name"],
+                "site_id":                    row["site_id"],
                 "reporting_date":             row["reporting_date"],
                 "metric_name":                matched["name"],
                 "data_point_id":              matched["id"],
@@ -193,9 +194,10 @@ class MappingService:
                 "v_status":                   0 if unit_ok else 99,
                 "standardization_confidence": confidence,
                 "updated_by":                 "system:standardization",
+                "raw_data_id":                row.get("id"),
             }
 
-            key = (result["source_type"], result["source_name"], result["reporting_date"], result["metric_name"])
+            key = (result["source_type"], result["site_id"], result["reporting_date"], result["metric_name"])
             if key in seen:
                 continue
             seen.add(key)
@@ -207,14 +209,14 @@ class MappingService:
 
             if len(batch) >= 100:
                 await sb.table("standardized_data") \
-                    .upsert(batch, on_conflict="source_type,source_name,reporting_date,metric_name") \
+                    .upsert(batch, on_conflict="source_type,site_id,reporting_date,metric_name") \
                     .execute()
                 success += len(batch)
                 batch = []
 
         if batch:
             await sb.table("standardized_data") \
-                .upsert(batch, on_conflict="source_type,source_name,reporting_date,metric_name") \
+                .upsert(batch, on_conflict="source_type,site_id,reporting_date,metric_name") \
                 .execute()
             success += len(batch)
 

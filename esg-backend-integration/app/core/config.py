@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     openai_api_key: str
 
     # Upstage
-    upstage_api_key: str = ""
+    upstage_api_key: str
 
     # App
     app_env: str = "development"

@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     # OpenAI
     openai_api_key: str
 
+    # Upstage
+    upstage_api_key: str = ""
+
     # App
     app_env: str = "development"
     cors_origins: str = "http://localhost:3000"

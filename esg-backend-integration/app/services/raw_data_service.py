@@ -23,7 +23,7 @@ def parse_file_name(file_name: str) -> tuple[str, str]:
     parts = stem.split("_")
     if len(parts) >= 2:
         return parts[0], parts[1]
-    raise ValueError(f"파일명 형식 오류: {file_name} (형식: source_type_site_id_raw.csv)")
+    raise ValueError(f"파일명 형식 오류: {file_name} (형식: source_type_source_name_raw.csv)")
 
 
 class RawDataService:
@@ -44,7 +44,7 @@ class RawDataService:
         uploaded_by: str,
     ) -> dict:
         # 1. 파일명 파싱
-        source_type, site_id = parse_file_name(file_name)
+        source_type, source_name = parse_file_name(file_name)
 
         # 2. 파일 읽기
         ext = file_name.rsplit(".", 1)[-1].lower()
@@ -78,7 +78,7 @@ class RawDataService:
         for _, row in df_long.iterrows():
             rows.append({
                 "source_type":    source_type,
-                "site_id":    site_id,
+                "source_name":    source_name,
                 "reporting_date": row["reporting_date"],
                 "metric_col":     row["metric_col"],
                 "raw_value":      row["raw_value"],
@@ -98,13 +98,13 @@ class RawDataService:
         mapping_service = MappingService()
         mapping_result = await mapping_service.run_mapping(
             source_type=source_type,
-            site_id=site_id,
+            source_name=source_name,
         )
 
         return {
             "message":        "업로드 및 표준화 완료",
             "source_type":    source_type,
-            "site_id":    site_id,
+            "source_name":    source_name,
             "source_file":    file_name,
             "row_count":      inserted,
             "mapping_result": mapping_result,

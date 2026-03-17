@@ -4,6 +4,7 @@ from fastapi.security import HTTPBearer
 from app.core.config import get_settings
 from app.core.dependencies import get_current_user
 from app.api.v1 import issues, indicators, data_points, mapping, raw_data, auth
+from app.api.v1 import outliers, evidence, finalization, dashboard, audit
 
 settings = get_settings()
 
@@ -28,11 +29,18 @@ app.add_middleware(
 app.include_router(issues.router,      prefix="/api/v1/issues",      tags=["Issues"],      dependencies=[Depends(get_current_user)])
 app.include_router(indicators.router,  prefix="/api/v1/indicators",  tags=["Indicators"],  dependencies=[Depends(get_current_user)])
 app.include_router(data_points.router, prefix="/api/v1/data-points", tags=["DataPoints"],  dependencies=[Depends(get_current_user)])
-app.include_router(mapping.router,     prefix="/api/v1/mapping",     tags=["Mapping"])
-app.include_router(raw_data.router,    prefix="/api/v1/raw-data",    tags=["RawData"])
+app.include_router(mapping.router,     prefix="/api/v1/mapping",     tags=["Mapping"],  dependencies=[Depends(get_current_user)])
+app.include_router(raw_data.router,    prefix="/api/v1/raw-data",    tags=["RawData"],  dependencies=[Depends(get_current_user)])
 
 # auth는 공개 (로그인/회원가입)
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["Auth"])
+
+# EDM 파이프라인 라우터
+app.include_router(outliers.router,     prefix="/api/v1/outliers",     tags=["EDM-Outliers"],     dependencies=[Depends(get_current_user)])
+app.include_router(evidence.router,     prefix="/api/v1/evidence",     tags=["EDM-Evidence"],     dependencies=[Depends(get_current_user)])
+app.include_router(finalization.router, prefix="/api/v1/finalization", tags=["EDM-Finalization"], dependencies=[Depends(get_current_user)])
+app.include_router(dashboard.router,    prefix="/api/v1/dashboard",    tags=["EDM-Dashboard"],    dependencies=[Depends(get_current_user)])
+app.include_router(audit.router,        prefix="/api/v1/audit",        tags=["EDM-Audit"],        dependencies=[Depends(get_current_user)])
 
 @app.get("/health", tags=["Health"])
 async def health_check():

@@ -1,12 +1,8 @@
 from fastapi import APIRouter, Depends
-from fastapi.security import HTTPBearer
 from app.schemas.issue import IssueCreate, IssueResponse
 from app.schemas.common import APIResponse, PaginatedResponse
 from app.services.supabase_service import IssueService
-from app.core.auth import get_current_user
 from app.core.dependencies import get_current_user
-
-security = HTTPBearer()
 
 router = APIRouter()
 
