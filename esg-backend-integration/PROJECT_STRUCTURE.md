@@ -1,3 +1,4 @@
+
 # ESG Backend Integration — 프로젝트 구조 및 파일 역할 설명
 
 > **기술 스택**: FastAPI · Supabase (PostgreSQL + pgvector) · OpenAI GPT-4o · LangChain · Upstage Document AI (OCR)
@@ -10,12 +11,29 @@
 ```
 esg-backend-integration/
 ├── app/                        ← FastAPI 애플리케이션 본체
-│   ├── main.py                 ← 앱 진입점, 라우터 등록
-│   ├── api/v1/                 ← REST API 라우터 (11개)
+│   ├── main.py                 ← 앱 진입점, 라우터 등록 (12개 라우터)
+│   ├── api/v1/                 ← REST API 라우터
+│   │   ├── auth.py
+│   │   ├── issues.py
+│   │   ├── indicators.py
+│   │   ├── data.py             ← NEW: data 테이블 CRUD
+│   │   ├── data_points.py
+│   │   ├── mapping.py
+│   │   ├── raw_data.py
+│   │   ├── outliers.py
+│   │   ├── evidence.py
+│   │   ├── finalization.py
+│   │   ├── dashboard.py
+│   │   └── audit.py
 │   ├── core/                   ← 설정·인증·DB 클라이언트
 │   ├── services/               ← 비즈니스 로직 서비스
 │   │   └── outlier_pipeline/   ← EDM 핵심 파이프라인
 │   ├── schemas/                ← Pydantic 요청·응답 스키마
+│   │   ├── common.py
+│   │   ├── issue.py
+│   │   ├── indicator.py
+│   │   ├── data.py             ← NEW: data 테이블 스키마
+│   │   └── data_point.py
 │   ├── scripts/                ← 1회성 임베딩 생성 스크립트
 │   └── utils/                  ← 공유 유틸리티 (현재 비어있음)
 ├── scripts/                    ← DB 초기 시딩 스크립트 (1회성)
@@ -104,6 +122,7 @@ E2E 테스트 실행 전 Supabase SQL Editor에서 직접 실행하는 초기화
 [공개]  GET/POST /api/v1/auth/**         ← 로그인/회원가입
 [인증]  /api/v1/issues/**
 [인증]  /api/v1/indicators/**
+[인증]  /api/v1/data/**                  ← NEW: indicators ↔ data_points 중간 레이어
 [인증]  /api/v1/data-points/**
 [인증]  /api/v1/mapping/**
 [인증]  /api/v1/raw-data/**
@@ -148,20 +167,33 @@ E2E 테스트 실행 전 Supabase SQL Editor에서 직접 실행하는 초기화
 - **로직**: Supabase Auth `sign_up` / `sign_in_with_password` 직접 호출. 회원가입 시 회사 이메일 도메인 일치 여부 검증, 이메일 즉시 인증 처리
 
 ### `issues.py` — 중대성 이슈
-- **엔드포인트**: `GET /`, `POST /`, `GET /{id}`, `PUT /{id}`, `DELETE /{id}`
+- **엔드포인트**: `GET /`, `POST /`, `GET /{id}`, `PATCH /{id}`, `DELETE /{id}`
 - **서비스**: `supabase_service.IssueService`
 - **스키마**: `IssueCreate`, `IssueResponse`
+- **쿼리 파라미터**:
+  - `?years=2023&years=2024` — `previous_years` 배열에 해당 연도가 포함된 이슈 필터링 (OR 조건, 복수 선택 가능)
+  - `?search=에너지` — 이슈명 키워드 검색
+- **`previous_years` 필드**: Supabase `issues` 테이블의 `integer[]` 컬럼. 해당 이슈가 과거 어느 연도(2023/2024/2025)에 채택되었는지를 정수 배열로 저장. 중복 가능 (예: `[2023, 2025]`)
 
 ### `indicators.py` — ESG 지표
-- **엔드포인트**: `GET /` (issue_id 필터 가능), `POST /`, `GET /{id}`, `PUT /{id}`, `DELETE /{id}`
+- **엔드포인트**: `GET /` (issue_id 필터 가능), `POST /`, `GET /{id}`, `PATCH /{id}`
 - **서비스**: `supabase_service.IndicatorService`
 - **스키마**: `IndicatorCreate`, `IndicatorResponse`
+- **`GET /{id}`**: `indicator → data → data_points` 3단계 계층 구조를 한 번에 반환 (`get_with_data()`)
+
+### `data.py` — 데이터 그룹 ★ NEW
+- **역할**: `indicators`와 `data_points` 사이의 중간 레이어. 기존 `data_points.data_group` 컬럼이 독립 테이블로 분리됨
+- **엔드포인트**: `GET /`, `POST /`, `GET /{id}`, `PATCH /{id}`, `DELETE /{id}`
+- **쿼리 파라미터**: `?indicator_id=1` — 지표 기준 필터링
+- **`GET /{id}`**: data 항목 + 하위 `data_points` 목록 함께 반환
+- **서비스**: `supabase_service.DataService`
+- **스키마**: `DataCreate`, `DataResponse`, `DataDetailResponse`
 
 ### `data_points.py` — 데이터포인트 및 동의어
-- **엔드포인트**: `GET /`, `POST /`, `GET /{id}`, `PUT /{id}`, `DELETE /{id}`, `POST /{id}/synonyms`, `DELETE /{id}/synonyms/{syn_id}`
+- **엔드포인트**: `GET /`, `POST /`, `GET /{id}`, `PATCH /{id}`, `DELETE /{id}`, `POST /{id}/synonyms`, `DELETE /{id}/synonyms/{syn_id}`
+- **쿼리 파라미터**: `?data_id=1` (기존 `indicator_id` → `data_id` 로 변경)
 - **서비스**: `supabase_service.DataPointService`
 - **스키마**: `DataPointCreate`, `DataPointResponse`, `SynonymCreate`, `SynonymResponse`
-- **특이사항**: 동의어 등록 시 OpenAI 임베딩 자동 생성 (벡터 유사도 매핑에 활용)
 
 ### `raw_data.py` — 원본 데이터 업로드
 - **엔드포인트**: `POST /upload`
@@ -217,11 +249,12 @@ E2E 테스트 실행 전 Supabase SQL Editor에서 직접 실행하는 초기화
 ## `app/services/` — 서비스 레이어
 
 ### `supabase_service.py`
-- **역할**: 이슈·지표·데이터포인트의 CRUD 로직을 담은 서비스 클래스 모음
+- **역할**: 이슈·지표·data·데이터포인트의 CRUD 로직을 담은 서비스 클래스 모음
 - **클래스**:
-  - `IssueService` — `issues` 테이블 CRUD
-  - `IndicatorService` — `indicators` 테이블 CRUD
-  - `DataPointService` — `data_points` + `data_point_synonyms` 테이블 CRUD
+  - `IssueService` — `issues` 테이블 CRUD. `get_all(years, search)` 로 연도 필터(`overlaps`) 및 키워드 검색 지원
+  - `IndicatorService` — `indicators` 테이블 CRUD. `get_with_data()` 로 `indicator → data → data_points` 계층 반환
+  - `DataService` ★ NEW — `data` 테이블 CRUD. `get_with_data_points()` 로 하위 data_points 포함 반환
+  - `DataPointService` — `data_points` + `data_point_synonyms` 테이블 CRUD. `get_all(data_id)` 로 data 기준 필터링
   - `UploadedDataService` — 업로드 데이터 조회 (현재 라우터에서 미사용)
 
 ### `raw_data_service.py`
@@ -238,6 +271,7 @@ E2E 테스트 실행 전 Supabase SQL Editor에서 직접 실행하는 초기화
   1. **정확 매칭**: 데이터포인트명 or 동의어와 100% 일치
   2. **벡터 유사도 매핑**: OpenAI 임베딩 → Supabase pgvector `match_data_point` RPC로 코사인 유사도 탐색 (신뢰도 threshold: 0.85)
 - **단위 변환**: 매핑 시 원본 단위 → 표준 단위 자동 변환 (예: `kWh` → `MWh`)
+- **`get_grouped_standardized()`**: `issues → indicators → data → data_points` 4단계 계층 구조 + 최신 standardized 값을 조합하여 반환. 기존 `data_points.data_group` 컬럼 기반 그룹핑에서 `data` 테이블 조회 방식으로 변경
 
 ---
 
@@ -350,19 +384,39 @@ ESG 데이터의 이상치 탐지부터 증빙 검증, 소명 처리, 최종 확
 
 ## `app/schemas/` — Pydantic 스키마
 
+Pydantic 모델 파일 모음. 역할:
+- **API 입력 검증**: 클라이언트 JSON body를 `Create` 모델로 받아 타입·필수값 자동 검증
+- **API 응답 직렬화**: DB dict를 `Response` 모델로 변환하여 프론트에 일관된 JSON 반환
+- **문서 자동생성**: FastAPI `/docs`(Swagger)에서 요청/응답 구조 자동 노출
+- **패턴**: `XxxBase` (공통 필드) → `XxxCreate` (입력, FK 포함) → `XxxResponse` (출력, id·created_at 포함)
+
 ### `common.py`
 - **역할**: 전체 API에서 공통으로 사용하는 응답 래퍼 스키마
-- `APIResponse[T]` — 단건 응답 (`data`, `message`)
-- `PaginatedResponse[T]` — 목록 응답 (`data`, `total`)
+- `APIResponse[T]` — 단건 응답 (`success`, `data`, `error`)
+- `PaginatedResponse[T]` — 목록 응답 (`success`, `data`, `total`, `page`, `page_size`)
 
 ### `issue.py`
-이슈 생성/응답 스키마: `IssueCreate`, `IssueResponse`
+- `IssueBase` — `name`, `description`, `previous_years: list[int] | None`
+- `IssueCreate` — IssueBase 그대로 (추가 FK 없음)
+- `IssueResponse` — `id`, `created_at` 추가
+- **`previous_years`**: Supabase `integer[]` 컬럼을 Python `list[int]`로 매핑. 이슈가 채택된 과거 연도 목록(2023/2024/2025, 중복 가능)
 
 ### `indicator.py`
-지표 생성/응답 스키마: `IndicatorCreate`, `IndicatorResponse`, `IndicatorDetailResponse`
+- `IndicatorCreate` — `name`, `issue_id` 및 GRI 메타 필드들
+- `IndicatorResponse` — `id`, `issue_id`, `created_at` 추가
+- `IndicatorDetailResponse` — `data: list[dict]` 포함 (indicator → data 계층 반영)
+
+### `data.py` ★ NEW
+- `DataBase` — `name`, `description`
+- `DataCreate` — `DataBase` + `indicator_id` (FK)
+- `DataResponse` — `id`, `indicator_id`, `created_at` 추가
+- `DataDetailResponse` — `data_points: list[dict]` 포함
 
 ### `data_point.py`
-데이터포인트 및 동의어 스키마: `DataPointCreate`, `DataPointResponse`, `SynonymCreate`, `SynonymResponse`
+- `DataPointBase` — `name`, `unit`, `data_type`, `definition` (기존 `data_group` 필드 제거됨 → `data` 테이블로 분리)
+- `DataPointCreate` — `DataPointBase` + `data_id` (FK, 기존 `indicator_id`에서 변경)
+- `DataPointResponse` — `id`, `data_id`, `created_at` 추가
+- `SynonymCreate`, `SynonymResponse` — 동의어 관리 스키마
 
 ---
 
@@ -371,7 +425,8 @@ ESG 데이터의 이상치 탐지부터 증빙 검증, 소명 처리, 최종 확
 매핑 서비스의 pgvector 유사도 검색을 위해 최초 1회 실행하는 스크립트.
 
 ### `generate_embeddings.py`
-- `data_points` 테이블의 각 데이터포인트명에 대해 OpenAI 임베딩 생성 → `embedding` 컬럼에 저장
+- `data_points` 테이블의 각 데이터포인트에 대해 OpenAI 임베딩 생성 → `embedding` 컬럼에 저장
+- 임베딩 텍스트: `name (unit) - 상위 data 그룹명` 조합 (기존 `data_points.data_group` 직접 참조에서 `data(name)` JOIN으로 변경)
 
 ### `generate_synonym_embeddings.py`
 - `data_point_synonyms` 테이블의 각 동의어에 대해 OpenAI 임베딩 생성 → `embedding` 컬럼에 저장
@@ -422,9 +477,10 @@ ESG 데이터의 이상치 탐지부터 증빙 검증, 소명 처리, 최종 확
 |--------|------|
 | `companies` | 회사 정보 (이메일 도메인 포함) |
 | `user_profiles` | 사용자 프로필 (Supabase Auth와 연동) |
-| `issues` | 중대성 이슈 |
-| `indicators` | ESG 지표 |
-| `data_points` | 데이터포인트 (임베딩 벡터 포함) |
+| `issues` | 중대성 이슈. `previous_years integer[]` 컬럼으로 과거 채택 연도 배열 저장 |
+| `indicators` | ESG 지표 (`issue_id` FK) |
+| `data` | 지표 하위 데이터 그룹 (`indicator_id` FK). 기존 `data_points.data_group` 텍스트 컬럼을 독립 테이블로 분리 |
+| `data_points` | 데이터포인트 (`data_id` FK, 임베딩 벡터 포함). 기존 `indicator_id` FK에서 `data_id` FK로 변경 |
 | `data_point_synonyms` | 데이터포인트 동의어 (임베딩 벡터 포함) |
 | `raw_data` | 원본 업로드 데이터 |
 | `standardized_data` | 표준화 변환 데이터 (v_status 관리) |
@@ -437,3 +493,11 @@ ESG 데이터의 이상치 탐지부터 증빙 검증, 소명 처리, 최종 확
 | `threshold_limits` | L2 임계값 기준 |
 | `activity_data` | L3 집약도 기준 데이터 |
 | `master_sites` | 사업장 정보 |
+
+### 계층 구조 (issues → data_points)
+```
+issues
+  └── indicators  (issue_id FK)
+        └── data  (indicator_id FK)  ← NEW: 기존 data_group 텍스트 → 독립 테이블
+              └── data_points  (data_id FK)  ← 기존 indicator_id FK에서 변경
+```

@@ -26,5 +26,6 @@ class IndicatorResponse(IndicatorBase):
         from_attributes = True
 
 class IndicatorDetailResponse(IndicatorResponse):
-    data_points: list[dict] = []
+    """data 계층을 통해 data_points 포함: indicator → data → data_points"""
+    data: list[dict] = []
     

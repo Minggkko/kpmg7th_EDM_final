@@ -1,0 +1,45 @@
+### 1. 가상 환경 및 의존성 (Virtual Environments) ###
+# 사용자 지정 가상 환경 명시
+lc_env/
+
+# 일반적인 가상 환경 폴더명
+.venv/
+env/
+venv/
+ENV/
+bin/
+lib/
+include/
+
+### 2. Python & Jupyter Artifacts ###
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints
+.pytest_cache/
+
+### 3. 데이터 및 대용량 파일 (Data & Storage) ###
+# 분석용 원본 데이터 및 결과물 제외
+*.csv
+*.parquet
+*.json
+*.pickle
+*.h5
+data/
+outputs/
+temp/
+
+### 4. 설정 및 보안 (Security & Config) ###
+.env
+*.log
+api_keys.txt
+secrets/
+
+### 5. IDE 및 시스템 파일 (IDE & OS) ###
+.vscode/
+.idea/
+.DS_Store
+Thumbs.dbnode_modules/
+dist/
+node_modules/
+dist/

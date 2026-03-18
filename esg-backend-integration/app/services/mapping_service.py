@@ -226,3 +226,62 @@ class MappingService:
             "skipped_match": skipped_match,
             "unit_error":    unit_error,
         }
+
+    async def get_grouped_standardized(self) -> list[dict]:
+        """issues → indicators → data → data_points + 최신 standardized 값을 계층 구조로 반환"""
+        sb = await self._get_supabase()
+
+        issues_res = await sb.table("issues").select("id, name").order("id").execute()
+        indicators_res = await sb.table("indicators").select("id, issue_id, name").order("id").execute()
+        data_res = await sb.table("data").select("id, indicator_id, name").order("id").execute()
+        dp_res = await sb.table("data_points").select("id, data_id, name, unit").order("id").execute()
+        std_res = await sb.table("standardized_data") \
+            .select("data_point_id, value, unit, reporting_date, source_name") \
+            .order("reporting_date", desc=True) \
+            .execute()
+
+        # 최신 standardized 값 index (data_point_id → first seen = latest)
+        std_by_dp: dict[int, dict] = {}
+        for row in std_res.data:
+            dp_id = row["data_point_id"]
+            if dp_id not in std_by_dp:
+                std_by_dp[dp_id] = row
+
+        result = []
+        for issue in issues_res.data:
+            indicators_for_issue = [i for i in indicators_res.data if i["issue_id"] == issue["id"]]
+            indicator_list = []
+            for indicator in indicators_for_issue:
+                # indicator에 속한 data 항목들 (data_group 역할)
+                data_for_indicator = [d for d in data_res.data if d["indicator_id"] == indicator["id"]]
+                data_list = []
+                for data_item in data_for_indicator:
+                    # data 항목에 속한 data_points
+                    dps = [d for d in dp_res.data if d.get("data_id") == data_item["id"]]
+                    dp_list = []
+                    for dp in dps:
+                        std = std_by_dp.get(dp["id"])
+                        dp_list.append({
+                            "id":             dp["id"],
+                            "name":           dp["name"],
+                            "unit":           dp["unit"],
+                            "value":          str(std["value"]) if std and std.get("value") is not None else None,
+                            "reporting_date": std["reporting_date"] if std else None,
+                            "source_name":    std["source_name"] if std else None,
+                        })
+                    data_list.append({
+                        "id":          data_item["id"],
+                        "name":        data_item["name"],
+                        "data_points": dp_list,
+                    })
+                indicator_list.append({
+                    "id":   indicator["id"],
+                    "name": indicator["name"],
+                    "data": data_list,
+                })
+            result.append({
+                "id":         issue["id"],
+                "name":       issue["name"],
+                "indicators": indicator_list,
+            })
+        return result

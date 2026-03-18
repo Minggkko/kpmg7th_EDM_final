@@ -14,3 +14,9 @@ async def run_mapping(
         source_type=source_type,
         source_name=source_name,
     )
+
+@router.get("/grouped")
+async def get_grouped_standardized():
+    """issues → indicators → data_group → data_points 계층 구조로 반환"""
+    service = MappingService()
+    return await service.get_grouped_standardized()

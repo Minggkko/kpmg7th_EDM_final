@@ -21,9 +21,9 @@ async def get_embedding(text: str) -> list[float]:
 
 
 async def generate_all_embeddings():
-    # 1. embedding이 없는 data_points 전체 조회
+    # 1. embedding이 없는 data_points + 상위 data(name) 함께 조회
     response = supabase.table('data_points') \
-        .select("id, name, unit, data_group") \
+        .select("id, name, unit, data(name)") \
         .is_('embedding', 'null') \
         .execute()
 
@@ -41,12 +41,13 @@ async def generate_all_embeddings():
     failed  = 0
 
     for i, row in enumerate(rows, start=1):
-        # 임베딩 텍스트: name + unit + data_group 조합 (검색 품질 향상)
+        # 임베딩 텍스트: name + unit + 상위 data 그룹명 조합 (검색 품질 향상)
         embed_text = f"{row['name']}"
         if row.get('unit'):
             embed_text += f" ({row['unit']})"
-        if row.get('data_group'):
-            embed_text += f" - {row['data_group']}"
+        data_group_name = (row.get('data') or {}).get('name')
+        if data_group_name:
+            embed_text += f" - {data_group_name}"
 
         try:
             embedding = await get_embedding(embed_text)

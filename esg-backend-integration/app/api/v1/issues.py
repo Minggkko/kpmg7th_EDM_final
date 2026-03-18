@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from fastapi.security import HTTPBearer
 from app.schemas.issue import IssueCreate, IssueResponse
 from app.schemas.common import APIResponse, PaginatedResponse
@@ -11,9 +11,16 @@ router = APIRouter()
 
 
 @router.get("", response_model=PaginatedResponse[IssueResponse])
-async def get_issues(_: dict = Depends(get_current_user)):
+async def get_issues(
+    years: list[int] | None = Query(
+        None,
+        description="이전 연도 필터 (복수 선택 가능). 예: ?years=2023&years=2024 → 2023 또는 2024에 채택된 이슈"
+    ),
+    search: str | None = Query(None, description="이슈명 키워드 검색"),
+    _: dict = Depends(get_current_user),
+):
     service = IssueService()
-    data = service.get_all()
+    data = service.get_all(years=years, search=search)
     return PaginatedResponse(data=data, total=len(data))
 
 
