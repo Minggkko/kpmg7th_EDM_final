@@ -27,8 +27,10 @@ const benchmarks = [
 function Dashboard({ isLoggedIn, onLogout }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const { type, issues } = location.state || {};
+  const { type, issues: stateIssues } = location.state || {};
   const meta = typeMeta[type];
+  // Materiality에서 넘어올 때 issues가 없을 수 있으므로 기본값 처리
+  const issues = stateIssues || [];
 
   return (
     <div style={styles.page}>

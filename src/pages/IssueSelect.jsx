@@ -109,11 +109,30 @@ function IssueSelect({ isLoggedIn, onLogout }) {
         <Sidebar currentStep="issue-select" />
 
         <main style={styles.main}>
-          <div style={styles.titleArea}>
-            <h1 style={styles.title}>중대성 이슈 선택</h1>
-            <p style={styles.titleSub}>
-              선택된 영역에 맞는 중대성 이슈를 고르고 다음 단계로 이동합니다.
-            </p>
+          <div style={styles.topBar}>
+            <div style={styles.titleArea}>
+              <h1 style={styles.title}>중대성 이슈 선택</h1>
+              <p style={styles.titleSub}>
+                선택된 영역에 맞는 중대성 이슈를 고르고 다음 단계로 이동합니다.
+              </p>
+            </div>
+            <div style={styles.bottomRow}>
+              <button type="button" style={styles.secondaryBtn} onClick={handlePrev}>
+                이전: E/S/G 선택
+              </button>
+              <button
+                type="button"
+                style={{
+                  ...styles.primaryBtn,
+                  opacity: selected.length > 0 ? 1 : 0.45,
+                  cursor: selected.length > 0 ? "pointer" : "not-allowed",
+                }}
+                disabled={selected.length === 0}
+                onClick={handleNext}
+              >
+                다음: 대시보드 →
+              </button>
+            </div>
           </div>
 
           <div style={styles.panel}>
@@ -171,28 +190,7 @@ function IssueSelect({ isLoggedIn, onLogout }) {
             </p>
           </div>
 
-          <div style={styles.bottomRow}>
-            <button
-              type="button"
-              style={styles.secondaryBtn}
-              onClick={handlePrev}
-            >
-              이전: E/S/G 선택
-            </button>
 
-            <button
-              type="button"
-              style={{
-                ...styles.primaryBtn,
-                opacity: selected.length > 0 ? 1 : 0.45,
-                cursor: selected.length > 0 ? "pointer" : "not-allowed",
-              }}
-              disabled={selected.length === 0}
-              onClick={handleNext}
-            >
-              다음: 대시보드 →
-            </button>
-          </div>
         </main>
       </div>
     </div>
@@ -215,8 +213,20 @@ const styles = {
     flex: 1,
     padding: "44px 48px",
   },
+  topBar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    position: "sticky",
+    top: 0,
+    background: "#faf8f0",
+    zIndex: 100,
+    padding: "16px 0",
+    marginBottom: 24,
+    borderBottom: "1px solid #e8e3da",
+  },
   titleArea: {
-    marginBottom: 28,
+    marginBottom: 0,
   },
   title: {
     fontSize: 24,
@@ -331,8 +341,8 @@ const styles = {
   },
   bottomRow: {
     display: "flex",
-    justifyContent: "flex-end",
     gap: 12,
+    flexShrink: 0,
   },
   secondaryBtn: {
     background: "white",

@@ -209,15 +209,15 @@ function ReportDownload({ isLoggedIn, onLogout }) {
                       key={std}
                       style={{
                         ...s.stdCard,
-                        borderColor: selectedStandard === std ? "#84934A" : "#e0e0e0",
+                        borderColor: selectedStandard === std ? "#5C6B2E" : "#e0e0e0",
                         background: selectedStandard === std ? "rgba(132,147,74,0.07)" : "white",
                       }}
                       onClick={() => setSelectedStandard(std)}
                     >
-                      <div style={{ ...s.stdCheck, background: selectedStandard === std ? "#84934A" : "white", borderColor: "#84934A", color: "white" }}>
+                      <div style={{ ...s.stdCheck, background: selectedStandard === std ? "#5C6B2E" : "white", borderColor: "#5C6B2E", color: "white" }}>
                         {selectedStandard === std ? "✓" : ""}
                       </div>
-                      <span style={{ fontSize: 15, fontWeight: 700, color: selectedStandard === std ? "#84934A" : "#333" }}>{std}</span>
+                      <span style={{ fontSize: 15, fontWeight: 700, color: selectedStandard === std ? "#5C6B2E" : "#333" }}>{std}</span>
                     </button>
                   ))}
                 </div>
@@ -333,11 +333,11 @@ function ReportDownload({ isLoggedIn, onLogout }) {
 }
 
 const s = {
-  page: { minHeight: "100vh", background: "#f8f9fa", fontFamily: "'Inter', sans-serif", display: "flex", flexDirection: "column" },
+  page: { minHeight: "100vh", background: "#FAF8F0", fontFamily: "'Pretendard', 'Apple SD Gothic Neo', sans-serif", display: "flex", flexDirection: "column" },
   body: { display: "flex", flex: 1 },
   main: { flex: 1, padding: "44px 48px" },
   header: { marginBottom: 28 },
-  eyebrow: { fontSize: 12, fontWeight: 600, color: "#84934A", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 },
+  eyebrow: { fontSize: 12, fontWeight: 600, color: "#5C6B2E", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 },
   title: { fontSize: 24, fontWeight: 700, color: "#1a1a1a", marginBottom: 6 },
   sub: { fontSize: 14, color: "#777" },
   twoCol: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 24 },
@@ -356,13 +356,13 @@ const s = {
   fmtExt: { fontSize: 12, fontWeight: 600 },
   fmtDesc: { fontSize: 12, color: "#888", lineHeight: 1.4 },
   fmtCheck: { width: 22, height: 22, borderRadius: "50%", border: "1.5px solid", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, flexShrink: 0 },
-  downloadBtn: { background: "#84934A", color: "white", border: "none", borderRadius: 12, padding: "16px", fontSize: 15, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center" },
+  downloadBtn: { background: "#5C6B2E", color: "white", border: "none", borderRadius: 12, padding: "16px", fontSize: 15, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center" },
   doneBox: { background: "#ecfdf5", borderRadius: 12, padding: "18px 20px", display: "flex", alignItems: "center", gap: 14 },
   doneIcon: { width: 40, height: 40, borderRadius: "50%", background: "#22c55e", color: "white", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
   doneTitle: { fontSize: 15, fontWeight: 700, color: "#065f46" },
   doneSub: { fontSize: 13, color: "#065f46", opacity: 0.75, marginTop: 2 },
   previewHeader: { marginBottom: 16 },
-  previewCover: { background: "linear-gradient(135deg, #1a2e0f 0%, #84934A 100%)", borderRadius: 12, padding: "24px", textAlign: "center", color: "white" },
+  previewCover: { background: "linear-gradient(135deg, #1a2e0f 0%, #5C6B2E 100%)", borderRadius: 12, padding: "24px", textAlign: "center", color: "white" },
   previewLogo: { fontSize: 13, fontWeight: 800, color: "rgba(255,255,255,0.6)", letterSpacing: "0.1em", marginBottom: 8 },
   previewReportTitle: { fontSize: 16, fontWeight: 700, marginBottom: 4 },
   previewYear: { fontSize: 28, fontWeight: 900, marginBottom: 4 },
@@ -370,7 +370,7 @@ const s = {
   tocList: { display: "flex", flexDirection: "column", gap: 2 },
   tocItem: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 12px", borderRadius: 8, background: "#fafaf8" },
   tocLeft: { display: "flex", alignItems: "center", gap: 10 },
-  tocNum: { width: 22, height: 22, borderRadius: "50%", background: "rgba(132,147,74,0.12)", color: "#84934A", fontSize: 11, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
+  tocNum: { width: 22, height: 22, borderRadius: "50%", background: "rgba(132,147,74,0.12)", color: "#5C6B2E", fontSize: 11, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
   tocLabel: { fontSize: 13, color: "#333", fontWeight: 500 },
   tocPages: { fontSize: 12, color: "#aaa" },
   previewMeta: { display: "flex", gap: 6, fontSize: 12, color: "#aaa", marginTop: 14, justifyContent: "center" },

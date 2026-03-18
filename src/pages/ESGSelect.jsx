@@ -30,7 +30,7 @@ function ESGSelect({ isLoggedIn, onLogout }) {
 
   const handleNext = () => {
     if (!selected) return;
-    navigate(`/issue-select?type=${selected}`);
+    navigate("/materiality");
   };
 
   return (
@@ -41,11 +41,39 @@ function ESGSelect({ isLoggedIn, onLogout }) {
         <Sidebar currentStep="esg-select" />
 
         <main style={styles.main}>
-          <div style={styles.titleArea}>
-            <h1 style={styles.title}>E / S / G &nbsp; 영역 선택</h1>
-            <p style={styles.titleSub}>
-              분석할 영역을 선택하세요. (발표용 흐름에선 1개 선택을 가정)
-            </p>
+          {/* 상단 고정 버튼 영역 */}
+          <div style={styles.topBar}>
+            <div style={styles.titleArea}>
+              <h1 style={styles.title}>E / S / G &nbsp; 영역 선택</h1>
+              <p style={styles.titleSub}>
+                분석할 영역을 선택하세요. (발표용 흐름에선 1개 선택을 가정)
+              </p>
+            </div>
+            <div style={styles.bottomRow}>
+              <button
+                type="button"
+                style={styles.homeBtn}
+                onClick={() => navigate("/")}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#aeb784"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#ccc"; }}
+              >
+                홈으로
+              </button>
+              <button
+                type="button"
+                style={{
+                  ...styles.nextBtn,
+                  opacity: selected ? 1 : 0.45,
+                  cursor: selected ? "pointer" : "not-allowed",
+                }}
+                disabled={!selected}
+                onClick={handleNext}
+                onMouseEnter={(e) => { if (selected) e.currentTarget.style.background = "#aeb784"; }}
+                onMouseLeave={(e) => { if (selected) e.currentTarget.style.background = "#41431b"; }}
+              >
+                다음: 이슈 선택 →
+              </button>
+            </div>
           </div>
 
           <div style={styles.panel}>
@@ -113,40 +141,6 @@ function ESGSelect({ isLoggedIn, onLogout }) {
             </p>
           </div>
 
-          <div style={styles.bottomRow}>
-            <button
-              type="button"
-              style={styles.homeBtn}
-              onClick={() => navigate("/")}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "#aeb784";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "#ccc";
-              }}
-            >
-              홈으로
-            </button>
-
-            <button
-              type="button"
-              style={{
-                ...styles.nextBtn,
-                opacity: selected ? 1 : 0.45,
-                cursor: selected ? "pointer" : "not-allowed",
-              }}
-              disabled={!selected}
-              onClick={handleNext}
-              onMouseEnter={(e) => {
-                if (selected) e.currentTarget.style.background = "#aeb784";
-              }}
-              onMouseLeave={(e) => {
-                if (selected) e.currentTarget.style.background = "#41431b";
-              }}
-            >
-              다음: 이슈 선택 →
-            </button>
-          </div>
         </main>
       </div>
     </div>
@@ -169,8 +163,20 @@ const styles = {
     flex: 1,
     padding: "44px 48px",
   },
+  topBar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    position: "sticky",
+    top: 0,
+    background: "#faf8f0",
+    zIndex: 100,
+    padding: "16px 0",
+    marginBottom: 24,
+    borderBottom: "1px solid #e8e3da",
+  },
   titleArea: {
-    marginBottom: 28,
+    marginBottom: 0,
   },
   title: {
     fontSize: 24,
@@ -254,8 +260,8 @@ const styles = {
   },
   bottomRow: {
     display: "flex",
-    justifyContent: "flex-end",
     gap: 12,
+    flexShrink: 0,
   },
   homeBtn: {
     background: "white",

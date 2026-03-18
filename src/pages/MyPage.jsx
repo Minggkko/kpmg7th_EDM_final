@@ -55,7 +55,7 @@ export default function MyPage({ isLoggedIn, onLogout }) {
               <h1 style={s.title}>보고서 히스토리</h1>
               <p style={s.sub}>생성된 ESG 보고서 초안을 조회하고 관리합니다.</p>
             </div>
-            <button style={s.newBtn} onClick={() => navigate("/upload")}>
+            <button style={s.newBtn} onClick={() => navigate("/esg-select")}>
               + 새 보고서 생성
             </button>
           </div>
@@ -65,7 +65,7 @@ export default function MyPage({ isLoggedIn, onLogout }) {
               <div style={s.emptyIcon}>📄</div>
               <div style={s.emptyTitle}>아직 생성된 보고서가 없습니다</div>
               <div style={s.emptySub}>보고서를 생성하면 여기에 자동으로 저장됩니다.</div>
-              <button style={s.emptyBtn} onClick={() => navigate("/upload")}>
+              <button style={s.emptyBtn} onClick={() => navigate("/esg-select")}>
                 첫 보고서 만들기 →
               </button>
             </div>

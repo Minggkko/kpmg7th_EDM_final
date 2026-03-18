@@ -13,7 +13,7 @@ function Hero() {
           Automate ESG data collection, analysis and report generation with AI.
           Build sustainable corporate transparency faster.
         </p>
-        <button className="main-btn" onClick={() => navigate("/esg-select")}>
+        <button className="main-btn" onClick={() => navigate("/materiality")}>
           Get Started
         </button>
       </div>

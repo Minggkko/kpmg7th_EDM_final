@@ -161,7 +161,13 @@ export default function ConsistencyCheck({ isLoggedIn, onLogout }) {
             <button
               style={allChecked ? s.btnPrimary : s.btnDisabled}
               disabled={!allChecked}
-              onClick={() => navigate("/data-input-request")}
+              onClick={() => navigate("/unverified-result", {
+                state: {
+                  checkedCount: checkedCount,
+                  totalCount: allItems.length,
+                  anomalyItems: allItems,
+                }
+              })}
             >
               다음 단계로
             </button>
