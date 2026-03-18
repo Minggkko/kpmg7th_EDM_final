@@ -14,7 +14,7 @@ router = APIRouter()
 
 @router.get("", response_model=PaginatedResponse[DataPointResponse])
 async def get_data_points(
-    indicator_id: int | None = Query(None, description="지표 ID로 필터링"),
+    data_id: int | None = Query(None, description="data ID로 필터링 (data 테이블)"),
     search: str | None = Query(None, description="이름 키워드 검색"),
     _: dict = Depends(get_current_user)
 ):
@@ -22,7 +22,7 @@ async def get_data_points(
     if search:
         data = service.search_by_name(search)
     else:
-        data = service.get_all(indicator_id=indicator_id)
+        data = service.get_all(data_id=data_id)
     return PaginatedResponse(data=data, total=len(data))
 
 

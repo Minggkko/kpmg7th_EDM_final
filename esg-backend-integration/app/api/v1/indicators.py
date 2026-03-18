@@ -24,9 +24,9 @@ async def get_indicator_detail(
     indicator_id: int,
     _: dict = Depends(get_current_user)
 ):
-    """indicator + data_points 함께 반환 (프론트 상세 페이지용)"""
+    """indicator → data → data_points 계층 구조로 반환 (프론트 상세 페이지용)"""
     service = IndicatorService()
-    data = service.get_with_data_points(indicator_id)
+    data = service.get_with_data(indicator_id)
     return APIResponse(data=data)
 
 

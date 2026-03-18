@@ -1,0 +1,51 @@
+# ============================================================
+# Frontend (React + Vite) 설치 목록
+# ============================================================
+# 아래 명령어로 한 번에 설치:
+#   cd frontend
+#   npm install
+#
+# 또는 개별 설치:
+#   npm install <패키지명>
+# ============================================================
+
+# ── 런타임 의존성 (dependencies) ──────────────────────────────
+
+react@^18.3.1
+# React 핵심 라이브러리
+
+react-dom@^18.3.1
+# React를 브라우저 DOM에 렌더링
+
+react-router-dom@^6.28.0
+# 페이지 라우팅 (BrowserRouter, Routes, Route, useNavigate, useLocation 등)
+
+axios@^1.7.9
+# HTTP 클라이언트 - 백엔드 API 호출 (src/api.js에서 사용)
+
+lucide-react@^0.469.0
+# 아이콘 라이브러리 (Sidebar, DataUpload 등에서 사용)
+# 사용 아이콘: UploadCloud, BarChart3, Leaf, ClipboardList, Upload, Settings, FileText, BookOpen, Database, ShieldCheck 등
+
+html2canvas@^1.4.1
+# HTML 요소를 Canvas 이미지로 변환 (ReportDownload, ReportGenerate에서 PDF 생성 시 사용)
+
+jspdf@^4.2.1
+# PDF 파일 생성 (ReportDownload, ReportGenerate에서 사용)
+# ※ 2.x → 4.x 업그레이드: dompurify XSS 취약점 수정 (CVE)
+
+
+# ── 개발 의존성 (devDependencies) ─────────────────────────────
+
+vite@^6.0.5
+# 번들러 / 개발 서버 (npm run dev 명령어)
+
+@vitejs/plugin-react@^4.3.4
+# Vite에서 React JSX를 처리하기 위한 플러그인
+
+
+# ── 환경 변수 (.env) ──────────────────────────────────────────
+# frontend/.env 파일에 아래 변수 설정 필요:
+#
+#   VITE_API_BASE_URL=http://localhost:8000/api/v1
+#   VITE_OPENAI_API_KEY=sk-...   (ReportGenerate 페이지 GPT 기능 사용 시)

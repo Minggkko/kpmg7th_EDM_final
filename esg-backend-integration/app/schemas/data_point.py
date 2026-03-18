@@ -7,17 +7,17 @@ class DataPointBase(BaseModel):
     name: str                               # 총_연료_소비량
     unit: Optional[str] = None             # GJ, MWh, tCO₂e, Text, Yes/No
     data_type: Optional[str] = None        # numeric / text
-    data_group: Optional[str] = None       # 총 연료 소비 분류
     definition: Optional[str] = None       # 공식 정의
+    # data_group 컬럼은 data 테이블로 분리됨 (data_id FK 사용)
 
 
 class DataPointCreate(DataPointBase):
-    indicator_id: int
+    data_id: int                            # FK → data.id (구: indicator_id 직접 참조)
 
 
 class DataPointResponse(DataPointBase):
     id: int
-    indicator_id: int
+    data_id: int
     created_at: datetime
 
     class Config:

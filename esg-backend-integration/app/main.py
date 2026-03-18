@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer
 from app.core.config import get_settings
 from app.core.dependencies import get_current_user
-from app.api.v1 import issues, indicators, data_points, mapping, raw_data, auth
+from app.api.v1 import issues, indicators, data_points, data, mapping, raw_data, auth
 from app.api.v1 import outliers, evidence, finalization, dashboard, audit
 
 settings = get_settings()
@@ -28,6 +28,7 @@ app.add_middleware(
 # 라우터 등록 - auth 제외 전부 토큰 보호
 app.include_router(issues.router,      prefix="/api/v1/issues",      tags=["Issues"],      dependencies=[Depends(get_current_user)])
 app.include_router(indicators.router,  prefix="/api/v1/indicators",  tags=["Indicators"],  dependencies=[Depends(get_current_user)])
+app.include_router(data.router,        prefix="/api/v1/data",        tags=["Data"],        dependencies=[Depends(get_current_user)])
 app.include_router(data_points.router, prefix="/api/v1/data-points", tags=["DataPoints"],  dependencies=[Depends(get_current_user)])
 app.include_router(mapping.router,     prefix="/api/v1/mapping",     tags=["Mapping"],  dependencies=[Depends(get_current_user)])
 app.include_router(raw_data.router,    prefix="/api/v1/raw-data",    tags=["RawData"],  dependencies=[Depends(get_current_user)])
