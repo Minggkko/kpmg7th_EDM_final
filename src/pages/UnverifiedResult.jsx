@@ -28,7 +28,7 @@ export default function UnverifiedResult({ isLoggedIn, onLogout }) {
     <div style={s.root}>
       <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
       <div style={s.body}>
-        <Sidebar />
+        <Sidebar currentStep="unverified" />
         <main style={s.main}>
 
           <div style={s.pageHeader}>
@@ -141,7 +141,7 @@ export default function UnverifiedResult({ isLoggedIn, onLogout }) {
             <p style={s.confirmDesc}>미증빙자료 검증을 완료하고 SR 보고서로 이동하시겠습니까?</p>
             <div style={{ display: "flex", justifyContent: "flex-end", gap: 10, marginTop: 20 }}>
               <button style={s.cancelBtn} onClick={() => setShowConfirm(false)}>취소</button>
-              <button style={s.btnPrimary} onClick={() => { setShowConfirm(false); navigate("/report-draft"); }}>확정 및 이동</button>
+              <button style={s.btnPrimary} onClick={() => { setShowConfirm(false); navigate("/analysis-dashboard"); }}>확정 및 이동</button>
             </div>
           </div>
         </div>

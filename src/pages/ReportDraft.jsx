@@ -1,332 +1,380 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar.jsx";
+import Sidebar from "../components/Sidebar.jsx";
 
-const formats = [
-  {
-    id: "word",
-    icon: "📄",
-    label: "Word",
-    ext: ".docx",
-    desc: "편집 가능한 문서 형식. 추가 수정이 필요할 때 적합합니다.",
-    color: "#1e40af",
-    bg: "#eff6ff",
-  },
-  {
-    id: "excel",
-    icon: "📊",
-    label: "Excel",
-    ext: ".xlsx",
-    desc: "데이터 테이블 및 수치 중심 정리. 내부 검토용으로 활용하세요.",
-    color: "#065f46",
-    bg: "#ecfdf5",
-  },
-  {
-    id: "ppt",
-    icon: "📑",
-    label: "PowerPoint",
-    ext: ".pptx",
-    desc: "경영진 보고 및 IR용 프레젠테이션 형식입니다.",
-    color: "#92400e",
-    bg: "#fffbeb",
-  },
-  {
-    id: "pdf",
-    icon: "🗂️",
-    label: "PDF",
-    ext: ".pdf",
-    desc: "최종 배포용 고정 형식. 외부 공시 및 제출용으로 사용하세요.",
-    color: "#991b1b",
-    bg: "#fef2f2",
-  },
-];
+const SECTION_COLORS = {
+  1: { bg: "#ecfdf5", border: "#bbf7d0", label: "#065f46" }, // 환경 E - green
+  2: { bg: "#eff6ff", border: "#bfdbfe", label: "#1e40af" }, // 사회 S - blue
+  3: { bg: "#fdf4ff", border: "#e9d5ff", label: "#6b21a8" }, // 지배구조 G - purple
+};
+const DEFAULT_COLOR = { bg: "#f8fafc", border: "#e2e8f0", label: "#334155" };
 
-const standards = ["GRI", "ISSB", "ESRS", "SASB"];
+export default function ReportDraft() {
+  const navigate  = useNavigate();
+  const location  = useLocation();
 
-const previewSections = [
-  { label: "표지 / 목차", pages: "1-2p" },
-  { label: "CEO 메시지", pages: "3p" },
-  { label: "환경 (E) — 탄소·에너지·용수", pages: "4-8p" },
-  { label: "사회 (S) — 안전·인권·다양성", pages: "9-13p" },
-  { label: "지배구조 (G) — 이사회·윤리", pages: "14-17p" },
-  { label: "ESG 데이터 요약표", pages: "18-20p" },
-  { label: "GRI Content Index", pages: "21-22p" },
-];
+  const [draft, setDraft]           = useState(null);
+  const [loading, setLoading]       = useState(true);
+  const [editingKey, setEditingKey] = useState(null); // "fieldId_context" | "fieldId_commentary"
+  const [saving, setSaving]         = useState(false);
+  const [modCount, setModCount]     = useState(0);
+  const [expandedSections, setExpandedSections] = useState({ 1: true, 2: true, 3: true });
 
-function ReportDownload({ isLoggedIn, onLogout }) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const fileName = location.state?.fileName || "uploaded_file.pdf";
-  const generatedSections = location.state?.generatedSections || {};
-  const stateStandard = location.state?.standard || null;
+  // Load draft from navigation state or API
+  useEffect(() => {
+    const stateDraft = location.state?.draft;
+    if (stateDraft) {
+      setDraft(stateDraft);
+      setLoading(false);
+    } else {
+      setDraft({
+        draft_id: "dummy-001",
+        version: 1,
+        generated_at: new Date().toISOString(),
+        sections: [
+          {
+            esg_id: 1,
+            label: "환경 (E)",
+            items: [
+              {
+                field_id: "GRI-305-1",
+                title: "온실가스 배출량 (Scope 1)",
+                context: { current: "당사의 2023년 Scope 1 직접 온실가스 배출량은 12,450 tCO₂e로, 전년 대비 3.2% 감소하였습니다.", last_modified: null },
+                commentary: { current: "생산 공정 개선 및 재생에너지 전환 투자의 결과로 배출량이 감소하였습니다. 2030년까지 탄소중립 달성을 목표로 추가 감축 계획을 수립 중입니다.", last_modified: null },
+                data_points: [{ dp_id: 1, dp_name: "Scope 1 직접배출량", unit: "tCO₂e", indicator_code: "GRI 305-1", has_data: true, rows: [{ id: 1, site_id: "본사", reporting_date: "2023-12", value: 12450, unit: "tCO₂e" }] }]
+              },
+              {
+                field_id: "GRI-302-1",
+                title: "에너지 사용량",
+                context: { current: "2023년 총 에너지 사용량은 84,200 MWh이며, 이 중 재생에너지 비중은 18.4%입니다.", last_modified: null },
+                commentary: { current: "당사는 2030년까지 재생에너지 비중을 50%로 확대할 계획입니다. 태양광 설비 추가 도입과 에너지 효율화 설비 투자를 지속하고 있습니다.", last_modified: null },
+                data_points: [{ dp_id: 2, dp_name: "총 에너지 소비량", unit: "MWh", indicator_code: "GRI 302-1", has_data: true, rows: [{ id: 2, site_id: "본사", reporting_date: "2023-12", value: 84200, unit: "MWh" }] }]
+              },
+              {
+                field_id: "GRI-303-5",
+                title: "용수 사용량",
+                context: { current: "2023년 총 용수 사용량은 19,200톤으로, 수자원 절감 설비 도입을 통해 전년 대비 효율이 개선되었습니다.", last_modified: null },
+                commentary: { current: "폐수 재활용률은 62%를 기록하였으며, 물 절약 기술 도입 및 재이용 시스템 확대를 통해 지속적인 절감을 추진하고 있습니다.", last_modified: null },
+                data_points: []
+              }
+            ]
+          },
+          {
+            esg_id: 2,
+            label: "사회 (S)",
+            items: [
+              {
+                field_id: "GRI-2-7",
+                title: "임직원 현황",
+                context: { current: "2023년 기준 총 임직원 수는 2,340명이며, 정규직 비율은 94.2%입니다.", last_modified: null },
+                commentary: { current: "여성 임원 비율은 18.2%로 전년 대비 2.1%p 증가하였으며, 다양성 확대 정책을 지속적으로 추진하고 있습니다.", last_modified: null },
+                data_points: [{ dp_id: 3, dp_name: "총 임직원 수", unit: "명", indicator_code: "GRI 2-7", has_data: true, rows: [{ id: 3, site_id: "전사", reporting_date: "2023-12", value: 2340, unit: "명" }] }]
+              },
+              {
+                field_id: "GRI-403-9",
+                title: "산업 안전",
+                context: { current: "2023년 산업재해율은 0.42%로, 업종 평균(0.58%) 대비 낮은 수준을 유지하고 있습니다.", last_modified: null },
+                commentary: { current: "안전관리 시스템 ISO 45001 인증을 유지하며 무사고 사업장 달성을 목표로 하고 있습니다.", last_modified: null },
+                data_points: []
+              }
+            ]
+          },
+          {
+            esg_id: 3,
+            label: "지배구조 (G)",
+            items: [
+              {
+                field_id: "GRI-2-9",
+                title: "이사회 독립성",
+                context: { current: "2023년 기준 이사회 내 사외이사 비율은 62.5%로, 이사회의 독립적 의사결정 체계를 강화하고 있습니다.", last_modified: null },
+                commentary: { current: "감사위원회는 100% 사외이사로 구성되어 있으며, ESG 전문위원회를 신설하여 지속가능경영 의사결정 체계를 강화하였습니다.", last_modified: null },
+                data_points: []
+              },
+              {
+                field_id: "GRI-205-3",
+                title: "윤리 경영",
+                context: { current: "2023년 윤리 위반 사건은 총 3건이 접수되었으며, 모두 내부 윤리위원회 심의를 거쳐 처리 완료되었습니다.", last_modified: null },
+                commentary: { current: "임직원 윤리교육 이수율은 98.7%를 기록하였으며, 익명 신고 채널을 강화하여 내부 감시 기능을 제고하였습니다.", last_modified: null },
+                data_points: []
+              }
+            ]
+          }
+        ]
+      }); setLoading(false);
+    }
+  }, []);
 
-  const [selectedFormats, setSelectedFormats] = useState(["pdf"]);
-  const [selectedStandard, setSelectedStandard] = useState("GRI");
-  const [downloading, setDownloading] = useState(false);
-  const [done, setDone] = useState(false);
+  // Count modifications
+  useEffect(() => {
+    if (!draft) return;
+    let count = 0;
+    for (const sec of draft.sections) {
+      for (const item of sec.items) {
+        if (item.context.last_modified)    count++;
+        if (item.commentary.last_modified) count++;
+      }
+    }
+    setModCount(count);
+  }, [draft]);
 
-  const toggleFormat = (id) => {
-    setSelectedFormats((prev) =>
-      prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]
-    );
+  const toggleSection = (esgId) => {
+    setExpandedSections(prev => ({ ...prev, [esgId]: !prev[esgId] }));
   };
 
-  const handleDownload = async () => {
-    if (selectedFormats.length === 0) return;
-    setDownloading(true);
+  const handleEdit = (fieldId, fieldType, value) => {
+    setDraft(prev => ({
+      ...prev,
+      sections: prev.sections.map(sec => ({
+        ...sec,
+        items: sec.items.map(item =>
+          item.field_id === fieldId
+            ? {
+                ...item,
+                [fieldType]: {
+                  ...item[fieldType],
+                  current:       value,
+                  last_modified: new Date().toISOString().slice(0, 19),
+                },
+              }
+            : item
+        ),
+      })),
+    }));
+  };
+
+  const handleBlur = async (fieldId, fieldType, value) => {
+    setEditingKey(null);
+    setSaving(true);
     try {
-      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
-        import("html2canvas"),
-        import("jspdf").then(m => ({ jsPDF: m.jsPDF })),
-      ]);
-
-      const today = new Date();
-      const dateStr = `${today.getFullYear()}. ${String(today.getMonth()+1).padStart(2,"0")}. ${String(today.getDate()).padStart(2,"0")}.`;
-
-      const container = document.createElement("div");
-      container.style.cssText = `
-        position:fixed; left:-9999px; top:0;
-        width:794px; background:white; padding:60px 64px;
-        font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-        color:#1a1a1a; font-size:14px; line-height:1.85; box-sizing:border-box;
-      `;
-      const esgSections = [
-        { id: "env_carbon", category: "환경 (E)", metric: "온실가스 배출량", standard: "GRI 305-1", data: { value: "12,450 tCO₂e", change: "-3.2%", year: 2023 } },
-        { id: "env_energy", category: "환경 (E)", metric: "에너지 사용량", standard: "GRI 302-1", data: { value: "84,200 MWh", renewable: "18.4%", year: 2023 } },
-        { id: "env_water", category: "환경 (E)", metric: "용수 사용량", standard: "GRI 303-5", data: { value: "19,200 톤", recycleRate: "62%", year: 2023 } },
-        { id: "soc_employee", category: "사회 (S)", metric: "임직원 현황", standard: "GRI 2-7", data: { total: "2,340명", female: "18.2%", permanent: "94.2%", year: 2023 } },
-        { id: "soc_safety", category: "사회 (S)", metric: "산업 안전", standard: "GRI 403-9", data: { rate: "0.42%", avg: "0.58%", year: 2023 } },
-        { id: "gov_board", category: "지배구조 (G)", metric: "이사회 독립성", standard: "GRI 2-9", data: { independence: "62.5%", audit: "100%", year: 2023 } },
-        { id: "gov_ethics", category: "지배구조 (G)", metric: "윤리 경영", standard: "GRI 205-3", data: { violations: "3건", training: "98.7%", year: 2023 } },
-      ];
-      const hasContent = Object.keys(generatedSections).length > 0;
-
-      container.innerHTML = `
-        <div style="width:100%;height:6px;background:#5C6B2E;margin-bottom:40px;border-radius:2px;"></div>
-        <div style="font-size:10px;color:#5C6B2E;font-weight:700;letter-spacing:0.1em;margin-bottom:8px;">지속가능경영보고서 · ${selectedStandard} 기준 · 초안</div>
-        <div style="font-size:28px;font-weight:700;color:#1a1a1a;margin-bottom:6px;">ESG 보고서 초안</div>
-        <div style="font-size:13px;color:#666;margin-bottom:4px;">${selectedStandard} 기준 ESG 지속가능경영보고서 초안입니다.</div>
-        <div style="font-size:11px;color:#aaa;margin-bottom:28px;">생성일: ${dateStr} &nbsp;|&nbsp; 원본 파일: ${fileName}</div>
-        <div style="height:1px;background:linear-gradient(90deg,#5C6B2E,#C8D4A0,transparent);margin-bottom:32px;"></div>
-
-        ${hasContent ? `
-          ${esgSections.map(sec => `
-            <div style="margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid #eee;">
-              <div style="font-size:10px;font-weight:700;color:#5C6B2E;letter-spacing:0.1em;margin-bottom:3px;">${sec.category}</div>
-              <div style="font-size:11px;color:#aaa;margin-bottom:4px;">${sec.standard}</div>
-              <div style="font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:10px;">${sec.metric}</div>
-              <div style="background:#FAFDF5;border-left:4px solid #5C6B2E;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#333;line-height:1.85;margin-bottom:10px;">
-                ${generatedSections[sec.id] || "초안이 생성되지 않았습니다."}
-              </div>
-              <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                ${Object.entries(sec.data).map(([k,v]) => `<span style="background:#f5f5f0;border:1px solid #e0ddd6;border-radius:4px;padding:2px 8px;font-size:11px;color:#666;">${k}: ${v}</span>`).join("")}
-              </div>
-            </div>
-          `).join("")}
-        ` : `
-          <div style="font-size:16px;font-weight:700;margin-bottom:16px;">목차</div>
-          ${previewSections.map((sec, i) => `
-            <div style="display:flex;justify-content:space-between;padding:10px 14px;margin-bottom:6px;background:${i%2===0?'#fafaf8':'white'};border-radius:6px;">
-              <div style="display:flex;align-items:center;gap:10px;">
-                <span style="width:22px;height:22px;border-radius:50%;background:rgba(92,107,46,0.12);color:#5C6B2E;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">${i+1}</span>
-                <span style="font-size:13px;font-weight:500;">${sec.label}</span>
-              </div>
-              <span style="font-size:12px;color:#aaa;">${sec.pages}</span>
-            </div>
-          `).join("")}
-        `}
-
-        <div style="margin-top:32px;padding:14px 18px;background:#FAFDF5;border:1px solid #A8C070;border-radius:8px;font-size:11px;color:#5C6B2E;line-height:1.7;">
-          ※ 본 초안은 AI가 자동 생성한 내용으로, 공식 제출 전 ESG 전문가의 검토 및 수정이 반드시 필요합니다.<br/>
-          생성 기준서: ${selectedStandard} &nbsp;|&nbsp; 생성일: ${dateStr}
-        </div>
-        <div style="margin-top:28px;padding-top:12px;border-top:1px solid #eee;display:flex;justify-content:space-between;font-size:10px;color:#bbb;">
-          <span>ESG 지속가능경영보고서 초안</span><span>${dateStr}</span>
-        </div>
-      `;
-      document.body.appendChild(container);
-      await document.fonts.ready;
-      await new Promise(r => setTimeout(r, 400));
-
-      const canvas = await html2canvas(container, {
-        scale: 2, useCORS: true, backgroundColor: "#ffffff", width: 794,
-      });
-      document.body.removeChild(container);
-
-      const imgData = canvas.toDataURL("image/png");
-      for (const fmtId of selectedFormats) {
-        const fmt = formats.find(f => f.id === fmtId);
-        const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-        const pdfW = 210, pdfH = 297;
-        const imgH = (canvas.height * pdfW) / canvas.width;
-        let posY = 0;
-        while (posY < imgH) {
-          if (posY > 0) pdf.addPage();
-          pdf.addImage(imgData, "PNG", 0, -posY, pdfW, imgH);
-          posY += pdfH;
-        }
-        const todayStr = `${today.getFullYear()}${String(today.getMonth()+1).padStart(2,"0")}${String(today.getDate()).padStart(2,"0")}`;
-        pdf.save(`ESG_보고서_${selectedStandard}_${todayStr}.pdf`);
-      }
-
-      setDownloading(false);
-      setDone(true);
-    } catch (e) {
-      console.error("다운로드 오류:", e);
-      alert("다운로드 중 오류: " + e.message);
-      setDownloading(false);
+      // mock save
+    } catch (_) {
+      // silent — mock always succeeds
+    } finally {
+      setSaving(false);
     }
   };
 
+  const handleConfirm = () => {
+    navigate("/report-download", { state: { draft } });
+  };
+
+  if (loading) return <LoadingScreen />;
+  if (!draft)  return <ErrorScreen />;
+
   return (
     <div style={s.page}>
-      <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
+      <Navbar />
       <div style={s.body}>
         <Sidebar currentStep="report" />
         <main style={s.main}>
 
-          {/* Header */}
+          {/* 헤더 */}
           <div style={s.header}>
-            <div>
-              <p style={s.eyebrow}>SR 보고서</p>
-              <h1 style={s.title}>보고서 다운로드</h1>
-              <p style={s.sub}>원하는 형식과 기준서를 선택하고 보고서를 다운로드하세요.</p>
-            </div>
-          </div>
-
-          <div style={s.twoCol}>
-
-            {/* Left: Options */}
-            <div style={s.leftCol}>
-
-              {/* Standard */}
-              <div style={s.panel}>
-                <p style={s.panelLabel}>기준서 선택</p>
-                <div style={s.stdGrid}>
-                  {standards.map((std) => (
-                    <button
-                      key={std}
-                      style={{
-                        ...s.stdCard,
-                        borderColor: selectedStandard === std ? "#5C6B2E" : "#e0e0e0",
-                        background: selectedStandard === std ? "rgba(132,147,74,0.07)" : "white",
-                      }}
-                      onClick={() => setSelectedStandard(std)}
-                    >
-                      <div style={{ ...s.stdCheck, background: selectedStandard === std ? "#5C6B2E" : "white", borderColor: "#5C6B2E", color: "white" }}>
-                        {selectedStandard === std ? "✓" : ""}
-                      </div>
-                      <span style={{ fontSize: 15, fontWeight: 700, color: selectedStandard === std ? "#5C6B2E" : "#333" }}>{std}</span>
-                    </button>
-                  ))}
-                </div>
+            <p style={s.eyebrow}>STEP 02 · 초안 편집</p>
+            <div style={s.headerRow}>
+              <div>
+                <h1 style={s.title}>ESG 보고서 초안 편집</h1>
+                <p style={s.sub}>
+                  항목별 평가 맥락과 AI 해설을 직접 수정할 수 있습니다.
+                  데이터 포인트는 읽기 전용으로 표시됩니다.
+                </p>
               </div>
-
-              {/* Format */}
-              <div style={s.panel}>
-                <p style={s.panelLabel}>다운로드 형식 (복수 선택 가능)</p>
-                <div style={s.formatList}>
-                  {formats.map((fmt) => {
-                    const active = selectedFormats.includes(fmt.id);
-                    return (
-                      <button
-                        key={fmt.id}
-                        style={{
-                          ...s.formatCard,
-                          borderColor: active ? fmt.color : "#e0e0e0",
-                          background: active ? fmt.bg : "white",
-                        }}
-                        onClick={() => toggleFormat(fmt.id)}
-                      >
-                        <div style={s.fmtLeft}>
-                          <span style={s.fmtIcon}>{fmt.icon}</span>
-                          <div>
-                            <div style={s.fmtTitle}>
-                              {fmt.label}
-                              <span style={{ ...s.fmtExt, color: fmt.color }}>{fmt.ext}</span>
-                            </div>
-                            <div style={s.fmtDesc}>{fmt.desc}</div>
-                          </div>
-                        </div>
-                        <div style={{ ...s.fmtCheck, background: active ? fmt.color : "white", borderColor: fmt.color, color: "white" }}>
-                          {active ? "✓" : ""}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Download Button */}
-              {!done ? (
-                <button
-                  style={{
-                    ...s.downloadBtn,
-                    opacity: selectedFormats.length === 0 || downloading ? 0.6 : 1,
-                    cursor: selectedFormats.length === 0 ? "not-allowed" : "pointer",
-                  }}
-                  disabled={selectedFormats.length === 0 || downloading}
-                  onClick={handleDownload}
-                >
-                  {downloading ? (
-                    <span>⏳ 생성 중...</span>
-                  ) : (
-                    <span>⬇ 보고서 다운로드 ({selectedFormats.length}개 형식)</span>
-                  )}
+              <div style={s.headerMeta}>
+                {saving && <span style={s.savingBadge}>저장 중...</span>}
+                {modCount > 0 && (
+                  <span style={s.modBadge}>{modCount}개 항목 수정됨</span>
+                )}
+                <button style={s.confirmBtn} onClick={handleConfirm}>
+                  저장 형식 선택 →
                 </button>
-              ) : (
-                <div style={s.doneBox}>
-                  <span style={s.doneIcon}>✓</span>
-                  <div>
-                    <div style={s.doneTitle}>다운로드 완료!</div>
-                    <div style={s.doneSub}>
-                      {selectedStandard} 기준 보고서 {selectedFormats.length}개 파일이 저장되었습니다.
-                    </div>
-                  </div>
-                </div>
-              )}
-
-            </div>
-
-            {/* Right: Preview */}
-            <div style={s.rightCol}>
-              <div style={s.panel}>
-                <p style={s.panelLabel}>보고서 구성 미리보기</p>
-                <div style={s.previewHeader}>
-                  <div style={s.previewCover}>
-                    <div style={s.previewLogo}>EDM</div>
-                    <div style={s.previewReportTitle}>ESG 지속가능경영보고서</div>
-                    <div style={s.previewYear}>2023</div>
-                    <div style={s.previewStd}>{selectedStandard} 기준</div>
-                  </div>
-                </div>
-                <div style={s.tocList}>
-                  {previewSections.map((sec, i) => (
-                    <div key={i} style={s.tocItem}>
-                      <div style={s.tocLeft}>
-                        <span style={s.tocNum}>{i + 1}</span>
-                        <span style={s.tocLabel}>{sec.label}</span>
-                      </div>
-                      <span style={s.tocPages}>{sec.pages}</span>
-                    </div>
-                  ))}
-                </div>
-                <div style={s.previewMeta}>
-                  <span>총 22페이지</span>
-                  <span>·</span>
-                  <span>{selectedStandard} Content Index 포함</span>
-                </div>
               </div>
             </div>
-
           </div>
 
-          <div style={s.bottomRow}>
-            <button style={s.secBtn} onClick={() => navigate(-1)}>← 초안으로 돌아가기</button>
-          </div>
+          {/* 섹션별 렌더 */}
+          {draft.sections.map(sec => {
+            const color = SECTION_COLORS[sec.esg_id] || DEFAULT_COLOR;
+            return (
+              <div key={sec.esg_id} style={s.section}>
+                {/* 섹션 헤더 */}
+                <button
+                  style={{ ...s.sectionHeader, background: color.bg, borderColor: color.border, width: "100%", cursor: "pointer" }}
+                  onClick={() => toggleSection(sec.esg_id)}
+                >
+                  <span style={{ ...s.sectionLabel, color: color.label }}>{sec.label}</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span style={s.sectionCount}>{sec.items.length}개 항목</span>
+                    <span style={{ fontSize: 12, color: color.label }}>{expandedSections[sec.esg_id] ? "▲" : "▽"}</span>
+                  </div>
+                </button>
+
+                {/* 아이템 목록 */}
+                {expandedSections[sec.esg_id] && sec.items.map(item => (
+                  <ItemCard
+                    key={item.field_id}
+                    item={item}
+                    color={color}
+                    editingKey={editingKey}
+                    setEditingKey={setEditingKey}
+                    onEdit={handleEdit}
+                    onBlur={handleBlur}
+                  />
+                ))}
+              </div>
+            );
+          })}
+
+
 
         </main>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────── ItemCard ─────────── */
+function ItemCard({ item, editingKey, setEditingKey, onEdit, onBlur }) {
+  const ctxKey  = `${item.field_id}_context`;
+  const comKey  = `${item.field_id}_commentary`;
+  const ctxMod  = !!item.context.last_modified;
+  const comMod  = !!item.commentary.last_modified;
+
+  return (
+    <div style={s.card}>
+      {/* 카드 헤더 */}
+      <div style={s.cardHeader}>
+        <span style={s.fieldId}>{item.field_id}</span>
+        <h3 style={s.cardTitle}>{item.title}</h3>
+        {(ctxMod || comMod) && <span style={s.modDot} title="수정됨" />}
+      </div>
+
+      {/* 평가 맥락 */}
+      <EditableField
+        label="평가 맥락"
+        value={item.context.current}
+        isEditing={editingKey === ctxKey}
+        modified={ctxMod}
+        lastModified={item.context.last_modified}
+        onFocus={() => setEditingKey(ctxKey)}
+        onChange={v => onEdit(item.field_id, "context", v)}
+        onBlur={v => onBlur(item.field_id, "context", v)}
+      />
+
+      {/* AI 해설 */}
+      <EditableField
+        label="AI 해설"
+        value={item.commentary.current}
+        isEditing={editingKey === comKey}
+        modified={comMod}
+        lastModified={item.commentary.last_modified}
+        onFocus={() => setEditingKey(comKey)}
+        onChange={v => onEdit(item.field_id, "commentary", v)}
+        onBlur={v => onBlur(item.field_id, "commentary", v)}
+        tall
+      />
+
+      {/* 데이터 포인트 */}
+      {item.data_points?.length > 0 && (
+        <div style={s.dpSection}>
+          <p style={s.dpLabel}>데이터 포인트</p>
+          {item.data_points.map(dp => (
+            <DataPointTable key={dp.dp_id} dp={dp} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─────────── EditableField ─────────── */
+function EditableField({ label, value, isEditing, modified, lastModified, onFocus, onChange, onBlur, tall }) {
+  return (
+    <div style={s.fieldWrap}>
+      <div style={s.fieldLabelRow}>
+        <span style={s.fieldLabel}>{label}</span>
+        {modified && lastModified && (
+          <span style={s.modTime}>수정됨 · {lastModified.slice(0, 16).replace("T", " ")}</span>
+        )}
+        {!isEditing && (
+          <button style={s.editBtn} onClick={onFocus}>편집</button>
+        )}
+      </div>
+      {isEditing ? (
+        <textarea
+          autoFocus
+          style={{ ...s.textarea, minHeight: tall ? 96 : 56 }}
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          onBlur={e => onBlur(e.target.value)}
+        />
+      ) : (
+        <div
+          style={{ ...s.fieldText, borderColor: modified ? "#A8C070" : "#f0f0ee" }}
+          onClick={onFocus}
+          title="클릭하여 편집"
+        >
+          {value || <span style={{ color: "#ccc" }}>—</span>}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─────────── DataPointTable ─────────── */
+function DataPointTable({ dp }) {
+  return (
+    <div style={s.dpCard}>
+      <div style={s.dpCardHeader}>
+        <span style={s.dpName}>{dp.dp_name}</span>
+        <span style={s.dpUnit}>{dp.unit}</span>
+        <span style={s.dpIndicator}>{dp.indicator_code}</span>
+      </div>
+
+      {dp.has_data && dp.rows.length > 0 ? (
+        <table style={s.table}>
+          <thead>
+            <tr>
+              {["사이트", "보고일", "값", "단위"].map(h => (
+                <th key={h} style={s.th}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {dp.rows.map(row => (
+              <tr key={row.id} style={s.tr}>
+                <td style={s.td}>{row.site_id}</td>
+                <td style={s.td}>{row.reporting_date?.slice(0, 7)}</td>
+                <td style={{ ...s.td, textAlign: "right", fontVariantNumeric: "tabular-nums" }}>
+                  {typeof row.value === "number" ? row.value.toLocaleString() : row.value}
+                </td>
+                <td style={s.td}>{row.unit}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div style={s.noData}>입력된 데이터가 없습니다.</div>
+      )}
+    </div>
+  );
+}
+
+function LoadingScreen() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: "#FAF8F0", fontFamily: "'Pretendard', 'Apple SD Gothic Neo', sans-serif" }}>
+      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#888", fontSize: 14 }}>
+        초안 불러오는 중...
+      </div>
+    </div>
+  );
+}
+
+function ErrorScreen() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: "#FAF8F0", fontFamily: "'Pretendard', 'Apple SD Gothic Neo', sans-serif" }}>
+      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "#991b1b", fontSize: 14 }}>
+        초안을 불러오지 못했습니다. 보고서 생성 단계부터 다시 시도해주세요.
       </div>
     </div>
   );
@@ -335,47 +383,51 @@ function ReportDownload({ isLoggedIn, onLogout }) {
 const s = {
   page: { minHeight: "100vh", background: "#FAF8F0", fontFamily: "'Pretendard', 'Apple SD Gothic Neo', sans-serif", display: "flex", flexDirection: "column" },
   body: { display: "flex", flex: 1 },
-  main: { flex: 1, padding: "44px 48px" },
-  header: { marginBottom: 28 },
-  eyebrow: { fontSize: 12, fontWeight: 600, color: "#5C6B2E", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 },
-  title: { fontSize: 24, fontWeight: 700, color: "#1a1a1a", marginBottom: 6 },
-  sub: { fontSize: 14, color: "#777" },
-  twoCol: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 24 },
-  leftCol: { display: "flex", flexDirection: "column", gap: 20 },
-  rightCol: {},
-  panel: { background: "white", borderRadius: 16, padding: "24px 28px", boxShadow: "0 2px 16px rgba(0,0,0,0.06)" },
-  panelLabel: { fontSize: 12, fontWeight: 600, color: "#888", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 },
-  stdGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 },
-  stdCard: { display: "flex", alignItems: "center", gap: 10, padding: "12px 16px", borderRadius: 10, border: "1.5px solid", cursor: "pointer", background: "white", textAlign: "left" },
-  stdCheck: { width: 20, height: 20, borderRadius: "50%", border: "1.5px solid", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, flexShrink: 0 },
-  formatList: { display: "flex", flexDirection: "column", gap: 10 },
-  formatCard: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 16px", borderRadius: 10, border: "1.5px solid", cursor: "pointer", textAlign: "left" },
-  fmtLeft: { display: "flex", alignItems: "center", gap: 12 },
-  fmtIcon: { fontSize: 22 },
-  fmtTitle: { fontSize: 14, fontWeight: 700, color: "#222", display: "flex", alignItems: "center", gap: 6, marginBottom: 2 },
-  fmtExt: { fontSize: 12, fontWeight: 600 },
-  fmtDesc: { fontSize: 12, color: "#888", lineHeight: 1.4 },
-  fmtCheck: { width: 22, height: 22, borderRadius: "50%", border: "1.5px solid", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, flexShrink: 0 },
-  downloadBtn: { background: "#5C6B2E", color: "white", border: "none", borderRadius: 12, padding: "16px", fontSize: 15, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center" },
-  doneBox: { background: "#ecfdf5", borderRadius: 12, padding: "18px 20px", display: "flex", alignItems: "center", gap: 14 },
-  doneIcon: { width: 40, height: 40, borderRadius: "50%", background: "#22c55e", color: "white", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
-  doneTitle: { fontSize: 15, fontWeight: 700, color: "#065f46" },
-  doneSub: { fontSize: 13, color: "#065f46", opacity: 0.75, marginTop: 2 },
-  previewHeader: { marginBottom: 16 },
-  previewCover: { background: "linear-gradient(135deg, #1a2e0f 0%, #5C6B2E 100%)", borderRadius: 12, padding: "24px", textAlign: "center", color: "white" },
-  previewLogo: { fontSize: 13, fontWeight: 800, color: "rgba(255,255,255,0.6)", letterSpacing: "0.1em", marginBottom: 8 },
-  previewReportTitle: { fontSize: 16, fontWeight: 700, marginBottom: 4 },
-  previewYear: { fontSize: 28, fontWeight: 900, marginBottom: 4 },
-  previewStd: { fontSize: 12, color: "rgba(255,255,255,0.6)", background: "rgba(255,255,255,0.15)", display: "inline-block", padding: "3px 12px", borderRadius: 20 },
-  tocList: { display: "flex", flexDirection: "column", gap: 2 },
-  tocItem: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 12px", borderRadius: 8, background: "#fafaf8" },
-  tocLeft: { display: "flex", alignItems: "center", gap: 10 },
-  tocNum: { width: 22, height: 22, borderRadius: "50%", background: "rgba(132,147,74,0.12)", color: "#5C6B2E", fontSize: 11, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
-  tocLabel: { fontSize: 13, color: "#333", fontWeight: 500 },
-  tocPages: { fontSize: 12, color: "#aaa" },
-  previewMeta: { display: "flex", gap: 6, fontSize: 12, color: "#aaa", marginTop: 14, justifyContent: "center" },
-  bottomRow: { display: "flex", justifyContent: "flex-start", gap: 12 },
-  secBtn: { background: "white", border: "1.5px solid #ccc", borderRadius: 8, padding: "10px 22px", fontSize: 14, fontWeight: 500, color: "#444", cursor: "pointer" },
-};
+  main: { flex: 1, padding: "0 48px 44px", maxWidth: 960 },
 
-export default ReportDownload;
+  header:    { position: "sticky", top: 64, zIndex: 10, background: "#FAF8F0", paddingTop: 28, paddingBottom: 16, marginBottom: 20, borderBottom: "1px solid #e8e3da", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" },
+  eyebrow:   { fontSize: 12, fontWeight: 600, color: "#5C6B2E", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 },
+  headerRow: { display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 },
+  title:     { fontSize: 26, fontWeight: 700, color: "#1a1a1a", marginBottom: 8 },
+  sub:       { fontSize: 14, color: "#777", lineHeight: 1.6, margin: 0 },
+  headerMeta: { display: "flex", alignItems: "center", gap: 10, flexShrink: 0, paddingTop: 4 },
+  savingBadge: { fontSize: 11, color: "#888", background: "#f0f0ee", borderRadius: 20, padding: "3px 10px" },
+  modBadge:    { fontSize: 11, fontWeight: 700, color: "#5C6B2E", background: "rgba(92,107,46,0.1)", border: "1px solid #A8C070", borderRadius: 20, padding: "3px 10px" },
+  confirmBtn:  { background: "#84934A", color: "white", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer" },
+
+  section:       { marginBottom: 32 },
+  sectionHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 16px", borderRadius: 10, border: "1px solid", marginBottom: 12 },
+  sectionLabel:  { fontSize: 14, fontWeight: 700 },
+  sectionCount:  { fontSize: 12, color: "#888" },
+
+  card:       { background: "white", borderRadius: 16, padding: "24px", boxShadow: "0 2px 16px rgba(0,0,0,0.06)", marginBottom: 16 },
+  cardHeader: { display: "flex", alignItems: "center", gap: 10, marginBottom: 18, paddingBottom: 14, borderBottom: "1px solid #f5f5f3" },
+  fieldId:    { fontSize: 10, fontWeight: 700, color: "#84934A", background: "rgba(132,147,74,0.1)", borderRadius: 4, padding: "2px 6px", flexShrink: 0 },
+  cardTitle:  { fontSize: 15, fontWeight: 700, color: "#1a1a1a", flex: 1, margin: 0 },
+  modDot:     { width: 8, height: 8, borderRadius: "50%", background: "#84934A", flexShrink: 0 },
+
+  fieldWrap:    { marginBottom: 16 },
+  fieldLabelRow: { display: "flex", alignItems: "center", gap: 8, marginBottom: 6 },
+  fieldLabel:   { fontSize: 11, fontWeight: 700, color: "#999", textTransform: "uppercase", letterSpacing: "0.06em" },
+  modTime:      { fontSize: 10, color: "#84934A", marginLeft: "auto" },
+  editBtn:      { fontSize: 10, color: "#84934A", background: "none", border: "1px solid #A8C070", borderRadius: 4, padding: "1px 7px", cursor: "pointer", marginLeft: "auto" },
+  fieldText:    { fontSize: 13, color: "#333", lineHeight: 1.65, padding: "10px 12px", background: "#fafaf8", border: "1px solid", borderRadius: 8, cursor: "text", whiteSpace: "pre-wrap" },
+  textarea:     { width: "100%", boxSizing: "border-box", fontSize: 13, color: "#1a1a1a", lineHeight: 1.65, padding: "10px 12px", background: "white", border: "1.5px solid #84934A", borderRadius: 8, resize: "vertical", outline: "none", fontFamily: "'Pretendard', 'Apple SD Gothic Neo', sans-serif" },
+
+  dpSection: { marginTop: 20, paddingTop: 16, borderTop: "1px solid #f0f0ee" },
+  dpLabel:   { fontSize: 11, fontWeight: 700, color: "#999", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 10 },
+  dpCard:    { background: "#fafaf8", borderRadius: 10, border: "1px solid #f0f0ee", marginBottom: 10, overflow: "hidden" },
+  dpCardHeader: { display: "flex", alignItems: "center", gap: 8, padding: "8px 12px", borderBottom: "1px solid #f0f0ee" },
+  dpName:    { fontSize: 12, fontWeight: 600, color: "#444", flex: 1 },
+  dpUnit:    { fontSize: 11, color: "#888", background: "#ede9e0", borderRadius: 4, padding: "1px 6px" },
+  dpIndicator: { fontSize: 10, color: "#84934A", background: "rgba(132,147,74,0.1)", borderRadius: 4, padding: "1px 6px" },
+
+  table: { width: "100%", borderCollapse: "collapse", fontSize: 12 },
+  th:    { padding: "6px 12px", background: "#f5f5f3", color: "#888", fontWeight: 600, textAlign: "left", fontSize: 11 },
+  tr:    { borderBottom: "1px solid #f5f5f3" },
+  td:    { padding: "6px 12px", color: "#444" },
+  noData: { padding: "10px 12px", fontSize: 12, color: "#bbb", fontStyle: "italic" },
+
+  bottomBar: { marginTop: 32, paddingTop: 24, borderTop: "1px solid #e5e7eb", display: "flex", justifyContent: "flex-end" },
+  confirmBtnLg: { background: "#84934A", color: "white", border: "none", borderRadius: 10, padding: "14px 28px", fontSize: 14, fontWeight: 700, cursor: "pointer" },
+};

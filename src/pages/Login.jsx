@@ -1,22 +1,32 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../api/auth";
 
 function Login({ onLogin }) {
   const navigate = useNavigate();
 
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!id || !pw) {
-      alert("아이디와 비밀번호를 입력하세요.");
+      setError("아이디와 비밀번호를 입력하세요.");
       return;
     }
-    localStorage.setItem("login", "true");
-    // 실제 서비스에서는 API 요청
-    onLogin();
-
-    navigate("/esg-select");
+    setLoading(true);
+    setError("");
+    try {
+      await login(id, pw);
+      localStorage.setItem("login", "true");
+      onLogin();
+      navigate("/materiality");
+    } catch (e) {
+      setError(e?.detail || "로그인에 실패했습니다.");
+    } finally {
+      setLoading(false);
+    }
   };
   
   
@@ -41,8 +51,10 @@ function Login({ onLogin }) {
           onChange={(e) => setPw(e.target.value)}
         />
 
-        <button style={styles.loginBtn} onClick={handleLogin}>
-          로그인
+        {error && <p style={styles.errorText}>{error}</p>}
+
+        <button style={{...styles.loginBtn, opacity: loading ? 0.7 : 1}} onClick={handleLogin} disabled={loading}>
+          {loading ? "로그인 중..." : "로그인"}
         </button>
 
         <p style={styles.signupText}>
@@ -98,6 +110,7 @@ const styles = {
     textAlign: "center",
     fontSize: 14,
   },
+  errorText: { color: "#dc2626", fontSize: 13, textAlign: "center", margin: 0 },
   signupLink: {
     color: "#84934A",
     cursor: "pointer",

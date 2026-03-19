@@ -1,330 +1,266 @@
 import { useState } from "react";
+import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle } from "docx";
+import { saveAs } from "file-saver";
 import { useNavigate, useLocation } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import { FileText, Download } from "lucide-react";
+import Navbar from "../components/Navbar.jsx";
+import Sidebar from "../components/Sidebar.jsx";
 
-const formats = [
-  {
-    id: "word",
-    icon: "📄",
-    label: "Word",
-    ext: ".docx",
-    desc: "편집 가능한 문서 형식. 추가 수정이 필요할 때 적합합니다.",
-    color: "#1e40af",
-    bg: "#eff6ff",
-  },
-  {
-    id: "excel",
-    icon: "📊",
-    label: "Excel",
-    ext: ".xlsx",
-    desc: "데이터 테이블 및 수치 중심 정리. 내부 검토용으로 활용하세요.",
-    color: "#065f46",
-    bg: "#ecfdf5",
-  },
-  {
-    id: "ppt",
-    icon: "📑",
-    label: "PowerPoint",
-    ext: ".pptx",
-    desc: "경영진 보고 및 IR용 프레젠테이션 형식입니다.",
-    color: "#92400e",
-    bg: "#fffbeb",
-  },
+const FORMATS = [
   {
     id: "pdf",
-    icon: "🗂️",
     label: "PDF",
-    ext: ".pdf",
-    desc: "최종 배포용 고정 형식. 외부 공시 및 제출용으로 사용하세요.",
-    color: "#991b1b",
-    bg: "#fef2f2",
+    ext: "pdf",
+    desc: "Adobe PDF 형식으로 저장합니다. 인쇄 및 배포에 적합합니다.",
+    color: "#dc2626",
+    bg:    "#fef2f2",
+    border:"#fca5a5",
+  },
+  {
+    id: "docx",
+    label: "Word (DOCX)",
+    ext: "docx",
+    desc: "Microsoft Word 형식으로 저장합니다. 추가 편집이 가능합니다.",
+    color: "#1d4ed8",
+    bg:    "#eff6ff",
+    border:"#bfdbfe",
+  },
+  {
+    id: "hwp",
+    label: "한글 (HWP)",
+    ext: "hwp",
+    desc: "한글 워드프로세서 형식으로 저장합니다.",
+    color: "#065f46",
+    bg:    "#ecfdf5",
+    border:"#bbf7d0",
   },
 ];
 
-const standards = ["GRI", "ISSB", "ESRS", "SASB"];
+export default function ReportDownload() {
+  const navigate  = useNavigate();
+  const location  = useLocation();
+  const draft     = location.state?.draft;
 
-const previewSections = [
-  { label: "표지 / 목차", pages: "1-2p" },
-  { label: "CEO 메시지", pages: "3p" },
-  { label: "환경 (E) — 탄소·에너지·용수", pages: "4-8p" },
-  { label: "사회 (S) — 안전·인권·다양성", pages: "9-13p" },
-  { label: "지배구조 (G) — 이사회·윤리", pages: "14-17p" },
-  { label: "ESG 데이터 요약표", pages: "18-20p" },
-  { label: "GRI Content Index", pages: "21-22p" },
-];
+  const [selectedFmt, setSelectedFmt] = useState("pdf");
+  const [status, setStatus]           = useState("idle"); // idle | loading | done | error
+  const [errMsg, setErrMsg]           = useState("");
 
-function ReportDownload({ isLoggedIn, onLogout }) {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const fileName = location.state?.fileName || "uploaded_file.pdf";
-  const generatedSections = location.state?.generatedSections || {};
-  const stateStandard = location.state?.standard || null;
+  const handleExport = async () => {
+    if (status === "loading") return;
+    setStatus("loading");
+    setErrMsg("");
 
-  const [selectedFormats, setSelectedFormats] = useState(["pdf"]);
-  const [selectedStandard, setSelectedStandard] = useState("GRI");
-  const [downloading, setDownloading] = useState(false);
-  const [done, setDone] = useState(false);
-
-  const toggleFormat = (id) => {
-    setSelectedFormats((prev) =>
-      prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]
-    );
-  };
-
-  const handleDownload = async () => {
-    if (selectedFormats.length === 0) return;
-    setDownloading(true);
     try {
-      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
-        import("html2canvas"),
-        import("jspdf").then(m => ({ jsPDF: m.jsPDF })),
-      ]);
-
-      const today = new Date();
-      const dateStr = `${today.getFullYear()}. ${String(today.getMonth()+1).padStart(2,"0")}. ${String(today.getDate()).padStart(2,"0")}.`;
-
-      const container = document.createElement("div");
-      container.style.cssText = `
-        position:fixed; left:-9999px; top:0;
-        width:794px; background:white; padding:60px 64px;
-        font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-        color:#1a1a1a; font-size:14px; line-height:1.85; box-sizing:border-box;
-      `;
-      const esgSections = [
-        { id: "env_carbon", category: "환경 (E)", metric: "온실가스 배출량", standard: "GRI 305-1", data: { value: "12,450 tCO₂e", change: "-3.2%", year: 2023 } },
-        { id: "env_energy", category: "환경 (E)", metric: "에너지 사용량", standard: "GRI 302-1", data: { value: "84,200 MWh", renewable: "18.4%", year: 2023 } },
-        { id: "env_water", category: "환경 (E)", metric: "용수 사용량", standard: "GRI 303-5", data: { value: "19,200 톤", recycleRate: "62%", year: 2023 } },
-        { id: "soc_employee", category: "사회 (S)", metric: "임직원 현황", standard: "GRI 2-7", data: { total: "2,340명", female: "18.2%", permanent: "94.2%", year: 2023 } },
-        { id: "soc_safety", category: "사회 (S)", metric: "산업 안전", standard: "GRI 403-9", data: { rate: "0.42%", avg: "0.58%", year: 2023 } },
-        { id: "gov_board", category: "지배구조 (G)", metric: "이사회 독립성", standard: "GRI 2-9", data: { independence: "62.5%", audit: "100%", year: 2023 } },
-        { id: "gov_ethics", category: "지배구조 (G)", metric: "윤리 경영", standard: "GRI 205-3", data: { violations: "3건", training: "98.7%", year: 2023 } },
-      ];
-      const hasContent = Object.keys(generatedSections).length > 0;
-
-      container.innerHTML = `
-        <div style="width:100%;height:6px;background:#5C6B2E;margin-bottom:40px;border-radius:2px;"></div>
-        <div style="font-size:10px;color:#5C6B2E;font-weight:700;letter-spacing:0.1em;margin-bottom:8px;">지속가능경영보고서 · ${selectedStandard} 기준 · 초안</div>
-        <div style="font-size:28px;font-weight:700;color:#1a1a1a;margin-bottom:6px;">ESG 보고서 초안</div>
-        <div style="font-size:13px;color:#666;margin-bottom:4px;">${selectedStandard} 기준 ESG 지속가능경영보고서 초안입니다.</div>
-        <div style="font-size:11px;color:#aaa;margin-bottom:28px;">생성일: ${dateStr} &nbsp;|&nbsp; 원본 파일: ${fileName}</div>
-        <div style="height:1px;background:linear-gradient(90deg,#5C6B2E,#C8D4A0,transparent);margin-bottom:32px;"></div>
-
-        ${hasContent ? `
-          ${esgSections.map(sec => `
-            <div style="margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid #eee;">
-              <div style="font-size:10px;font-weight:700;color:#5C6B2E;letter-spacing:0.1em;margin-bottom:3px;">${sec.category}</div>
-              <div style="font-size:11px;color:#aaa;margin-bottom:4px;">${sec.standard}</div>
-              <div style="font-size:16px;font-weight:700;color:#1a1a1a;margin-bottom:10px;">${sec.metric}</div>
-              <div style="background:#FAFDF5;border-left:4px solid #5C6B2E;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#333;line-height:1.85;margin-bottom:10px;">
-                ${generatedSections[sec.id] || "초안이 생성되지 않았습니다."}
-              </div>
-              <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                ${Object.entries(sec.data).map(([k,v]) => `<span style="background:#f5f5f0;border:1px solid #e0ddd6;border-radius:4px;padding:2px 8px;font-size:11px;color:#666;">${k}: ${v}</span>`).join("")}
-              </div>
-            </div>
-          `).join("")}
-        ` : `
-          <div style="font-size:16px;font-weight:700;margin-bottom:16px;">목차</div>
-          ${previewSections.map((sec, i) => `
-            <div style="display:flex;justify-content:space-between;padding:10px 14px;margin-bottom:6px;background:${i%2===0?'#fafaf8':'white'};border-radius:6px;">
-              <div style="display:flex;align-items:center;gap:10px;">
-                <span style="width:22px;height:22px;border-radius:50%;background:rgba(92,107,46,0.12);color:#5C6B2E;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;">${i+1}</span>
-                <span style="font-size:13px;font-weight:500;">${sec.label}</span>
-              </div>
-              <span style="font-size:12px;color:#aaa;">${sec.pages}</span>
-            </div>
-          `).join("")}
-        `}
-
-        <div style="margin-top:32px;padding:14px 18px;background:#FAFDF5;border:1px solid #A8C070;border-radius:8px;font-size:11px;color:#5C6B2E;line-height:1.7;">
-          ※ 본 초안은 AI가 자동 생성한 내용으로, 공식 제출 전 ESG 전문가의 검토 및 수정이 반드시 필요합니다.<br/>
-          생성 기준서: ${selectedStandard} &nbsp;|&nbsp; 생성일: ${dateStr}
-        </div>
-        <div style="margin-top:28px;padding-top:12px;border-top:1px solid #eee;display:flex;justify-content:space-between;font-size:10px;color:#bbb;">
-          <span>ESG 지속가능경영보고서 초안</span><span>${dateStr}</span>
-        </div>
-      `;
-      document.body.appendChild(container);
-      await document.fonts.ready;
-      await new Promise(r => setTimeout(r, 400));
-
-      const canvas = await html2canvas(container, {
-        scale: 2, useCORS: true, backgroundColor: "#ffffff", width: 794,
-      });
-      document.body.removeChild(container);
-
-      const imgData = canvas.toDataURL("image/png");
-      for (const fmtId of selectedFormats) {
-        const fmt = formats.find(f => f.id === fmtId);
-        const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-        const pdfW = 210, pdfH = 297;
-        const imgH = (canvas.height * pdfW) / canvas.width;
-        let posY = 0;
-        while (posY < imgH) {
-          if (posY > 0) pdf.addPage();
-          pdf.addImage(imgData, "PNG", 0, -posY, pdfW, imgH);
-          posY += pdfH;
-        }
-        const todayStr = `${today.getFullYear()}${String(today.getMonth()+1).padStart(2,"0")}${String(today.getDate()).padStart(2,"0")}`;
-        pdf.save(`ESG_보고서_${selectedStandard}_${todayStr}.pdf`);
+      if (selectedFmt === "docx") {
+        await exportDocx(draft);
+      } else {
+        // PDF, HWP는 추후 백엔드 연동 예정
+        alert(`${selectedFmt.toUpperCase()} 형식은 준비 중입니다.`);
+        setStatus("idle");
+        return;
       }
-
-      setDownloading(false);
-      setDone(true);
+      setStatus("done");
     } catch (e) {
-      console.error("다운로드 오류:", e);
-      alert("다운로드 중 오류: " + e.message);
-      setDownloading(false);
+      setErrMsg(e.message || "내보내기 실패");
+      setStatus("error");
     }
   };
 
+  const exportDocx = async (draft) => {
+    if (!draft) throw new Error("초안 데이터가 없습니다.");
+
+    const children = [];
+
+    // 표지
+    children.push(
+      new Paragraph({
+        text: "ESG 지속가능경영 보고서",
+        heading: HeadingLevel.TITLE,
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 400 },
+      }),
+      new Paragraph({
+        children: [new TextRun({ text: `생성일: ${draft.generated_at?.slice(0,10) ?? ""}`, color: "888888", size: 20 })],
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 800 },
+      }),
+    );
+
+    // 섹션별 내용
+    for (const sec of draft.sections ?? []) {
+      children.push(
+        new Paragraph({
+          text: sec.label,
+          heading: HeadingLevel.HEADING_1,
+          spacing: { before: 400, after: 200 },
+          border: { bottom: { style: BorderStyle.SINGLE, size: 1, color: "5C6B2E" } },
+        })
+      );
+
+      for (const item of sec.items ?? []) {
+        // 항목 제목
+        children.push(
+          new Paragraph({
+            children: [
+              new TextRun({ text: `[${item.field_id}] `, color: "5C6B2E", bold: true, size: 22 }),
+              new TextRun({ text: item.title, bold: true, size: 24 }),
+            ],
+            spacing: { before: 300, after: 100 },
+          })
+        );
+
+        // 평가 맥락
+        children.push(
+          new Paragraph({ children: [new TextRun({ text: "▶ 평가 맥락", bold: true, size: 20, color: "444444" })], spacing: { before: 100, after: 60 } }),
+          new Paragraph({ children: [new TextRun({ text: item.context?.current ?? "", size: 20, color: "333333" })], spacing: { after: 100 }, indent: { left: 300 } }),
+        );
+
+        // AI 해설
+        children.push(
+          new Paragraph({ children: [new TextRun({ text: "▶ AI 해설", bold: true, size: 20, color: "444444" })], spacing: { before: 100, after: 60 } }),
+          new Paragraph({ children: [new TextRun({ text: item.commentary?.current ?? "", size: 20, color: "333333" })], spacing: { after: 200 }, indent: { left: 300 } }),
+        );
+      }
+    }
+
+    const doc = new Document({
+      sections: [{ properties: {}, children }],
+    });
+
+    const blob = await Packer.toBlob(doc);
+    saveAs(blob, `ESG_보고서_${new Date().toISOString().slice(0,10)}.docx`);
+  };
+
+  const selectedInfo = FORMATS.find(f => f.id === selectedFmt);
+
   return (
     <div style={s.page}>
-      <Navbar isLoggedIn={isLoggedIn} onLogout={onLogout} />
+      <Navbar />
       <div style={s.body}>
         <Sidebar currentStep="report" />
         <main style={s.main}>
 
-          {/* Header */}
+          {/* 헤더 */}
           <div style={s.header}>
-            <div>
-              <p style={s.eyebrow}>SR 보고서</p>
-              <h1 style={s.title}>보고서 다운로드</h1>
-              <p style={s.sub}>원하는 형식과 기준서를 선택하고 보고서를 다운로드하세요.</p>
-            </div>
+            <p style={s.eyebrow}>STEP 03 · 저장 형식 선택</p>
+            <h1 style={s.title}>보고서 저장</h1>
+            <p style={s.sub}>
+              원하는 파일 형식을 선택하고 다운로드하세요.
+              {draft?.draft_id && (
+                <span style={s.draftId}> Draft ID: {draft.draft_id.slice(0, 8)}...</span>
+              )}
+            </p>
           </div>
 
-          <div style={s.twoCol}>
-
-            {/* Left: Options */}
+          <div style={s.layout}>
+            {/* 왼쪽: 형식 선택 */}
             <div style={s.leftCol}>
-
-              {/* Standard */}
               <div style={s.panel}>
-                <p style={s.panelLabel}>기준서 선택</p>
-                <div style={s.stdGrid}>
-                  {standards.map((std) => (
-                    <button
-                      key={std}
-                      style={{
-                        ...s.stdCard,
-                        borderColor: selectedStandard === std ? "#5C6B2E" : "#e0e0e0",
-                        background: selectedStandard === std ? "rgba(132,147,74,0.07)" : "white",
-                      }}
-                      onClick={() => setSelectedStandard(std)}
-                    >
-                      <div style={{ ...s.stdCheck, background: selectedStandard === std ? "#5C6B2E" : "white", borderColor: "#5C6B2E", color: "white" }}>
-                        {selectedStandard === std ? "✓" : ""}
+                <p style={s.panelLabel}>저장 형식</p>
+                {FORMATS.map(fmt => (
+                  <button
+                    key={fmt.id}
+                    style={{
+                      ...s.fmtCard,
+                      borderColor:   selectedFmt === fmt.id ? fmt.color : "#e5e7eb",
+                      background:    selectedFmt === fmt.id ? fmt.bg    : "white",
+                      boxShadow:     selectedFmt === fmt.id ? `0 0 0 2px ${fmt.color}22` : "none",
+                    }}
+                    onClick={() => { setSelectedFmt(fmt.id); setStatus("idle"); }}
+                  >
+                    <div style={{ ...s.fmtDot, background: fmt.color }} />
+                    <div style={s.fmtInfo}>
+                      <div style={{ ...s.fmtLabel, color: selectedFmt === fmt.id ? fmt.color : "#1a1a1a" }}>
+                        {fmt.label}
                       </div>
-                      <span style={{ fontSize: 15, fontWeight: 700, color: selectedStandard === std ? "#5C6B2E" : "#333" }}>{std}</span>
-                    </button>
-                  ))}
-                </div>
+                      <div style={s.fmtDesc}>{fmt.desc}</div>
+                    </div>
+                    {selectedFmt === fmt.id && (
+                      <div style={{ ...s.fmtCheck, color: fmt.color }}>✓</div>
+                    )}
+                  </button>
+                ))}
               </div>
+            </div>
 
-              {/* Format */}
+            {/* 오른쪽: 다운로드 */}
+            <div style={s.rightCol}>
+              {/* 요약 카드 */}
               <div style={s.panel}>
-                <p style={s.panelLabel}>다운로드 형식 (복수 선택 가능)</p>
-                <div style={s.formatList}>
-                  {formats.map((fmt) => {
-                    const active = selectedFormats.includes(fmt.id);
-                    return (
-                      <button
-                        key={fmt.id}
-                        style={{
-                          ...s.formatCard,
-                          borderColor: active ? fmt.color : "#e0e0e0",
-                          background: active ? fmt.bg : "white",
-                        }}
-                        onClick={() => toggleFormat(fmt.id)}
-                      >
-                        <div style={s.fmtLeft}>
-                          <span style={s.fmtIcon}>{fmt.icon}</span>
-                          <div>
-                            <div style={s.fmtTitle}>
-                              {fmt.label}
-                              <span style={{ ...s.fmtExt, color: fmt.color }}>{fmt.ext}</span>
-                            </div>
-                            <div style={s.fmtDesc}>{fmt.desc}</div>
-                          </div>
-                        </div>
-                        <div style={{ ...s.fmtCheck, background: active ? fmt.color : "white", borderColor: fmt.color, color: "white" }}>
-                          {active ? "✓" : ""}
-                        </div>
-                      </button>
-                    );
-                  })}
+                <p style={s.panelLabel}>내보내기 정보</p>
+                <div style={s.summaryRow}>
+                  <span style={s.summaryKey}>파일 형식</span>
+                  <span style={{ ...s.summaryVal, color: selectedInfo.color, fontWeight: 700 }}>
+                    .{selectedInfo.ext.toUpperCase()}
+                  </span>
+                </div>
+                <div style={s.summaryRow}>
+                  <span style={s.summaryKey}>섹션 수</span>
+                  <span style={s.summaryVal}>{draft?.sections?.length ?? "—"}</span>
+                </div>
+                <div style={s.summaryRow}>
+                  <span style={s.summaryKey}>생성일</span>
+                  <span style={s.summaryVal}>
+                    {draft?.generated_at?.slice(0, 10) ?? "—"}
+                  </span>
+                </div>
+                <div style={s.summaryRow}>
+                  <span style={s.summaryKey}>버전</span>
+                  <span style={s.summaryVal}>v{draft?.version ?? 1}</span>
                 </div>
               </div>
 
-              {/* Download Button */}
-              {!done ? (
-                <button
-                  style={{
-                    ...s.downloadBtn,
-                    opacity: selectedFormats.length === 0 || downloading ? 0.6 : 1,
-                    cursor: selectedFormats.length === 0 ? "not-allowed" : "pointer",
-                  }}
-                  disabled={selectedFormats.length === 0 || downloading}
-                  onClick={handleDownload}
-                >
-                  {downloading ? (
-                    <span>⏳ 생성 중...</span>
-                  ) : (
-                    <span>⬇ 보고서 다운로드 ({selectedFormats.length}개 형식)</span>
-                  )}
-                </button>
-              ) : (
-                <div style={s.doneBox}>
-                  <span style={s.doneIcon}>✓</span>
+              {/* 오류 */}
+              {status === "error" && (
+                <div style={s.errorBox}>
+                  <strong>오류:</strong> {errMsg}
+                </div>
+              )}
+
+              {/* 완료 배너 */}
+              {status === "done" && (
+                <div style={s.doneBanner}>
+                  <div style={s.doneIcon}>✓</div>
                   <div>
                     <div style={s.doneTitle}>다운로드 완료!</div>
-                    <div style={s.doneSub}>
-                      {selectedStandard} 기준 보고서 {selectedFormats.length}개 파일이 저장되었습니다.
-                    </div>
+                    <div style={s.doneSub}>파일이 저장되었습니다.</div>
                   </div>
                 </div>
               )}
 
-            </div>
+              {/* 다운로드 버튼 */}
+              <button
+                style={{
+                  ...s.downloadBtn,
+                  opacity: status === "loading" ? 0.7 : 1,
+                  cursor:  status === "loading" ? "not-allowed" : "pointer",
+                }}
+                onClick={handleExport}
+                disabled={status === "loading"}
+              >
+                {status === "loading" ? (
+                  <>
+                    <LoadingSpinner /> 내보내는 중...
+                  </>
+                ) : (
+                  <>
+                    <Download size={16} style={{ marginRight: 8 }} />
+                    {selectedInfo.label}로 다운로드
+                  </>
+                )}
+              </button>
 
-            {/* Right: Preview */}
-            <div style={s.rightCol}>
-              <div style={s.panel}>
-                <p style={s.panelLabel}>보고서 구성 미리보기</p>
-                <div style={s.previewHeader}>
-                  <div style={s.previewCover}>
-                    <div style={s.previewLogo}>EDM</div>
-                    <div style={s.previewReportTitle}>ESG 지속가능경영보고서</div>
-                    <div style={s.previewYear}>2023</div>
-                    <div style={s.previewStd}>{selectedStandard} 기준</div>
-                  </div>
-                </div>
-                <div style={s.tocList}>
-                  {previewSections.map((sec, i) => (
-                    <div key={i} style={s.tocItem}>
-                      <div style={s.tocLeft}>
-                        <span style={s.tocNum}>{i + 1}</span>
-                        <span style={s.tocLabel}>{sec.label}</span>
-                      </div>
-                      <span style={s.tocPages}>{sec.pages}</span>
-                    </div>
-                  ))}
-                </div>
-                <div style={s.previewMeta}>
-                  <span>총 22페이지</span>
-                  <span>·</span>
-                  <span>{selectedStandard} Content Index 포함</span>
-                </div>
-              </div>
-            </div>
+              {/* 처음으로 버튼 */}
+              <button style={s.restartBtn} onClick={() => navigate("/report-generate")}>
+                ↩ 새 보고서 생성
+              </button>
 
+
+            </div>
           </div>
 
-          <div style={s.bottomRow}>
-            <button style={s.secBtn} onClick={() => navigate(-1)}>← 초안으로 돌아가기</button>
-          </div>
+          {/* 드래프트 미리보기 (접힘) */}
+          {draft && <DraftPreview draft={draft} />}
 
         </main>
       </div>
@@ -332,50 +268,108 @@ function ReportDownload({ isLoggedIn, onLogout }) {
   );
 }
 
+/* ─────────── DraftPreview ─────────── */
+function DraftPreview({ draft }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={s.previewWrap}>
+      <button style={s.previewToggle} onClick={() => setOpen(v => !v)}>
+        <FileText size={14} style={{ marginRight: 6 }} />
+        초안 내용 {open ? "접기" : "펼치기"}
+        <span style={{ marginLeft: 6, fontSize: 10, color: "#aaa" }}>
+          ({draft.sections.reduce((a, sec) => a + sec.items.length, 0)}개 항목)
+        </span>
+      </button>
+      {open && (
+        <div style={s.previewBody}>
+          {draft.sections.map(sec => (
+            <div key={sec.esg_id} style={s.previewSection}>
+              <div style={s.previewSecLabel}>{sec.label}</div>
+              {sec.items.map(item => (
+                <div key={item.field_id} style={s.previewItem}>
+                  <div style={s.previewItemTitle}>
+                    <span style={s.previewFid}>{item.field_id}</span>
+                    {item.title}
+                  </div>
+                  <div style={s.previewText}>{item.commentary.current}</div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function LoadingSpinner() {
+  return (
+    <span style={{
+      display: "inline-block", width: 12, height: 12,
+      border: "2px solid white", borderTopColor: "transparent",
+      borderRadius: "50%", marginRight: 8, verticalAlign: "middle",
+      animation: "spin 0.8s linear infinite",
+    }} />
+  );
+}
+
+// spinner keyframe
+if (typeof document !== "undefined" && !document.getElementById("dl-spin")) {
+  const tag = document.createElement("style");
+  tag.id = "dl-spin";
+  tag.textContent = "@keyframes spin { to { transform: rotate(360deg); } }";
+  document.head.appendChild(tag);
+}
+
 const s = {
   page: { minHeight: "100vh", background: "#FAF8F0", fontFamily: "'Pretendard', 'Apple SD Gothic Neo', sans-serif", display: "flex", flexDirection: "column" },
   body: { display: "flex", flex: 1 },
   main: { flex: 1, padding: "44px 48px" },
-  header: { marginBottom: 28 },
-  eyebrow: { fontSize: 12, fontWeight: 600, color: "#5C6B2E", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 },
-  title: { fontSize: 24, fontWeight: 700, color: "#1a1a1a", marginBottom: 6 },
-  sub: { fontSize: 14, color: "#777" },
-  twoCol: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 24 },
-  leftCol: { display: "flex", flexDirection: "column", gap: 20 },
-  rightCol: {},
-  panel: { background: "white", borderRadius: 16, padding: "24px 28px", boxShadow: "0 2px 16px rgba(0,0,0,0.06)" },
-  panelLabel: { fontSize: 12, fontWeight: 600, color: "#888", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 },
-  stdGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 },
-  stdCard: { display: "flex", alignItems: "center", gap: 10, padding: "12px 16px", borderRadius: 10, border: "1.5px solid", cursor: "pointer", background: "white", textAlign: "left" },
-  stdCheck: { width: 20, height: 20, borderRadius: "50%", border: "1.5px solid", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, flexShrink: 0 },
-  formatList: { display: "flex", flexDirection: "column", gap: 10 },
-  formatCard: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 16px", borderRadius: 10, border: "1.5px solid", cursor: "pointer", textAlign: "left" },
-  fmtLeft: { display: "flex", alignItems: "center", gap: 12 },
-  fmtIcon: { fontSize: 22 },
-  fmtTitle: { fontSize: 14, fontWeight: 700, color: "#222", display: "flex", alignItems: "center", gap: 6, marginBottom: 2 },
-  fmtExt: { fontSize: 12, fontWeight: 600 },
-  fmtDesc: { fontSize: 12, color: "#888", lineHeight: 1.4 },
-  fmtCheck: { width: 22, height: 22, borderRadius: "50%", border: "1.5px solid", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, flexShrink: 0 },
-  downloadBtn: { background: "#5C6B2E", color: "white", border: "none", borderRadius: 12, padding: "16px", fontSize: 15, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center" },
-  doneBox: { background: "#ecfdf5", borderRadius: 12, padding: "18px 20px", display: "flex", alignItems: "center", gap: 14 },
-  doneIcon: { width: 40, height: 40, borderRadius: "50%", background: "#22c55e", color: "white", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
-  doneTitle: { fontSize: 15, fontWeight: 700, color: "#065f46" },
-  doneSub: { fontSize: 13, color: "#065f46", opacity: 0.75, marginTop: 2 },
-  previewHeader: { marginBottom: 16 },
-  previewCover: { background: "linear-gradient(135deg, #1a2e0f 0%, #5C6B2E 100%)", borderRadius: 12, padding: "24px", textAlign: "center", color: "white" },
-  previewLogo: { fontSize: 13, fontWeight: 800, color: "rgba(255,255,255,0.6)", letterSpacing: "0.1em", marginBottom: 8 },
-  previewReportTitle: { fontSize: 16, fontWeight: 700, marginBottom: 4 },
-  previewYear: { fontSize: 28, fontWeight: 900, marginBottom: 4 },
-  previewStd: { fontSize: 12, color: "rgba(255,255,255,0.6)", background: "rgba(255,255,255,0.15)", display: "inline-block", padding: "3px 12px", borderRadius: 20 },
-  tocList: { display: "flex", flexDirection: "column", gap: 2 },
-  tocItem: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 12px", borderRadius: 8, background: "#fafaf8" },
-  tocLeft: { display: "flex", alignItems: "center", gap: 10 },
-  tocNum: { width: 22, height: 22, borderRadius: "50%", background: "rgba(132,147,74,0.12)", color: "#5C6B2E", fontSize: 11, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
-  tocLabel: { fontSize: 13, color: "#333", fontWeight: 500 },
-  tocPages: { fontSize: 12, color: "#aaa" },
-  previewMeta: { display: "flex", gap: 6, fontSize: 12, color: "#aaa", marginTop: 14, justifyContent: "center" },
-  bottomRow: { display: "flex", justifyContent: "flex-start", gap: 12 },
-  secBtn: { background: "white", border: "1.5px solid #ccc", borderRadius: 8, padding: "10px 22px", fontSize: 14, fontWeight: 500, color: "#444", cursor: "pointer" },
-};
 
-export default ReportDownload;
+  header:  { marginBottom: 32 },
+  eyebrow: { fontSize: 12, fontWeight: 600, color: "#5C6B2E", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 },
+  title:   { fontSize: 26, fontWeight: 700, color: "#1a1a1a", marginBottom: 8 },
+  sub:     { fontSize: 14, color: "#777", lineHeight: 1.6, margin: 0 },
+  draftId: { fontSize: 12, color: "#aaa", fontFamily: "monospace" },
+
+  layout:   { display: "flex", gap: 24, alignItems: "flex-start" },
+  leftCol:  { flex: 1 },
+  rightCol: { width: 300, flexShrink: 0, display: "flex", flexDirection: "column", gap: 16 },
+
+  panel:      { background: "white", borderRadius: 16, padding: "22px 24px", boxShadow: "0 2px 16px rgba(0,0,0,0.06)" },
+  panelLabel: { fontSize: 11, fontWeight: 700, color: "#999", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16, paddingBottom: 10, borderBottom: "1px solid #f0f0f0" },
+
+  fmtCard:  { display: "flex", alignItems: "flex-start", gap: 12, width: "100%", padding: "14px 16px", borderRadius: 12, border: "1.5px solid", marginBottom: 10, cursor: "pointer", textAlign: "left", background: "white", transition: "all 0.15s" },
+  fmtDot:   { width: 10, height: 10, borderRadius: "50%", flexShrink: 0, marginTop: 4 },
+  fmtInfo:  { flex: 1 },
+  fmtLabel: { fontSize: 14, fontWeight: 700, marginBottom: 3 },
+  fmtDesc:  { fontSize: 12, color: "#888", lineHeight: 1.5 },
+  fmtCheck: { fontSize: 16, fontWeight: 700, flexShrink: 0 },
+
+  summaryRow: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: "1px solid #f5f5f3" },
+  summaryKey: { fontSize: 12, color: "#888" },
+  summaryVal: { fontSize: 12, color: "#1a1a1a" },
+
+  downloadBtn: { display: "flex", alignItems: "center", justifyContent: "center", background: "#5C6B2E", color: "white", border: "none", borderRadius: 10, padding: "14px", fontSize: 14, fontWeight: 700, width: "100%", textAlign: "center" },
+  restartBtn:  { display: "block", width: "100%", padding: "10px", fontSize: 13, color: "#888", background: "none", border: "1px solid #e5e7eb", borderRadius: 8, cursor: "pointer" },
+
+  doneBanner: { background: "#ecfdf5", border: "1px solid #bbf7d0", borderRadius: 12, padding: "16px 20px", display: "flex", alignItems: "center", gap: 14 },
+  doneIcon:   { width: 36, height: 36, borderRadius: "50%", background: "#22c55e", color: "white", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
+  doneTitle:  { fontSize: 14, fontWeight: 700, color: "#065f46" },
+  doneSub:    { fontSize: 12, color: "#065f46", opacity: 0.7, marginTop: 2 },
+
+  errorBox: { background: "#fef2f2", border: "1px solid #fca5a5", borderRadius: 10, padding: "12px 16px", fontSize: 13, color: "#991b1b" },
+
+  note:     { fontSize: 11, color: "#aaa", lineHeight: 1.7, padding: "12px 14px", background: "#fafaf8", border: "1px solid #e8e3da", borderRadius: 8 },
+  noteCode: { fontSize: 10, background: "#ede9e0", padding: "1px 5px", borderRadius: 3, color: "#5C6B2E" },
+
+  previewWrap:    { marginTop: 32 },
+  previewToggle:  { display: "flex", alignItems: "center", background: "none", border: "1px solid #e5e7eb", borderRadius: 8, padding: "8px 14px", fontSize: 12, color: "#5C6B2E", cursor: "pointer", fontWeight: 600 },
+  previewBody:    { marginTop: 12, background: "white", borderRadius: 16, padding: "20px 24px", boxShadow: "0 2px 16px rgba(0,0,0,0.06)" },
+  previewSection: { marginBottom: 20 },
+  previewSecLabel: { fontSize: 12, fontWeight: 700, color: "#5C6B2E", marginBottom: 10, paddingBottom: 8, borderBottom: "1px solid #f0f0ee" },
+  previewItem:    { marginBottom: 14, paddingLeft: 12, borderLeft: "3px solid #e5e7eb" },
+  previewItemTitle: { fontSize: 13, fontWeight: 600, color: "#1a1a1a", marginBottom: 4, display: "flex", alignItems: "center", gap: 8 },
+  previewFid:     { fontSize: 10, color: "#84934A", background: "rgba(132,147,74,0.1)", borderRadius: 3, padding: "1px 5px", flexShrink: 0 },
+  previewText:    { fontSize: 12, color: "#666", lineHeight: 1.6 },
+};
