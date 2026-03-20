@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { signup, checkUsername, searchCompanies } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 function SignUp() {
@@ -14,23 +15,65 @@ function SignUp() {
   const [companyEmail, setCompanyEmail]     = useState("");
   const [company, setCompany]               = useState("");
   const [companySearch, setCompanySearch]   = useState("");
+  const [companyId, setCompanyId]           = useState(null);
+  const [companyList, setCompanyList]       = useState([]);
+  const [loading, setLoading]               = useState(false);
+  const [error, setError]                   = useState("");
 
   const pwValid = pw.length >= 8 && /[a-zA-Z]/.test(pw) && /[0-9]/.test(pw);
   const pwMatch = pw === pwConfirm;
   const step1OK = idChecked && pwValid && pwMatch && pw !== "";
 
-  const handleIdCheck = () => {
+  const handleIdCheck = async () => {
     if (!id) return;
-    alert(`"${id}" 사용 가능한 아이디입니다.`);
-    setIdChecked(true);
+    try {
+      const res = await checkUsername(id);
+      if (res.available) {
+        setIdChecked(true);
+        setError("");
+      } else {
+        setError("이미 사용 중인 아이디입니다.");
+        setIdChecked(false);
+      }
+    } catch (e) {
+      setError("아이디 확인 중 오류가 발생했습니다.");
+    }
   };
 
-  const handleCompanySearch = () => {
+  const handleCompanySearch = async () => {
     if (!companySearch) return;
-    setCompany(companySearch);
+    try {
+      const res = await searchCompanies(companySearch);
+      setCompanyList(res);
+      if (res.length === 1) {
+        setCompany(res[0].name);
+        setCompanyId(res[0].id);
+      }
+    } catch (e) {
+      setError("회사 검색 중 오류가 발생했습니다.");
+    }
   };
 
-  const handleSubmit = () => navigate("/");
+  const handleSubmit = async () => {
+    if (!username || !companyEmail || !companyId) return;
+    setLoading(true);
+    setError("");
+    try {
+      await signup({
+        username: id,
+        password: pw,
+        display_name: username,
+        work_email: companyEmail,
+        company_id: companyId,
+      });
+      alert("회원가입이 완료되었습니다! 로그인해주세요.");
+      navigate("/login");
+    } catch (e) {
+      setError(e?.detail || "회원가입에 실패했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div style={styles.page}>
@@ -132,10 +175,11 @@ function SignUp() {
                 )}
               </div>
 
+              {error && <p style={{ fontSize: 12, color: "#e55", textAlign: "center" }}>{error}</p>}
               <button
                 style={{ ...styles.primaryBtn, opacity: step1OK ? 1 : 0.4 }}
                 disabled={!step1OK}
-                onClick={() => setStep(2)}
+                onClick={() => { setError(""); setStep(2); }}
               >
                 다음 단계
               </button>
@@ -184,7 +228,20 @@ function SignUp() {
                     검색
                   </button>
                 </div>
-                {company && (
+                {companyList.length > 1 && (
+                  <div style={{ border: "1px solid #ddd", borderRadius: 8, overflow: "hidden", marginTop: 4 }}>
+                    {companyList.map(c => (
+                      <div
+                        key={c.id}
+                        style={{ padding: "10px 14px", cursor: "pointer", fontSize: 13, background: companyId === c.id ? "rgba(132,147,74,0.1)" : "#fff", borderBottom: "1px solid #f0f0f0" }}
+                        onClick={() => { setCompany(c.name); setCompanyId(c.id); setCompanyList([]); }}
+                      >
+                        {c.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {company && companyList.length <= 1 && (
                   <div style={styles.selectedCompany}>
                     <span style={styles.selectedDot} />
                     {company}
@@ -193,6 +250,7 @@ function SignUp() {
                 <p style={styles.hint}>회사 이메일 도메인과 회사 정보가 일치해야 합니다.</p>
               </div>
 
+              {error && <p style={{ fontSize: 12, color: "#e55", textAlign: "center" }}>{error}</p>}
               <div style={styles.btnRow}>
                 <button style={styles.secondaryBtn} onClick={() => setStep(1)}>
                   이전
@@ -201,12 +259,12 @@ function SignUp() {
                   style={{
                     ...styles.primaryBtn,
                     flex: 1,
-                    opacity: username && companyEmail && company ? 1 : 0.4,
+                    opacity: username && companyEmail && companyId && !loading ? 1 : 0.4,
                   }}
-                  disabled={!username || !companyEmail || !company}
+                  disabled={!username || !companyEmail || !companyId || loading}
                   onClick={handleSubmit}
                 >
-                  회원가입 완료
+                  {loading ? "가입 중..." : "회원가입 완료"}
                 </button>
               </div>
 

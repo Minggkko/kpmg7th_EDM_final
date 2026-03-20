@@ -95,10 +95,35 @@ const ISSUES = [
 
 export default function StandardDataView({ isLoggedIn, onLogout }) {
   const navigate = useNavigate();
+  // 첫 번째 이상치 있는 data로 초기 포커스
+  const getFirstAnomalyIdx = () => {
+    for (let ii = 0; ii < ISSUES[0].indicators.length; ii++) {
+      for (let di = 0; di < ISSUES[0].indicators[ii].data.length; di++) {
+        if (ISSUES[0].indicators[ii].data[di].dps.some(dp => ANOMALIES[dp.id])) {
+          return { indIdx: ii, dataIdx: di };
+        }
+      }
+    }
+    return { indIdx: 0, dataIdx: 0 };
+  };
+  const { indIdx: initIndIdx, dataIdx: initDataIdx } = getFirstAnomalyIdx();
   const [activeIssueIdx, setActiveIssueIdx] = useState(0);
-  const [activeIndicatorIdx, setActiveIndicatorIdx] = useState(0);
-  const [activeDataIdx, setActiveDataIdx] = useState(0);
-  const [confirmedData, setConfirmedData] = useState(new Set());
+  const [activeIndicatorIdx, setActiveIndicatorIdx] = useState(initIndIdx);
+  const [activeDataIdx, setActiveDataIdx] = useState(initDataIdx);
+  // 이상치 없는 data는 초기에 자동 확인 처리
+  const getAutoConfirmedData = () => {
+    const autoConfirmed = new Set();
+    ISSUES.forEach(issue => {
+      issue.indicators.forEach(ind => {
+        ind.data.forEach(data => {
+          const hasAnomaly = data.dps.some(dp => ANOMALIES[dp.id]);
+          if (!hasAnomaly) autoConfirmed.add(data.id);
+        });
+      });
+    });
+    return autoConfirmed;
+  };
+  const [confirmedData, setConfirmedData] = useState(getAutoConfirmedData);
   const [clearedAnomalies, setClearedAnomalies] = useState(new Set()); // 소명 완료된 이상치
 
   // 팝업 상태
@@ -122,6 +147,19 @@ export default function StandardDataView({ isLoggedIn, onLogout }) {
 
   const handleConfirmData = () => {
     setConfirmedData((prev) => new Set([...prev, currentData.id]));
+    // 다음 이상치 있는 data로 자동 이동
+    const allData = currentIssue.indicators.flatMap((ind, ii) =>
+      ind.data.map((d, di) => ({ d, ii, di }))
+    );
+    const currentFlat = allData.findIndex(x => x.d.id === currentData.id);
+    for (let i = currentFlat + 1; i < allData.length; i++) {
+      const { d, ii, di } = allData[i];
+      if (d.dps.some(dp => ANOMALIES[dp.id])) {
+        setActiveIndicatorIdx(ii);
+        setActiveDataIdx(di);
+        return;
+      }
+    }
   };
 
   // 이상치 소명 확인
@@ -213,7 +251,7 @@ export default function StandardDataView({ isLoggedIn, onLogout }) {
                     >
                       <span style={{ fontSize: 11, color: "#aaa" }}>{data.category}</span>
                       <span style={{ fontSize: 13, fontWeight: 700, color: active ? "#5C6B2E" : done ? "#16a34a" : "#888" }}>
-                        {done ? "✓ " : ""}{data.label}
+                        {done && !data.dps.some(dp => ANOMALIES[dp.id]) ? "✓ 자동확인 " : done ? "✓ " : ""}{data.label}
                       </span>
                       {anomalyCount > 0 && !done && (
                         <span style={s.anomalyTabBadge}>{anomalyCount}</span>
@@ -222,6 +260,21 @@ export default function StandardDataView({ isLoggedIn, onLogout }) {
                   );
                 })}
               </div>
+
+              {/* 이상치 요약 배너 */}
+              {(() => {
+                const totalAnomalies = ISSUES.flatMap(issue => issue.indicators.flatMap(ind => ind.data.flatMap(d => d.dps))).filter(dp => ANOMALIES[dp.id]).length;
+                const clearedCount = clearedAnomalies.size;
+                return totalAnomalies > 0 ? (
+                  <div style={s.anomalySummaryBar}>
+                    <span style={s.anomalySummaryIcon}>⚠</span>
+                    <span style={s.anomalySummaryText}>
+                      이상치 탐지 <strong>{totalAnomalies}건</strong> 중 <strong style={{color:"#5C6B2E"}}>{clearedCount}건</strong> 소명 완료
+                    </span>
+                    <span style={s.anomalySummaryNote}>이상치 없는 항목은 자동으로 확인 처리되었습니다.</span>
+                  </div>
+                ) : null;
+              })()}
 
               {/* DP 테이블 */}
               <div style={s.dpArea}>
@@ -428,6 +481,10 @@ const s = {
 
   confirmRow: { display: "flex", justifyContent: "flex-end" },
   confirmBtn: { padding: "9px 28px", fontSize: 13, fontWeight: 600, background: "#5C6B2E", color: "#fff", border: "none", borderRadius: 6, cursor: "pointer" },
+  anomalySummaryBar: { display: "flex", alignItems: "center", gap: 10, background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 8, padding: "10px 16px", margin: "0 0 0 0" },
+  anomalySummaryIcon: { fontSize: 16, color: "#d97706" },
+  anomalySummaryText: { fontSize: 13, color: "#92400e" },
+  anomalySummaryNote: { fontSize: 11, color: "#aaa", marginLeft: "auto" },
   confirmBtnDisabled: { padding: "9px 28px", fontSize: 13, fontWeight: 600, background: "#e8e3da", color: "#888", border: "none", borderRadius: 6, cursor: "not-allowed" },
 
   // 팝업

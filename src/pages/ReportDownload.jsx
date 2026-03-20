@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, BorderStyle } from "docx";
 import { saveAs } from "file-saver";
+import { exportReport } from "../api/report";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FileText, Download } from "lucide-react";
 import Navbar from "../components/Navbar.jsx";
@@ -49,16 +49,10 @@ export default function ReportDownload() {
     if (status === "loading") return;
     setStatus("loading");
     setErrMsg("");
-
     try {
-      if (selectedFmt === "docx") {
-        await exportDocx(draft);
-      } else {
-        // PDF, HWP는 추후 백엔드 연동 예정
-        alert(`${selectedFmt.toUpperCase()} 형식은 준비 중입니다.`);
-        setStatus("idle");
-        return;
-      }
+      const blob = await exportReport(selectedFmt);
+      const fmt = FORMATS.find(f => f.id === selectedFmt);
+      saveAs(blob, `ESG_보고서_${new Date().toISOString().slice(0,10)}.${fmt.ext}`);
       setStatus("done");
     } catch (e) {
       setErrMsg(e.message || "내보내기 실패");
@@ -66,70 +60,6 @@ export default function ReportDownload() {
     }
   };
 
-  const exportDocx = async (draft) => {
-    if (!draft) throw new Error("초안 데이터가 없습니다.");
-
-    const children = [];
-
-    // 표지
-    children.push(
-      new Paragraph({
-        text: "ESG 지속가능경영 보고서",
-        heading: HeadingLevel.TITLE,
-        alignment: AlignmentType.CENTER,
-        spacing: { after: 400 },
-      }),
-      new Paragraph({
-        children: [new TextRun({ text: `생성일: ${draft.generated_at?.slice(0,10) ?? ""}`, color: "888888", size: 20 })],
-        alignment: AlignmentType.CENTER,
-        spacing: { after: 800 },
-      }),
-    );
-
-    // 섹션별 내용
-    for (const sec of draft.sections ?? []) {
-      children.push(
-        new Paragraph({
-          text: sec.label,
-          heading: HeadingLevel.HEADING_1,
-          spacing: { before: 400, after: 200 },
-          border: { bottom: { style: BorderStyle.SINGLE, size: 1, color: "5C6B2E" } },
-        })
-      );
-
-      for (const item of sec.items ?? []) {
-        // 항목 제목
-        children.push(
-          new Paragraph({
-            children: [
-              new TextRun({ text: `[${item.field_id}] `, color: "5C6B2E", bold: true, size: 22 }),
-              new TextRun({ text: item.title, bold: true, size: 24 }),
-            ],
-            spacing: { before: 300, after: 100 },
-          })
-        );
-
-        // 평가 맥락
-        children.push(
-          new Paragraph({ children: [new TextRun({ text: "▶ 평가 맥락", bold: true, size: 20, color: "444444" })], spacing: { before: 100, after: 60 } }),
-          new Paragraph({ children: [new TextRun({ text: item.context?.current ?? "", size: 20, color: "333333" })], spacing: { after: 100 }, indent: { left: 300 } }),
-        );
-
-        // AI 해설
-        children.push(
-          new Paragraph({ children: [new TextRun({ text: "▶ AI 해설", bold: true, size: 20, color: "444444" })], spacing: { before: 100, after: 60 } }),
-          new Paragraph({ children: [new TextRun({ text: item.commentary?.current ?? "", size: 20, color: "333333" })], spacing: { after: 200 }, indent: { left: 300 } }),
-        );
-      }
-    }
-
-    const doc = new Document({
-      sections: [{ properties: {}, children }],
-    });
-
-    const blob = await Packer.toBlob(doc);
-    saveAs(blob, `ESG_보고서_${new Date().toISOString().slice(0,10)}.docx`);
-  };
 
   const selectedInfo = FORMATS.find(f => f.id === selectedFmt);
 

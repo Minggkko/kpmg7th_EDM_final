@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { generateReport } from "../api/report";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Sidebar from "../components/Sidebar.jsx";
@@ -47,8 +48,10 @@ export default function ReportGenerate() {
         await animateTo((i + 1) * 20, 700);
       }
 
-      // 실제 API 호출 (generateReport는 api.js에서 mock 또는 실제 호출)
-      const draft = {
+      // 실제 API 호출
+      const draft = await generateReport();
+      if (!draft || !draft.sections) throw new Error("보고서 생성에 실패했습니다.");
+      const _unused = {
         draft_id: "dummy-" + Date.now(),
         version: 1,
         generated_at: new Date().toISOString(),
@@ -191,12 +194,7 @@ export default function ReportGenerate() {
                 </div>
               )}
 
-              {/* 안내 메모 */}
-              <div style={s.note}>
-                ※ 현재 모의(mock) 데이터로 동작합니다.<br />
-                실제 연동 시 <code style={s.noteCode}>src/api.js</code>의
-                <code style={s.noteCode}> USE_MOCK = false</code> 로 변경하세요.
-              </div>
+
             </div>
           </div>
 
@@ -265,7 +263,7 @@ const s = {
   track:      { height: 8, background: "#f0f0ee", borderRadius: 99, overflow: "hidden" },
   fill:       { height: "100%", borderRadius: 99, transition: "width 0.2s ease" },
 
-  generateBtn: { background: "#84934A", color: "white", border: "none", borderRadius: 10, padding: "14px", fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center" },
+  generateBtn: { background: "#5C6B2E", color: "white", border: "none", borderRadius: 10, padding: "14px", fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center" },
 
   doneBanner: { background: "#ecfdf5", border: "1px solid #bbf7d0", borderRadius: 12, padding: "16px 20px", display: "flex", alignItems: "center", gap: 14 },
   doneIcon:   { width: 36, height: 36, borderRadius: "50%", background: "#22c55e", color: "white", fontSize: 16, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },

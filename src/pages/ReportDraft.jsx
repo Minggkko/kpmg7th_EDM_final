@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { loadDraft, updateField } from "../api/report";
 import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Sidebar from "../components/Sidebar.jsx";
@@ -28,80 +29,9 @@ export default function ReportDraft() {
       setDraft(stateDraft);
       setLoading(false);
     } else {
-      setDraft({
-        draft_id: "dummy-001",
-        version: 1,
-        generated_at: new Date().toISOString(),
-        sections: [
-          {
-            esg_id: 1,
-            label: "환경 (E)",
-            items: [
-              {
-                field_id: "GRI-305-1",
-                title: "온실가스 배출량 (Scope 1)",
-                context: { current: "당사의 2023년 Scope 1 직접 온실가스 배출량은 12,450 tCO₂e로, 전년 대비 3.2% 감소하였습니다.", last_modified: null },
-                commentary: { current: "생산 공정 개선 및 재생에너지 전환 투자의 결과로 배출량이 감소하였습니다. 2030년까지 탄소중립 달성을 목표로 추가 감축 계획을 수립 중입니다.", last_modified: null },
-                data_points: [{ dp_id: 1, dp_name: "Scope 1 직접배출량", unit: "tCO₂e", indicator_code: "GRI 305-1", has_data: true, rows: [{ id: 1, site_id: "본사", reporting_date: "2023-12", value: 12450, unit: "tCO₂e" }] }]
-              },
-              {
-                field_id: "GRI-302-1",
-                title: "에너지 사용량",
-                context: { current: "2023년 총 에너지 사용량은 84,200 MWh이며, 이 중 재생에너지 비중은 18.4%입니다.", last_modified: null },
-                commentary: { current: "당사는 2030년까지 재생에너지 비중을 50%로 확대할 계획입니다. 태양광 설비 추가 도입과 에너지 효율화 설비 투자를 지속하고 있습니다.", last_modified: null },
-                data_points: [{ dp_id: 2, dp_name: "총 에너지 소비량", unit: "MWh", indicator_code: "GRI 302-1", has_data: true, rows: [{ id: 2, site_id: "본사", reporting_date: "2023-12", value: 84200, unit: "MWh" }] }]
-              },
-              {
-                field_id: "GRI-303-5",
-                title: "용수 사용량",
-                context: { current: "2023년 총 용수 사용량은 19,200톤으로, 수자원 절감 설비 도입을 통해 전년 대비 효율이 개선되었습니다.", last_modified: null },
-                commentary: { current: "폐수 재활용률은 62%를 기록하였으며, 물 절약 기술 도입 및 재이용 시스템 확대를 통해 지속적인 절감을 추진하고 있습니다.", last_modified: null },
-                data_points: []
-              }
-            ]
-          },
-          {
-            esg_id: 2,
-            label: "사회 (S)",
-            items: [
-              {
-                field_id: "GRI-2-7",
-                title: "임직원 현황",
-                context: { current: "2023년 기준 총 임직원 수는 2,340명이며, 정규직 비율은 94.2%입니다.", last_modified: null },
-                commentary: { current: "여성 임원 비율은 18.2%로 전년 대비 2.1%p 증가하였으며, 다양성 확대 정책을 지속적으로 추진하고 있습니다.", last_modified: null },
-                data_points: [{ dp_id: 3, dp_name: "총 임직원 수", unit: "명", indicator_code: "GRI 2-7", has_data: true, rows: [{ id: 3, site_id: "전사", reporting_date: "2023-12", value: 2340, unit: "명" }] }]
-              },
-              {
-                field_id: "GRI-403-9",
-                title: "산업 안전",
-                context: { current: "2023년 산업재해율은 0.42%로, 업종 평균(0.58%) 대비 낮은 수준을 유지하고 있습니다.", last_modified: null },
-                commentary: { current: "안전관리 시스템 ISO 45001 인증을 유지하며 무사고 사업장 달성을 목표로 하고 있습니다.", last_modified: null },
-                data_points: []
-              }
-            ]
-          },
-          {
-            esg_id: 3,
-            label: "지배구조 (G)",
-            items: [
-              {
-                field_id: "GRI-2-9",
-                title: "이사회 독립성",
-                context: { current: "2023년 기준 이사회 내 사외이사 비율은 62.5%로, 이사회의 독립적 의사결정 체계를 강화하고 있습니다.", last_modified: null },
-                commentary: { current: "감사위원회는 100% 사외이사로 구성되어 있으며, ESG 전문위원회를 신설하여 지속가능경영 의사결정 체계를 강화하였습니다.", last_modified: null },
-                data_points: []
-              },
-              {
-                field_id: "GRI-205-3",
-                title: "윤리 경영",
-                context: { current: "2023년 윤리 위반 사건은 총 3건이 접수되었으며, 모두 내부 윤리위원회 심의를 거쳐 처리 완료되었습니다.", last_modified: null },
-                commentary: { current: "임직원 윤리교육 이수율은 98.7%를 기록하였으며, 익명 신고 채널을 강화하여 내부 감시 기능을 제고하였습니다.", last_modified: null },
-                data_points: []
-              }
-            ]
-          }
-        ]
-      }); setLoading(false);
+      loadDraft()
+        .then(d => { setDraft(d); setLoading(false); })
+        .catch(() => { setLoading(false); });
     }
   }, []);
 
@@ -147,7 +77,7 @@ export default function ReportDraft() {
     setEditingKey(null);
     setSaving(true);
     try {
-      // mock save
+      await updateField(fieldId, fieldType, value);
     } catch (_) {
       // silent — mock always succeeds
     } finally {
