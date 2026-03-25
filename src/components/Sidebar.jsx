@@ -3,21 +3,15 @@ import {
   BarChart3,
   FileText,
   BookOpen,
-  Database,
-  ShieldCheck,
   ListChecks,
   AlertTriangle,
-  FileQuestion
 } from "lucide-react";
 
 const steps = [
-  { label: "중대이슈 표준목록", path: "/materiality",       step: "materiality",  icon: ListChecks },
-  { label: "표준화 데이터 조회", path: "/standard-data",    step: "standard",     icon: Database },
-  { label: "이상치 검증",       path: "/anomaly-result",   step: "anomaly",      icon: AlertTriangle },
-  { label: "정합성 검증",       path: "/consistency-check",step: "consistency",  icon: ShieldCheck },
-  { label: "미증빙자료 검증",   path: "/unverified-result",step: "unverified",   icon: FileQuestion },
-  { label: "분석 대시보드",     path: "/analysis-dashboard",step: "analysis",    icon: BarChart3 },
-  { label: "레포트 생성",       path: "/report-generate",  step: "report",       icon: FileText },
+  { label: "중대이슈 표준목록", path: "/materiality",        step: "materiality", icon: ListChecks },
+  { label: "데이터 검증",      path: "/standard-data",      step: "outlier",     icon: AlertTriangle },
+  { label: "분석 대시보드",    path: "/analysis-dashboard", step: "analysis",    icon: BarChart3 },
+  { label: "레포트 생성",      path: "/report-generate",    step: "report",      icon: FileText },
 ];
 
 const extra = [

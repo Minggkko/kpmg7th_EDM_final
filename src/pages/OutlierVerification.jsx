@@ -2,33 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import { getDashboard } from "../api/outliners";
-import { getIndicators, getIndicatorDetail } from "../api/standardData";
-import { finalizeData as _finalizeData } from "../api/finalization";
-import { submitJustification as _submitJustificationRaw } from "../api/outliners";
-import { apiFetch } from "../api/index";
-
-// 추가 API 함수들
-const getSites = () => apiFetch("/dashboard?limit=1");
-const sendConfirmRequest = (stdId, body) => apiFetch(`/outliers/${stdId}/confirm-request`, {
-  method: "POST",
-  body: JSON.stringify(body),
-});
-const autoFinalizeV4 = () => apiFetch("/finalization/auto-v4", { method: "POST" });
-
-// API 응답 래퍼 (기존 코드와 호환)
-const wrapRes = (data) => ({ data: { data } });
-const _getDashboard = async (params) => wrapRes((await getDashboard(params))?.data || []);
-const _getIndicators = async (issueId) => wrapRes((await getIndicators(issueId))?.data || []);
-const _getIndicatorDetail = async (id) => wrapRes(await getIndicatorDetail(id));
-const _getSites = async () => wrapRes([]);
-const finalizeData = (stdId, newVal, reason) => _finalizeData(stdId, { correctedValue: newVal, reason });
-const submitJustification = (stdId, body) => _submitJustificationRaw(stdId, {
-  userFeedback: body.user_feedback,
-  actionTaken: body.action_taken,
-  justificationType: body.justification_type,
-  outlierId: body.outlier_id,
-});
+import {
+  getDashboard,
+  getIndicators,
+  getIndicatorDetail,
+  submitJustification,
+  sendConfirmRequest,
+  finalizeData,
+  getSites,
+  
+} from "../api";
 
 // ── v_status별 케이스 정의 ─────────────────────────────────────────────────────
 // 2: 이상치 없음 + 증빙 불일치  → 확인 요청 (이메일 + due_date)
@@ -88,7 +71,7 @@ export default function OutlierVerification({ isLoggedIn, onLogout }) {
   useEffect(() => {
     const load = async () => {
       try {
-        const sitesRes   = await _getSites();
+        const sitesRes   = await getSites();
         const masterSites = sitesRes.data?.data || [];
 
         const issues = selectedIssues || [];
@@ -98,11 +81,11 @@ export default function OutlierVerification({ isLoggedIn, onLogout }) {
           const issueName = issue.name ?? String(issue);
           if (!issueId) continue;
 
-          const indRes     = await _getIndicators(issueId);
+          const indRes     = await getIndicators(issueId);
           const indicators = indRes.data?.data || [];
           const indNodes   = [];
           for (const ind of indicators) {
-            const detailRes = await _getIndicatorDetail(ind.id);
+            const detailRes = await getIndicatorDetail(ind.id);
             const detail    = detailRes.data?.data || {};
             const dataNodes = (detail.data || []).map(d => ({
               id: d.id, name: d.name,
@@ -116,7 +99,7 @@ export default function OutlierVerification({ isLoggedIn, onLogout }) {
         }
 
         // 전체 v_status 조회 (이상치 포함)
-        const dashRes = await _getDashboard({ limit: 5000 });
+        const dashRes = await getDashboard({ limit: 5000 });
         const rows    = dashRes.data?.data || [];
 
         // v_status=4 레코드가 있으면 자동 현행 확정
@@ -168,7 +151,7 @@ export default function OutlierVerification({ isLoggedIn, onLogout }) {
 
   // ── 데이터 재로드 ────────────────────────────────────────────────────────────
   const reloadRows = async () => {
-    const dashRes = await _getDashboard({ limit: 5000 });
+    const dashRes = await getDashboard({ limit: 5000 });
     const rows    = dashRes.data?.data || [];
     setAllRows(rows);
     if (allSites.length === 0) {

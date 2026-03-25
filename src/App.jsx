@@ -22,6 +22,7 @@ import MyPage from "./pages/MyPage";
 import DataInputRequest from "./pages/DataInputRequest";
 import DataInputUpload from "./pages/DataInputUpload";
 import DataAggregation from "./pages/DataAggregation";
+import OutlierVerification from "./pages/OutlierVerification";
 
 import "./App.css";
 
@@ -62,6 +63,7 @@ function App() {
         <Route path="/data-aggregation"   element={<DataAggregation {...props} />} />
         <Route path="/mypage"             element={<MyPage {...props} />} />
         <Route path="/report"             element={<ProtectedRoute isLoggedIn={isLoggedIn}><Report /></ProtectedRoute>} />
+        <Route path="/outlier-verification" element={<OutlierVerification {...props} />} />
       </Routes>
     </BrowserRouter>
   );

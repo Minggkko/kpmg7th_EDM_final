@@ -49,4 +49,12 @@ export const runMapping = (rawDataId) =>
 export const getMappingResult = (rawDataId) =>
   api.get(`/mapping/result/${rawDataId}`);
 
+export const getDashboard = async () => {};
+export const getIndicatorDetail = async () => {};
+export const submitJustification = async () => {};
+export const sendConfirmRequest = async () => {};
+export const finalizeData = async () => {};
+export const getSites = async () => {};
+export const autoFinalizeV4 = async () => {};
+
 export default api;

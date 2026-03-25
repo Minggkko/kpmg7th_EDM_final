@@ -139,7 +139,12 @@ export default function Materiality({ isLoggedIn, onLogout }) {
     setShowCreateModal(false);
     setCreateSelected([]);
     setExpandedIssue(null);
-    navigate('/standard-data');
+    const selectedIssueData = ALL_ISSUES.filter(i => createSelected.includes(i.id)).map(i => ({
+      id: i.id, name: i.title, category: i.category
+    }));
+    sessionStorage.setItem("esgIssues", JSON.stringify(selectedIssueData));
+    sessionStorage.setItem("esgYear", String(createYear));
+    navigate('/standard-data', { state: { issues: selectedIssueData } });
   };
 
   return (
