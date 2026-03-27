@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EDM_PIPELINE_GUIDE.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="edm-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8-%EA%B8%B0%EC%88%A0-%EA%B0%80%EC%9D%B4%EB%93%9C">EDM 파이프라인 기술 가이드</h1>
+<blockquote>
+<p><strong>대상 독자</strong>: 시스템을 처음 인수인계받는 개발자 / ESG 데이터 운영 담당자
+<strong>기술 스택</strong>: FastAPI · Supabase (PostgreSQL + pgvector) · OpenAI GPT-4o · LangChain · Upstage Document AI
+<strong>서비스 목적</strong>: 지주회사·계열사가 제출한 ESG 원본 데이터를 표준화·이상치탐지·증빙검증·소명처리·최종확정까지 일괄 관리하는 EDM(ESG Data Management) 백엔드</p>
+</blockquote>
+<hr>
+<h2 id="%EB%AA%A9%EC%B0%A8">목차</h2>
+<ol>
+<li><a href="#1-%EC%A0%84%EC%B2%B4-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EC%9A%94">전체 파이프라인 개요</a></li>
+<li><a href="#2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%83%81%ED%83%9C%EA%B0%92v_status-%EC%99%84%EC%A0%84-%EC%A0%95%EB%A6%AC">데이터 상태값(v_status) 완전 정리</a></li>
+<li><a href="#3-db-%ED%85%8C%EC%9D%B4%EB%B8%94-%EA%B5%AC%EC%A1%B0-%EB%B0%8F-%EC%97%B0%EA%B4%80-%EA%B4%80%EA%B3%84">DB 테이블 구조 및 연관 관계</a></li>
+<li><a href="#4-stage-1--%EC%9B%90%EB%B3%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%85%EB%A1%9C%EB%93%9C-%EB%B0%8F-%ED%91%9C%EC%A4%80%ED%99%94">STAGE 1 — 원본 데이터 업로드 및 표준화</a></li>
+<li><a href="#5-stage-2--%EC%A6%9D%EB%B9%99-%EB%AC%B8%EC%84%9C-ocr-%EC%B2%98%EB%A6%AC">STAGE 2 — 증빙 문서 OCR 처리</a></li>
+<li><a href="#6-stage-3--%EC%9D%B4%EC%83%81%EC%B9%98-%ED%83%90%EC%A7%80-3%EB%8B%A8%EA%B3%84-%ED%83%90%EC%A7%80-%EB%A1%9C%EC%A7%81">STAGE 3 — 이상치 탐지 (3단계 탐지 로직)</a></li>
+<li><a href="#7-stage-4--%EC%A6%9D%EB%B9%99-%EC%A0%95%ED%95%A9%EC%84%B1-%EA%B2%80%EC%A6%9D-%EB%B0%8F-v_status-%EC%B5%9C%EC%A2%85-%EA%B2%B0%EC%A0%95">STAGE 4 — 증빙 정합성 검증 및 v_status 최종 결정</a></li>
+<li><a href="#8-stage-5--ai-%EC%A7%84%EB%8B%A8-gpt-4o">STAGE 5 — AI 진단 (GPT-4o)</a></li>
+<li><a href="#9-stage-6--%EC%86%8C%EB%AA%85-%EC%B2%98%EB%A6%AC">STAGE 6 — 소명 처리</a></li>
+<li><a href="#10-stage-7--%EC%B5%9C%EC%A2%85-%ED%99%95%EC%A0%95-%EB%B0%8F-%EC%B7%A8%EC%86%8C">STAGE 7 — 최종 확정 및 취소</a></li>
+<li><a href="#11-v_status%EB%B3%84-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A1%B0%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C">v_status별 사용자 조치 가이드</a></li>
+<li><a href="#12-api-%EC%97%94%EB%93%9C%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%9A%94%EC%95%BD">API 엔드포인트 요약</a></li>
+</ol>
+<hr>
+<h2 id="1-%EC%A0%84%EC%B2%B4-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EC%9A%94">1. 전체 파이프라인 개요</h2>
+<pre class="hljs"><code><div>[지주회사 내부 인터페이스]
+         │
+         ▼
+┌─────────────────────────────┐
+│ STAGE 1: 원본 업로드 &amp; 표준화  │  POST /api/v1/raw-data/upload
+│  raw_data → standardized_data│  v_status: 없음 → 0(Pending)
+└──────────────┬──────────────┘
+               │ 자동 실행
+               ▼
+┌─────────────────────────────┐
+│ STAGE 2: 증빙 OCR 처리       │  POST /api/v1/evidence/upload-ocr
+│  이미지/PDF → raw_ocr_data   │  POST /api/v1/evidence/extract
+│  → evidence_usage            │  (v_status 변경 없음)
+└──────────────┬──────────────┘
+               │ 사용자가 탐지 트리거
+               ▼
+┌─────────────────────────────┐
+│ STAGE 3: 이상치 탐지          │  POST /api/v1/outliers/detect
+│  L1(통계) + L2(임계값)        │  v_status: 0 → 1(Standardized)
+│  + L3(집약도)                 │
+└──────────────┬──────────────┘
+               │ 탐지 완료 후 자동 연동
+               ▼
+┌─────────────────────────────┐
+│ STAGE 4: 증빙 정합성 검증     │  (detect_outliers 내부 자동 호출)
+│  OCR값 ↔ 표준화값 비교        │  POST /api/v1/evidence/verify (수동 재실행)
+│  v_status 최종 결정          │  v_status: 1 → 2 / 3 / 4 / 5
+└──────────────┬──────────────┘
+               │ 사용자가 AI 진단 요청
+               ▼
+┌─────────────────────────────┐
+│ STAGE 5: AI 진단 (GPT-4o)   │  POST /api/v1/outliers/analyze
+│  이상치 원인 분석 보고서 생성   │  (v_status 변경 없음)
+└──────────────┬──────────────┘
+               │ 담당자 검토 후
+               ▼
+┌─────────────────────────────┐
+│ STAGE 6: 소명 처리            │  POST /api/v1/outliers/{std_id}/justify
+│  이상치 원인 또는 데이터 오류   │  v_status: 유지(2/3/4) or 1(정상)
+│  에 대한 소명 제출             │
+└──────────────┬──────────────┘
+               │
+               ▼
+┌─────────────────────────────┐
+│ STAGE 7: 최종 확정            │  POST /api/v1/finalization/{std_id}
+│  값 수정(선택) + 확정 승인     │  v_status: 2/3/4 → 5(Verified)
+└─────────────────────────────┘
+</div></code></pre>
+<hr>
+<h2 id="2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%83%81%ED%83%9C%EA%B0%92vstatus-%EC%99%84%EC%A0%84-%EC%A0%95%EB%A6%AC">2. 데이터 상태값(v_status) 완전 정리</h2>
+<p><code>standardized_data</code> 테이블의 <code>v_status</code> 컬럼이 각 데이터의 파이프라인 진행 상태를 나타냅니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">v_status</th>
+<th>이름</th>
+<th>의미</th>
+<th>전이 주체</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>0</strong></td>
+<td>Pending</td>
+<td>표준화 완료, 이상치 탐지 대기 중</td>
+<td><code>mapping_service.run_mapping()</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>1</strong></td>
+<td>Standardized</td>
+<td>이상치 탐지 완료 (정상 또는 탐지 중간 상태)</td>
+<td><code>outlier_detection.detect_outliers()</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>2</strong></td>
+<td>PASS + 불일치</td>
+<td>이상치 없음 + 증빙값과 DB값 불일치</td>
+<td><code>evidence_verification.verify_evidence_data()</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>3</strong></td>
+<td>FAIL + 일치</td>
+<td>이상치 탐지 + 증빙값과 DB값 일치</td>
+<td><code>evidence_verification.verify_evidence_data()</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>4</strong></td>
+<td>FAIL + 불일치</td>
+<td>이상치 탐지 + 증빙값과 DB값도 불일치</td>
+<td><code>evidence_verification.verify_evidence_data()</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>5</strong></td>
+<td>Verified</td>
+<td>최종 확정 완료 (SR 보고서 사용 가능)</td>
+<td><code>data_finalization.finalize_usage_data()</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>99</strong></td>
+<td>Unit Error</td>
+<td>단위 변환 실패 (파이프라인 제외)</td>
+<td><code>mapping_service.run_mapping()</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="vstatus-%EC%A0%84%EC%9D%B4-%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8">v_status 전이 다이어그램</h3>
+<pre class="hljs"><code><div>원본 업로드
+    │
+    ▼
+[v_status=0] ─── detect_outliers() ────────────────────────────────┐
+    │                                                               │
+    │  ┌──────────────────────────────────────────────────────┐    │
+    │  │ 증빙 데이터가 없는 경우                                │    │
+    │  │  v_status=1 에서 멈춤 (수동 개입 필요)                │    │
+    │  └──────────────────────────────────────────────────────┘    │
+    │                                                               │
+    ▼                                                               │
+[v_status=1] ─── verify_evidence_data() ────────────────────────────┤
+    │                                                               │
+    ├─ 이상치 없음 + 증빙 일치  ──────────────────► [v_status=5] ◄──┘
+    ├─ 이상치 없음 + 증빙 불일치 ──────────────────► [v_status=2]
+    ├─ 이상치 있음 + 증빙 일치  ──────────────────► [v_status=3]
+    └─ 이상치 있음 + 증빙 불일치 ──────────────────► [v_status=4]
+
+[v_status=2/3/4] ─── justify(action='정상') ──► [v_status=1] (재검증)
+[v_status=2/3/4] ─── finalize() ──────────────► [v_status=5]
+[v_status=5]     ─── revert()   ──────────────► [이전 v_status]
+</div></code></pre>
+<hr>
+<h2 id="3-db-%ED%85%8C%EC%9D%B4%EB%B8%94-%EA%B5%AC%EC%A1%B0-%EB%B0%8F-%EC%97%B0%EA%B4%80-%EA%B4%80%EA%B3%84">3. DB 테이블 구조 및 연관 관계</h2>
+<h3 id="3-1-%EB%A7%88%EC%8A%A4%ED%84%B0-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B3%84%EC%B8%B5-%EA%B5%AC%EC%A1%B0">3-1. 마스터 데이터 계층 구조</h3>
+<pre class="hljs"><code><div>issues                     ← 중대성 이슈 (예: 에너지, 온실가스)
+  └── indicators            ← ESG 지표 (예: 에너지 소비량)
+        └── data            ← 데이터 그룹 (예: 직접에너지, 간접에너지)
+              └── data_points  ← 데이터포인트 (예: 전력사용량(MWh))
+                    └── data_point_synonyms  ← 동의어 (매핑용)
+</div></code></pre>
+<h3 id="3-2-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8-%ED%95%B5%EC%8B%AC-%ED%85%8C%EC%9D%B4%EB%B8%94">3-2. 파이프라인 핵심 테이블</h3>
+<pre class="hljs"><code><div>raw_data                   ← 업로드된 원본 데이터 (wide→long 변환됨)
+  │
+  ▼ mapping_service
+standardized_data          ← 표준화된 데이터 (v_status 관리 핵심 테이블)
+  │
+  ├──► outlier_results     ← 이상치 탐지 결과
+  │       └──► justification_logs  ← 소명 처리 이력
+  │
+  └──► verification_logs  ← 증빙 검증 결과 (gap_percent, result_code)
+         ▲
+         │
+raw_ocr_data               ← OCR 처리 원본 텍스트
+  │
+  ▼ evidence_extraction
+evidence_usage             ← 구조화된 증빙값 (site_id, metric_name, ocr_value)
+
+audit_trail                ← 전체 파이프라인 동작 감사 로그
+</div></code></pre>
+<h3 id="3-3-%EA%B8%B0%EC%A4%80-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%9D%B4%EC%83%81%EC%B9%98-%ED%83%90%EC%A7%80%EC%9A%A9">3-3. 기준 데이터 테이블 (이상치 탐지용)</h3>
+<table>
+<thead>
+<tr>
+<th>테이블</th>
+<th>역할</th>
+<th>사용 단계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>threshold_limits</code></td>
+<td>L2 탐지용 절대 상한값</td>
+<td><code>outlier_detection</code> L2</td>
+</tr>
+<tr>
+<td><code>activity_data</code></td>
+<td>L3 탐지용 생산량(기준년도별)</td>
+<td><code>outlier_detection</code> L3</td>
+</tr>
+<tr>
+<td><code>master_sites</code></td>
+<td>사업장 정보</td>
+<td>시딩 참고용</td>
+</tr>
+<tr>
+<td><code>site_metric_map</code></td>
+<td>고객번호 → 사업장/지표 매핑</td>
+<td><code>evidence_extraction</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-4-standardizeddata-%EC%A3%BC%EC%9A%94-%EC%BB%AC%EB%9F%BC">3-4. standardized_data 주요 컬럼</h3>
+<table>
+<thead>
+<tr>
+<th>컬럼</th>
+<th>타입</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>int</td>
+<td>PK</td>
+</tr>
+<tr>
+<td><code>source_type</code></td>
+<td>text</td>
+<td>계열사/자회사 구분</td>
+</tr>
+<tr>
+<td><code>source_name</code></td>
+<td>text</td>
+<td>회사명 (예: 삼성물산)</td>
+</tr>
+<tr>
+<td><code>site_id</code></td>
+<td>text</td>
+<td>사업장 ID</td>
+</tr>
+<tr>
+<td><code>metric_name</code></td>
+<td>text</td>
+<td>표준화된 지표명</td>
+</tr>
+<tr>
+<td><code>data_point_id</code></td>
+<td>int</td>
+<td>data_points FK</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>float</td>
+<td>현재 적용 값</td>
+</tr>
+<tr>
+<td><code>original_value</code></td>
+<td>float</td>
+<td>확정 전 백업 값 (수정 시 보존)</td>
+</tr>
+<tr>
+<td><code>unit</code></td>
+<td>text</td>
+<td>표준 단위</td>
+</tr>
+<tr>
+<td><code>v_status</code></td>
+<td>int</td>
+<td>파이프라인 상태 (0~5, 99)</td>
+</tr>
+<tr>
+<td><code>reporting_date</code></td>
+<td>date</td>
+<td>보고 기준 월 (YYYY-MM-01)</td>
+</tr>
+<tr>
+<td><code>standardization_confidence</code></td>
+<td>float</td>
+<td>매핑 신뢰도 (0.0~1.0)</td>
+</tr>
+<tr>
+<td><code>updated_by</code></td>
+<td>text</td>
+<td>최종 수정 주체</td>
+</tr>
+<tr>
+<td><code>correction_reason</code></td>
+<td>text</td>
+<td>수정 사유 (감사용)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-stage-1--%EC%9B%90%EB%B3%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%85%EB%A1%9C%EB%93%9C-%EB%B0%8F-%ED%91%9C%EC%A4%80%ED%99%94">4. STAGE 1 — 원본 데이터 업로드 및 표준화</h2>
+<h3 id="%EB%8B%B4%EB%8B%B9-%EB%AA%A8%EB%93%88">담당 모듈</h3>
+<ul>
+<li><code>app/services/raw_data_service.py</code> → <code>app/services/mapping_service.py</code></li>
+</ul>
+<h3 id="api">API</h3>
+<pre class="hljs"><code><div>POST /api/v1/raw-data/upload
+Content-Type: multipart/form-data
+파일: CSV / XLSX / XLS
+</div></code></pre>
+<h3 id="%ED%8C%8C%EC%9D%BC%EB%AA%85-%EA%B7%9C%EC%B9%99-%ED%95%84%EC%88%98">파일명 규칙 (필수)</h3>
+<pre class="hljs"><code><div>{source_type}_{source_name}_raw.{확장자}
+
+예시:
+  계열사_삼성물산_raw.csv
+  자회사_삼성전자_raw.xlsx
+</div></code></pre>
+<h3 id="%EC%B2%98%EB%A6%AC-%ED%9D%90%EB%A6%84">처리 흐름</h3>
+<pre class="hljs"><code><div>1. 파일명에서 source_type, source_name 추출
+2. DataFrame 로드 (CSV/Excel)
+3. wide → long 변환 (melt)
+   - date 컬럼 = reporting_date
+   - 나머지 컬럼 = metric_col (+ 단위는 컬럼명 괄호에서 추출)
+   예: &quot;전력사용량(MWh)&quot; → metric_col=&quot;전력사용량&quot;, unit=&quot;MWh&quot;
+4. raw_data 테이블에 100건 단위 배치 INSERT
+5. MappingService.run_mapping() 자동 호출 → standardized_data INSERT
+</div></code></pre>
+<h3 id="%EB%A7%A4%ED%95%91-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%83%81%EC%84%B8-mappingservice">매핑 서비스 상세 (MappingService)</h3>
+<pre class="hljs"><code><div>각 raw_data 행에 대해:
+
+STEP 1 — 정확 매칭
+  data_points.name == metric_col → 신뢰도 1.0
+
+STEP 2 — 벡터 유사도 매칭 (정확 매칭 실패 시)
+  OpenAI text-embedding-3-small → pgvector RPC
+    match_data_points (data_points 벡터 검색)
+    → 실패 시 match_data_point_synonyms (동의어 벡터 검색)
+  신뢰도 = cosine similarity 값
+
+STEP 3 — 단위 변환
+  UNIT_CONVERSION 테이블로 자동 변환
+  (kWh→MWh, GJ→TJ, kg→ton, Nm3→m3 등 15종 지원)
+  변환 불가 시 v_status=99 로 마킹 → 파이프라인 제외
+
+STEP 4 — standardized_data UPSERT
+  중복 키: (source_type, source_name, reporting_date, metric_name)
+  초기 v_status = 0 (Pending)
+</div></code></pre>
+<h3 id="%EA%B4%80%EB%A0%A8-db-%ED%85%8C%EC%9D%B4%EB%B8%94">관련 DB 테이블</h3>
+<table>
+<thead>
+<tr>
+<th>입력</th>
+<th>출력</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>raw_data</code></td>
+<td><code>standardized_data</code> (v_status=0)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-stage-2--%EC%A6%9D%EB%B9%99-%EB%AC%B8%EC%84%9C-ocr-%EC%B2%98%EB%A6%AC">5. STAGE 2 — 증빙 문서 OCR 처리</h2>
+<h3 id="%EB%8B%B4%EB%8B%B9-%EB%AA%A8%EB%93%88">담당 모듈</h3>
+<ul>
+<li><code>app/services/outlier_pipeline/ocr_service.py</code></li>
+<li><code>app/services/outlier_pipeline/evidence_extraction.py</code></li>
+</ul>
+<h3 id="api">API</h3>
+<pre class="hljs"><code><div>POST /api/v1/evidence/upload-ocr   ← 파일 업로드 + OCR
+POST /api/v1/evidence/extract      ← Pending OCR → evidence_usage 적재
+</div></code></pre>
+<h3 id="ocr-%EC%B2%98%EB%A6%AC-%ED%9D%90%EB%A6%84-upload-ocr">OCR 처리 흐름 (upload-ocr)</h3>
+<pre class="hljs"><code><div>업로드된 이미지/PDF (JPG, PNG, PDF 등)
+    │
+    ▼
+1. Upstage Document AI API 호출
+   - URL: https://api.upstage.ai/v1/document-digitization
+   - 모델: document-parse
+   - 타임아웃: 60초
+   - 응답: content.text (HTML 태그 제거 후 사용)
+    │
+    ▼
+2. GPT-4o 구조화
+   - 입력: OCR 원문 (최대 4,000자)
+   - 추출 필드:
+     · customer_number (고객번호/계량기번호)
+     · year / month (청구 연도·월)
+     · usage (실소비량, 청구금액 아님)
+     · unit (MWh, kWh, Nm3, m3 등)
+    │
+    ▼
+3. raw_ocr_data 테이블 INSERT
+   - processing_status = &quot;Pending&quot;
+   - raw_content(JSONB): 구조화 결과 + OCR 원문 + 업로더 ID
+</div></code></pre>
+<h3 id="%EC%A6%9D%EB%B9%99-%EC%B6%94%EC%B6%9C-%ED%9D%90%EB%A6%84-extract">증빙 추출 흐름 (extract)</h3>
+<pre class="hljs"><code><div>raw_ocr_data (processing_status=&quot;Pending&quot;)
+    │
+    ▼
+1. raw_content 파싱 (customer_number, year, month, usage, unit 추출)
+    │
+    ▼
+2. site_metric_map 조회
+   customer_number → {site_id, metric_name, unit} 매핑
+    │
+    ▼
+3. evidence_usage 테이블 INSERT
+   (site_id, metric_name, reporting_date, ocr_value, unit, file_name)
+    │
+    ▼
+4. raw_ocr_data.processing_status → &quot;Extracted&quot;
+</div></code></pre>
+<h3 id="rawocrdata-%EC%83%81%ED%83%9C-%EC%A0%84%EC%9D%B4">raw_ocr_data 상태 전이</h3>
+<pre class="hljs"><code><div>Pending → Extracted → Success
+  ↑           ↑           ↑
+업로드      extract()   verify() 완료
+</div></code></pre>
+<h3 id="%EA%B4%80%EB%A0%A8-db-%ED%85%8C%EC%9D%B4%EB%B8%94">관련 DB 테이블</h3>
+<table>
+<thead>
+<tr>
+<th>입력</th>
+<th>중간</th>
+<th>출력</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>업로드 파일</td>
+<td><code>raw_ocr_data</code> (Pending→Extracted)</td>
+<td><code>evidence_usage</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>주의</strong>: <code>site_metric_map</code> 테이블에 해당 <code>customer_number</code>가 등록되어 있지 않으면 OCR 추출 단계에서 스킵됩니다. OCR 파일 업로드 전 반드시 매핑 테이블을 확인하세요.</p>
+</blockquote>
+<hr>
+<h2 id="6-stage-3--%EC%9D%B4%EC%83%81%EC%B9%98-%ED%83%90%EC%A7%80-3%EB%8B%A8%EA%B3%84-%ED%83%90%EC%A7%80-%EB%A1%9C%EC%A7%81">6. STAGE 3 — 이상치 탐지 (3단계 탐지 로직)</h2>
+<h3 id="%EB%8B%B4%EB%8B%B9-%EB%AA%A8%EB%93%88">담당 모듈</h3>
+<ul>
+<li><code>app/services/outlier_pipeline/outlier_detection.py</code></li>
+</ul>
+<h3 id="api">API</h3>
+<pre class="hljs"><code><div>POST /api/v1/outliers/detect
+Body (선택): {&quot;site_id&quot;: &quot;삼성물산_서울&quot;, &quot;metric_name&quot;: &quot;전력사용량&quot;}
+</div></code></pre>
+<h3 id="%ED%83%90%EC%A7%80-%EB%8C%80%EC%83%81">탐지 대상</h3>
+<p><code>standardized_data.v_status = 0</code> (Pending) 인 레코드</p>
+<h3 id="3%EB%8B%A8%EA%B3%84-%ED%83%90%EC%A7%80-%EB%A1%9C%EC%A7%81-%EC%83%81%EC%84%B8">3단계 탐지 로직 상세</h3>
+<h4 id="l1--%ED%86%B5%EA%B3%84%EC%A0%81-%EC%9D%B4%EC%83%81%EC%B9%98-z-score--yoy-%EB%B3%80%ED%99%94%EC%9C%A8">L1 — 통계적 이상치 (Z-Score + YoY 변화율)</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># 슬라이딩 윈도우: 직전 12개월 데이터 기준</span>
+Z-Score = |현재값 - <span class="hljs-number">12</span>개월 평균| / <span class="hljs-number">12</span>개월 표준편차
+YoY-RoC = |현재값 - 전년동월값| / 전년동월값 × <span class="hljs-number">100</span>
+
+<span class="hljs-comment"># 임계값</span>
+Z-Score  &gt; <span class="hljs-number">3.0</span>  → L1 플래그
+YoY-RoC &gt; <span class="hljs-number">30.0</span>% → L1 플래그  (둘 중 하나만 초과해도 탐지)
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>의미</th>
+<th>판단 기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Z-Score</td>
+<td>최근 1년 평균에서 3σ 이상 벗어난 경우</td>
+</tr>
+<tr>
+<td>YoY-RoC</td>
+<td>전년 동월 대비 30% 초과 증감</td>
+</tr>
+</tbody>
+</table>
+<h4 id="l2--%EC%A0%88%EB%8C%80-%EC%9E%84%EA%B3%84%EA%B0%92-%EC%B4%88%EA%B3%BC">L2 — 절대 임계값 초과</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># threshold_limits 테이블에서 (site_id, metric_name) 기준 조회</span>
+value &gt; threshold_limits.upper_limit → L2 플래그
+
+<span class="hljs-comment"># 예시:</span>
+<span class="hljs-comment"># 삼성물산 전체 전력: 상한 14,000 MWh</span>
+<span class="hljs-comment"># 삼성전자 전력:     상한 18,000 MWh</span>
+</div></code></pre>
+<h4 id="l3--%EC%A7%91%EC%95%BD%EB%8F%84%EC%9B%90%EB%8B%A8%EC%9C%84-%ED%8E%B8%EC%B0%A8">L3 — 집약도(원단위) 편차</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># activity_data 테이블의 생산량과 결합</span>
+집약도(현재) = 현재값 / 해당월 생산량
+집약도(과거평균) = 직전 <span class="hljs-number">12</span>개월 (값/생산량) 평균
+
+편차 = |집약도(현재) - 집약도(과거평균)| / 집약도(과거평균) × <span class="hljs-number">100</span>
+
+<span class="hljs-comment"># 임계값</span>
+편차 &gt; <span class="hljs-number">50</span>% → L3 플래그
+</div></code></pre>
+<h4 id="%EC%8B%AC%EA%B0%81%EB%8F%84-%EB%93%B1%EA%B8%89-%EA%B2%B0%EC%A0%95">심각도 등급 결정</h4>
+<pre class="hljs"><code><div>L2 초과           → Critical  (설비 가동 한계 초과, 최우선 조치)
+L3 초과(L2 미초과) → Major    (에너지 투입 효율 이상)
+L1만 초과          → Warning  (통계적 이상, 확인 필요)
+</div></code></pre>
+<h4 id="%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%80%EC%A1%B1-%EC%8B%9C-%EC%B2%98%EB%A6%AC">데이터 부족 시 처리</h4>
+<pre class="hljs"><code><div>슬라이딩 윈도우 최소 요건: 13건 이상 (현재 1 + 이전 12)
+
+데이터 &lt; 13건인 경우:
+  - L1/L3 판정 불가 → 스킵
+  - L2 단독 체크만 수행
+
+i &lt; 12 (baseline 구간):
+  - rolling window 기준 데이터 → 정상 처리
+  - v_status = 0 → 1 전이
+</div></code></pre>
+<h3 id="%ED%83%90%EC%A7%80-%EA%B2%B0%EA%B3%BC-%EC%A0%80%EC%9E%A5">탐지 결과 저장</h3>
+<pre class="hljs"><code><div>이상치 탐지된 경우 → outlier_results 테이블 INSERT
+  · std_id, layer, detected_value, threshold, severity
+  · z_score, yoy_roc, intensity_deviation
+
+이상치 여부 무관하게 → standardized_data.v_status = 0 → 1
+(최종 v_status 결정은 STAGE 4에서 수행)
+</div></code></pre>
+<h3 id="%ED%83%90%EC%A7%80-%EC%99%84%EB%A3%8C-%ED%9B%84-%EC%9E%90%EB%8F%99-%EB%8F%99%EC%9E%91">탐지 완료 후 자동 동작</h3>
+<pre class="hljs"><code><div>detect_outliers() 완료
+    └──► verify_evidence_data() 자동 호출 (STAGE 4)
+              → v_status 최종 결정 (1 → 2/3/4/5)
+</div></code></pre>
+<h3 id="%EA%B4%80%EB%A0%A8-db-%ED%85%8C%EC%9D%B4%EB%B8%94">관련 DB 테이블</h3>
+<table>
+<thead>
+<tr>
+<th>읽기</th>
+<th>쓰기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>standardized_data</code> (v_status=0)</td>
+<td><code>standardized_data</code> (v_status 업데이트)</td>
+</tr>
+<tr>
+<td><code>activity_data</code></td>
+<td><code>outlier_results</code></td>
+</tr>
+<tr>
+<td><code>threshold_limits</code></td>
+<td><code>audit_trail</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-stage-4--%EC%A6%9D%EB%B9%99-%EC%A0%95%ED%95%A9%EC%84%B1-%EA%B2%80%EC%A6%9D-%EB%B0%8F-vstatus-%EC%B5%9C%EC%A2%85-%EA%B2%B0%EC%A0%95">7. STAGE 4 — 증빙 정합성 검증 및 v_status 최종 결정</h2>
+<h3 id="%EB%8B%B4%EB%8B%B9-%EB%AA%A8%EB%93%88">담당 모듈</h3>
+<ul>
+<li><code>app/services/outlier_pipeline/evidence_verification.py</code></li>
+</ul>
+<h3 id="api">API</h3>
+<pre class="hljs"><code><div>POST /api/v1/evidence/verify   ← 수동 재실행
+(통상적으로는 detect_outliers 완료 후 자동 호출됨)
+</div></code></pre>
+<h3 id="%ED%95%B5%EC%8B%AC-%EB%A1%9C%EC%A7%81">핵심 로직</h3>
+<h4 id="step-1--%EB%A7%A4%EC%B9%AD-%ED%82%A4">STEP 1 — 매칭 키</h4>
+<pre class="hljs"><code><div>evidence_usage (site_id, metric_name, reporting_date)
+    ↔ standardized_data (site_id, metric_name, reporting_date, v_status=1)
+</div></code></pre>
+<h4 id="step-2--gap-%EA%B3%84%EC%82%B0">STEP 2 — gap 계산</h4>
+<pre class="hljs"><code><div>gap_value   = DB값 - OCR값
+gap_percent = |gap_value| / DB값 × <span class="hljs-number">100</span>
+
+<span class="hljs-comment"># 예시:</span>
+<span class="hljs-comment"># DB값=1,200 MWh, OCR값=1,150 MWh</span>
+<span class="hljs-comment"># gap_percent = |1200-1150| / 1200 × 100 = 4.17%</span>
+</div></code></pre>
+<h4 id="step-3--%EB%8B%A8%EC%9C%84-%EC%98%A4%EB%A5%98-%EA%B0%90%EC%A7%80">STEP 3 — 단위 오류 감지</h4>
+<pre class="hljs"><code><div><span class="hljs-comment"># 1000배 단위 오기입 의심 (kWh ↔ MWh, Nm3 ↔ kNm3 등)</span>
+unit_mismatch = <span class="hljs-literal">True</span>
+  조건: |DB값 × <span class="hljs-number">1000</span> - OCR값| &lt; <span class="hljs-number">1.0</span>
+     또는 |DB값 / <span class="hljs-number">1000</span> - OCR값| &lt; <span class="hljs-number">1.0</span>
+</div></code></pre>
+<h4 id="step-4--resultcode-%EA%B2%B0%EC%A0%95-%EC%A6%9D%EB%B9%99-%EB%B9%84%EA%B5%90-%EA%B2%B0%EA%B3%BC">STEP 4 — result_code 결정 (증빙 비교 결과)</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">result_code</th>
+<th>의미</th>
+<th>조건</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>0</strong></td>
+<td>일치</td>
+<td><code>gap_percent == 0.0</code> (완전 일치)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>1</strong></td>
+<td>불일치</td>
+<td><code>gap_percent != 0.0</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>2</strong></td>
+<td>단위 오류 의심</td>
+<td><code>unit_mismatch == True</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>주의</strong>: 일치 판정은 <code>gap_percent == 0.0</code> 완전 일치만 허용합니다. 0.001%라도 차이가 나면 불일치로 처리됩니다.</p>
+</blockquote>
+<h4 id="step-5--vstatus-%EC%B5%9C%EC%A2%85-%EA%B2%B0%EC%A0%95-4%EA%B0%80%EC%A7%80-%EC%BC%80%EC%9D%B4%EC%8A%A4">STEP 5 — v_status 최종 결정 (4가지 케이스)</h4>
+<pre class="hljs"><code><div>outlier_results 존재 여부 (has_outlier) × 증빙 일치 여부 (evidence_match)
+
+┌──────────────┬───────────────┬───────────────┐
+│              │  증빙 일치     │  증빙 불일치   │
+├──────────────┼───────────────┼───────────────┤
+│ 이상치 없음   │ v_status = 5  │ v_status = 2  │
+│ (PASS)       │ 자동 확정 ✅   │ 조치 필요 ⚠️  │
+├──────────────┼───────────────┼───────────────┤
+│ 이상치 있음   │ v_status = 3  │ v_status = 4  │
+│ (FAIL)       │ 소명 필요 ⚠️  │ 긴급 조치 🚨  │
+└──────────────┴───────────────┴───────────────┘
+</div></code></pre>
+<h3 id="%EA%B4%80%EB%A0%A8-db-%ED%85%8C%EC%9D%B4%EB%B8%94">관련 DB 테이블</h3>
+<table>
+<thead>
+<tr>
+<th>읽기</th>
+<th>쓰기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>evidence_usage</code></td>
+<td><code>verification_logs</code></td>
+</tr>
+<tr>
+<td><code>standardized_data</code> (v_status=1)</td>
+<td><code>standardized_data</code> (v_status 업데이트)</td>
+</tr>
+<tr>
+<td><code>outlier_results</code></td>
+<td><code>raw_ocr_data</code> (processing_status→Success)</td>
+</tr>
+<tr>
+<td><code>raw_ocr_data</code></td>
+<td><code>audit_trail</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="8-stage-5--ai-%EC%A7%84%EB%8B%A8-gpt-4o">8. STAGE 5 — AI 진단 (GPT-4o)</h2>
+<h3 id="%EB%8B%B4%EB%8B%B9-%EB%AA%A8%EB%93%88">담당 모듈</h3>
+<ul>
+<li><code>app/services/outlier_pipeline/outlier_llm.py</code></li>
+</ul>
+<h3 id="api">API</h3>
+<pre class="hljs"><code><div>POST /api/v1/outliers/analyze
+Body (선택): {&quot;outlier_id&quot;: 123}   ← 특정 건만 처리
+</div></code></pre>
+<h3 id="%EC%B2%98%EB%A6%AC-%EB%8C%80%EC%83%81">처리 대상</h3>
+<p><code>outlier_results.analysis_summary IS NULL</code> 인 레코드
+(이미 진단된 건은 재실행하지 않음)</p>
+<h3 id="%EC%8A%A4%ED%82%B5-%EC%A1%B0%EA%B1%B4">스킵 조건</h3>
+<ul>
+<li><code>v_status = 5</code> (이미 자동 확정된 데이터)</li>
+<li><code>standardized_data</code> 레코드 없음</li>
+</ul>
+<h3 id="%EC%BC%80%EC%9D%B4%EC%8A%A4%EB%B3%84-%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EB%B6%84%EA%B8%B0">케이스별 프롬프트 분기</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">v_status</th>
+<th>상황 설명</th>
+<th>진단 포커스</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>2</strong></td>
+<td>이상치 없음 + 증빙 불일치</td>
+<td>DB값 vs OCR값 중 어느 쪽이 맞는지 판별. 수동 입력 오류 또는 OCR 오류 가능성 분석</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>3</strong></td>
+<td>이상치 있음 + 증빙 일치</td>
+<td>실제 이상 소비가 발생한 원인 분석. 설비 교체, 공정 변경, 특수 운영 상황 추정</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>4</strong></td>
+<td>이상치 있음 + 증빙 불일치</td>
+<td>가장 심각한 케이스. 실제 이상 현상 + 입력 오류 복합 가능성 분석</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ai-%EC%A7%84%EB%8B%A8-%EC%B6%9C%EB%A0%A5-%ED%98%95%EC%8B%9D">AI 진단 출력 형식</h3>
+<pre class="hljs"><code><div>{
+    <span class="hljs-attr">"이상치_식별자"</span>: <span class="hljs-string">"삼성물산_2024-01-01_전력사용량"</span>,
+    <span class="hljs-attr">"위험_등급"</span>: <span class="hljs-string">"Critical / Major / Warning"</span>,
+    <span class="hljs-attr">"진단_요약"</span>: <span class="hljs-string">"현장 담당자용 핵심 메시지 (1~2문장)"</span>,
+    <span class="hljs-attr">"판단_근거_및_해설"</span>: <span class="hljs-string">"L1/L2/L3 탐지 결과를 비즈니스 언어로 설명"</span>,
+    <span class="hljs-attr">"추론_가설"</span>: <span class="hljs-string">"데이터 오기입 또는 현장 이슈 원인 추정"</span>,
+    <span class="hljs-attr">"현장_체크리스트"</span>: [
+        <span class="hljs-string">"점검항목 1"</span>,
+        <span class="hljs-string">"점검항목 2"</span>,
+        <span class="hljs-string">"점검항목 3"</span>
+    ]
+}
+</div></code></pre>
+<blockquote>
+<p>AI 진단은 <strong>v_status를 변경하지 않습니다</strong>. 순수하게 <code>outlier_results.analysis_summary</code>만 업데이트합니다.</p>
+</blockquote>
+<hr>
+<h2 id="9-stage-6--%EC%86%8C%EB%AA%85-%EC%B2%98%EB%A6%AC">9. STAGE 6 — 소명 처리</h2>
+<h3 id="%EB%8B%B4%EB%8B%B9-%EB%AA%A8%EB%93%88">담당 모듈</h3>
+<ul>
+<li><code>app/services/outlier_pipeline/outlier_management.py</code></li>
+</ul>
+<h3 id="api">API</h3>
+<pre class="hljs"><code><div>POST /api/v1/outliers/{std_id}/justify
+Body:
+{
+    &quot;user_feedback&quot;: &quot;설비 정기 점검으로 인한 일시적 증가입니다.&quot;,
+    &quot;action_taken&quot;:  &quot;정상&quot;    ← 또는 &quot;수정&quot;, &quot;확인중&quot; 등
+}
+</div></code></pre>
+<h3 id="%EC%86%8C%EB%AA%85-%EA%B0%80%EB%8A%A5-%EB%8C%80%EC%83%81">소명 가능 대상</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">v_status</th>
+<th>상황</th>
+<th>소명 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>2</strong></td>
+<td>이상치 없음 + 증빙 불일치</td>
+<td>DB값이 맞는지, OCR값이 맞는지 확인 후 소명</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>3</strong></td>
+<td>이상치 있음 + 증빙 일치</td>
+<td>이상치 원인 소명 (데이터 수정 불가)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>4</strong></td>
+<td>이상치 있음 + 증빙 불일치</td>
+<td>이상 원인 소명 (OCR값으로 자동 수정 진행)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="actiontaken-%EA%B0%92%EC%97%90-%EB%94%B0%EB%A5%B8-%EC%B2%98%EB%A6%AC">action_taken 값에 따른 처리</h3>
+<pre class="hljs"><code><div>action_taken == &quot;정상&quot;
+  → justification_logs INSERT
+  → standardized_data.v_status = 1 (재검증 트리거)
+  → outlier_results.is_resolved = True
+  → audit_trail 기록
+
+action_taken != &quot;정상&quot; (예: &quot;수정 예정&quot;, &quot;확인중&quot;)
+  → justification_logs INSERT
+  → v_status 유지 (최종 확정은 /finalization 에서)
+  → outlier_results.is_resolved = True
+  → audit_trail 기록
+</div></code></pre>
+<h3 id="%EA%B4%80%EB%A0%A8-db-%ED%85%8C%EC%9D%B4%EB%B8%94">관련 DB 테이블</h3>
+<table>
+<thead>
+<tr>
+<th>읽기</th>
+<th>쓰기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>standardized_data</code></td>
+<td><code>justification_logs</code></td>
+</tr>
+<tr>
+<td><code>outlier_results</code></td>
+<td><code>standardized_data</code> (v_status, action='정상'일 때)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>outlier_results</code> (is_resolved=True)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>audit_trail</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="10-stage-7--%EC%B5%9C%EC%A2%85-%ED%99%95%EC%A0%95-%EB%B0%8F-%EC%B7%A8%EC%86%8C">10. STAGE 7 — 최종 확정 및 취소</h2>
+<h3 id="%EB%8B%B4%EB%8B%B9-%EB%AA%A8%EB%93%88">담당 모듈</h3>
+<ul>
+<li><code>app/services/outlier_pipeline/data_finalization.py</code></li>
+</ul>
+<h3 id="api">API</h3>
+<pre class="hljs"><code><div>POST /api/v1/finalization/{std_id}         ← 최종 확정
+POST /api/v1/finalization/{std_id}/revert  ← 확정 취소
+GET  /api/v1/finalization/{std_id}/history ← 이력 조회
+</div></code></pre>
+<h3 id="%EC%B5%9C%EC%A2%85-%ED%99%95%EC%A0%95-%EC%B2%98%EB%A6%AC-%ED%9D%90%EB%A6%84">최종 확정 처리 흐름</h3>
+<pre class="hljs"><code><div>STEP 1: standardized_data 현재 상태 스냅샷
+  - before_value, before_status 저장
+
+STEP 2: standardized_data 업데이트
+  - original_value = 이전 value (최초 원본 보존)
+  - value = corrected_value (수정값, 변경 없으면 기존값 그대로)
+  - v_status = 5 (Verified)
+  - updated_by = user_id
+  - correction_reason = reason
+
+STEP 3: audit_trail 기록
+  - 기록 실패 시 STEP 2 자동 롤백 시도
+</div></code></pre>
+<h3 id="%ED%99%95%EC%A0%95-%EC%B7%A8%EC%86%8C-revert">확정 취소 (revert)</h3>
+<pre class="hljs"><code><div>STEP 1: v_status=5 인지 검증
+STEP 2: original_value 존재 여부 확인
+STEP 3: audit_trail에서 직전 FINALIZE 액션의 before_status 복원
+STEP 4: value = original_value 복원
+        v_status = 직전 상태 (audit_trail 기록 기반)
+</div></code></pre>
+<blockquote>
+<p><strong>주의</strong>: <code>original_value</code>가 없으면 취소가 불가능합니다. 반드시 값 확인 후 확정하세요.</p>
+</blockquote>
+<h3 id="%EA%B4%80%EB%A0%A8-db-%ED%85%8C%EC%9D%B4%EB%B8%94">관련 DB 테이블</h3>
+<table>
+<thead>
+<tr>
+<th>읽기</th>
+<th>쓰기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>standardized_data</code></td>
+<td><code>standardized_data</code> (value, original_value, v_status)</td>
+</tr>
+<tr>
+<td><code>audit_trail</code> (revert 시)</td>
+<td><code>audit_trail</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="11-vstatus%EB%B3%84-%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A1%B0%EC%B9%98-%EA%B0%80%EC%9D%B4%EB%93%9C">11. v_status별 사용자 조치 가이드</h2>
+<h3 id="vstatus--0-pending">v_status = 0 (Pending)</h3>
+<blockquote>
+<p><strong>상황</strong>: 원본 데이터가 표준화되었으나 이상치 탐지를 받지 않은 상태</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>원인</td>
+<td>정상적인 초기 상태</td>
+</tr>
+<tr>
+<td>필요 조치</td>
+<td><code>POST /api/v1/outliers/detect</code> 실행</td>
+</tr>
+<tr>
+<td>주의사항</td>
+<td>OCR 증빙 파일도 미리 업로드해두면 detect 이후 자동 검증까지 완료됨</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="vstatus--1-standardized">v_status = 1 (Standardized)</h3>
+<blockquote>
+<p><strong>상황</strong>: 이상치 탐지 완료. 증빙 데이터 없어서 검증이 보류된 상태</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>원인</td>
+<td><code>evidence_usage</code>에 매칭되는 OCR 데이터가 없음</td>
+</tr>
+<tr>
+<td>필요 조치</td>
+<td>1. 증빙 파일 OCR 업로드: <code>POST /api/v1/evidence/upload-ocr</code></td>
+</tr>
+<tr>
+<td></td>
+<td>2. 추출: <code>POST /api/v1/evidence/extract</code></td>
+</tr>
+<tr>
+<td></td>
+<td>3. 검증 재실행: <code>POST /api/v1/evidence/verify</code></td>
+</tr>
+<tr>
+<td>주의사항</td>
+<td>증빙이 없는 데이터는 최종 확정 전 반드시 수동 검토 필요</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="vstatus--2-pass--%EB%B6%88%EC%9D%BC%EC%B9%98">v_status = 2 (PASS + 불일치)</h3>
+<blockquote>
+<p><strong>상황</strong>: 이상치 없음. 그런데 DB값과 OCR 증빙값이 다름</p>
+</blockquote>
+<pre class="hljs"><code><div>진단 요약: 통계적으로는 정상이나, 입력값 또는 OCR 인식에 오류가 있을 가능성
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>체크 순서</th>
+<th>조치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. AI 진단 확인</td>
+<td><code>POST /api/v1/outliers/analyze</code> → analysis_summary 참고</td>
+</tr>
+<tr>
+<td>2. 원본 문서 대조</td>
+<td>DB값 vs OCR값 중 어느 쪽이 정확한지 육안 확인</td>
+</tr>
+<tr>
+<td>3-A. DB값이 맞는 경우</td>
+<td><code>POST /api/v1/outliers/{std_id}/justify</code><br><code>action_taken: &quot;정상&quot;</code> → 소명 후 v_status=1 전환</td>
+</tr>
+<tr>
+<td>3-B. OCR값이 맞는 경우</td>
+<td><code>POST /api/v1/finalization/{std_id}</code><br><code>corrected_value: {OCR값}</code> → 값 수정 + 확정</td>
+</tr>
+<tr>
+<td>3-C. 불명확한 경우</td>
+<td>소명(<code>action_taken: &quot;확인중&quot;</code>)으로 기록 후 보류</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="vstatus--3-fail--%EC%9D%BC%EC%B9%98">v_status = 3 (FAIL + 일치)</h3>
+<blockquote>
+<p><strong>상황</strong>: 이상치 탐지됨. DB값과 OCR 증빙값은 같음 → 실제 이상 소비 가능성</p>
+</blockquote>
+<pre class="hljs"><code><div>진단 요약: 데이터는 맞을 가능성이 높음. 이상 소비의 원인을 소명해야 함
+데이터 수정 불가 (DB값 = 증빙값 = 실제값)
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>체크 순서</th>
+<th>조치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. AI 진단 확인</td>
+<td><code>POST /api/v1/outliers/analyze</code> → 현장 체크리스트 참고</td>
+</tr>
+<tr>
+<td>2. 현장 확인</td>
+<td>설비 교체, 공정 변경, 야간작업 증가 등 확인</td>
+</tr>
+<tr>
+<td>3. 소명 제출</td>
+<td><code>POST /api/v1/outliers/{std_id}/justify</code><br><code>user_feedback: &quot;설비 교체로 인한 일시적 증가&quot;</code><br><code>action_taken: &quot;이상치 원인 확인&quot;</code></td>
+</tr>
+<tr>
+<td>4. 최종 확정</td>
+<td><code>POST /api/v1/finalization/{std_id}</code><br><code>corrected_value: {기존값 그대로}</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="vstatus--4-fail--%EB%B6%88%EC%9D%BC%EC%B9%98-%F0%9F%9A%A8-%EA%B0%80%EC%9E%A5-%EC%8B%AC%EA%B0%81">v_status = 4 (FAIL + 불일치) 🚨 가장 심각</h3>
+<blockquote>
+<p><strong>상황</strong>: 이상치 탐지 + DB값과 OCR 증빙값도 다름 → 실제 이상 + 입력 오류 복합 가능성</p>
+</blockquote>
+<pre class="hljs"><code><div>진단 요약: 데이터 오류 가능성 + 실제 현장 이상 가능성 모두 존재. 우선 순위 최고
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>체크 순서</th>
+<th>조치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. AI 진단 확인</td>
+<td><code>POST /api/v1/outliers/analyze</code> → 위험 등급, 추론 가설 우선 확인</td>
+</tr>
+<tr>
+<td>2. 단위 오류 여부</td>
+<td><code>verification_logs.unit_mismatch</code> 확인<br>True이면 kWh↔MWh 오기입 확인</td>
+</tr>
+<tr>
+<td>3. 원본 문서 대조</td>
+<td>실제 청구서와 DB 입력값 비교</td>
+</tr>
+<tr>
+<td>4-A. 단순 입력 오류</td>
+<td><code>POST /api/v1/finalization/{std_id}</code><br><code>corrected_value: {OCR값 또는 정확한 값}</code></td>
+</tr>
+<tr>
+<td>4-B. 실제 이상 소비</td>
+<td>소명 제출 후 → 최종 확정</td>
+</tr>
+<tr>
+<td>4-C. 불명확</td>
+<td><code>action_taken: &quot;긴급 조사 중&quot;</code> 으로 소명 기록 후 보류</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="vstatus--5-verified">v_status = 5 (Verified)</h3>
+<blockquote>
+<p><strong>상황</strong>: 최종 확정 완료. SR 보고서에 사용 가능한 데이터</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>정상 상태</td>
+<td>추가 조치 불필요</td>
+</tr>
+<tr>
+<td>취소 필요 시</td>
+<td><code>POST /api/v1/finalization/{std_id}/revert</code><br>→ <code>original_value</code>로 복원, 이전 v_status로 되돌아감</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="vstatus--99-unit-error">v_status = 99 (Unit Error)</h3>
+<blockquote>
+<p><strong>상황</strong>: 매핑 시 단위 변환 실패. 파이프라인에서 제외됨</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>원인</td>
+<td><code>UNIT_CONVERSION</code> 테이블에 없는 단위 조합</td>
+</tr>
+<tr>
+<td>필요 조치</td>
+<td>1. <code>standardized_data</code>에서 해당 레코드 확인</td>
+</tr>
+<tr>
+<td></td>
+<td>2. 단위 정보 수동 보정 후 mapping 재실행</td>
+</tr>
+<tr>
+<td></td>
+<td>3. 또는 <code>data_points.unit</code> 수정 후 재매핑</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="12-api-%EC%97%94%EB%93%9C%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EC%9A%94%EC%95%BD">12. API 엔드포인트 요약</h2>
+<h3 id="%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8-%EC%8B%A4%ED%96%89-%EC%88%9C%EC%84%9C">파이프라인 실행 순서</h3>
+<pre class="hljs"><code><div>1. POST /api/v1/raw-data/upload              ← 원본 CSV/Excel 업로드
+2. POST /api/v1/evidence/upload-ocr          ← 증빙 이미지/PDF OCR
+3. POST /api/v1/evidence/extract             ← OCR → evidence_usage 적재
+4. POST /api/v1/outliers/detect              ← 이상치 탐지 (증빙 검증 자동 포함)
+5. POST /api/v1/outliers/analyze             ← AI 진단 (선택)
+6. POST /api/v1/outliers/{std_id}/justify    ← 소명 처리 (v_status=2/3/4인 경우)
+7. POST /api/v1/finalization/{std_id}        ← 최종 확정
+</div></code></pre>
+<h3 id="%EC%A1%B0%ED%9A%8C-%EB%B0%8F-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81">조회 및 모니터링</h3>
+<table>
+<thead>
+<tr>
+<th>엔드포인트</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /api/v1/dashboard/</code></td>
+<td>전체 표준화 데이터 현황</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/dashboard/status-summary</code></td>
+<td>v_status별 건수 집계</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/dashboard/outlier-pending</code></td>
+<td>소명 대기 이상치 목록</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/outliers/{std_id}</code></td>
+<td>특정 데이터의 이상치·소명 상세</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/finalization/{std_id}/history</code></td>
+<td>수정 이력 조회</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/audit/</code></td>
+<td>전체 감사 로그</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/audit/summary</code></td>
+<td>액션 타입별 집계</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/audit/{std_id}</code></td>
+<td>특정 데이터 변경 이력</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%EB%B6%80%EB%A1%9D--%EC%9E%90%EC%A3%BC-%EB%AC%BB%EB%8A%94-%EC%A7%88%EB%AC%B8">부록 — 자주 묻는 질문</h2>
+<p><strong>Q. detect 실행 시 일부 데이터가 &quot;스킵&quot;되었습니다.</strong>
+A. 해당 <code>(site_id, metric_name)</code> 조합의 이력이 13건 미만이면 L1/L3 분석이 스킵됩니다. L2(절대 임계값) 체크는 별도로 수행됩니다. 이력 데이터가 쌓이면 자동으로 전체 분석이 가능해집니다.</p>
+<p><strong>Q. 증빙 검증 결과가 항상 불일치(gap_percent &gt; 0)로 나옵니다.</strong>
+A. 일치 판정은 <code>gap_percent == 0.0</code> 완전 일치만 허용합니다. 소수점 오차라도 불일치로 처리됩니다. 단위 변환 차이(예: 반올림)가 원인일 수 있으니 <code>unit_mismatch</code> 여부를 우선 확인하세요.</p>
+<p><strong>Q. v_status=1인 데이터가 많습니다.</strong>
+A. 대부분 증빙 OCR 데이터(<code>evidence_usage</code>)가 없는 경우입니다. 해당 사업장·지표·월의 OCR 파일이 업로드되어 있는지 확인하세요.</p>
+<p><strong>Q. AI 진단(analyze)을 실행했는데 &quot;새로운 데이터 없음&quot;이 나옵니다.</strong>
+A. <code>outlier_results.analysis_summary</code>가 이미 채워진 경우 재실행하지 않습니다. 재분석이 필요하면 DB에서 <code>analysis_summary = NULL</code> 로 초기화 후 재실행하세요.</p>
+<p><strong>Q. 최종 확정(v_status=5)을 취소하려면?</strong>
+A. <code>POST /api/v1/finalization/{std_id}/revert</code> 를 호출하세요. <code>original_value</code>가 저장되어 있어야만 복원 가능합니다. <code>original_value</code>가 없는 경우 취소가 불가능합니다.</p>
+
+</body>
+</html>

@@ -1,0 +1,3756 @@
+{
+  "draft_id": "dc0cfb42-0048-4485-9e92-d3bd4e4b3afb",
+  "generated_at": "2026-03-23T03:17:27",
+  "version": 1,
+  "sections": [
+    {
+      "label": "총괄편",
+      "esg_id": 4,
+      "items": [
+        {
+          "field_id": "s4_i0",
+          "title": "ESG 목표 및 전략 수립",
+          "context": {
+            "original": "기관장의 ESG 비전, 중장기 목표, 전략 방향 및 이행계획 수립·공시",
+            "current": "기관장의 ESG 비전, 중장기 목표, 전략 방향 및 이행계획 수립·공시",
+            "last_modified": null
+          },
+          "commentary": {
+            "original": "삼성물산의 총 에너지 소비량은 2025년 7월부터 12월까지의 데이터에 따르면, 312,000 GJ에서 시작하여 318,000 GJ로 증가한 후, 297,000 GJ로 감소하는 등의 변동을 보였습니다. 이 기간 동안 에너지 소비량은 293,000 GJ에서 300,000 GJ로 다시 증가하는 경향을 나타냈습니다. 이러한 수치는 삼성물산이 설정한 ESG 목표와 전략에 따른 에너지 효율성 개선 및 지속 가능한 경영을 위한 이행 계획의 일환으로 해석될 수 있습니다.\n\n투자자 여러분, 삼성물산은 ESG 목표를 달성하기 위해 에너지 소비를 관리하고 있으며, 최근 6개월 간의 데이터에서 에너지 소비량의 변동이 있음을 확인할 수 있습니다. 이는 기업이 지속 가능성을 추구하는 과정에서 에너지 사용을 최적화하려는 노력의 일환으로 볼 수 있습니다. 그러나 에너지 소비량의 일시적인 증가와 감소는 기업의 운영 효율성에 대한 지속적인 검토와 개선이 필요함을 시사합니다. 이러한 성과는 기업이 ESG 목표를 달성하기 위한 전략적 방향성을 가지고 있음을 보여주지만, 동시에 개선이 필요한 부분도 존재함을 나타냅니다.",
+            "current": "삼성물산의 총 에너지 소비량은 2025년 7월부터 12월까지의 데이터에 따르면, 312,000 GJ에서 시작하여 318,000 GJ로 증가한 후, 297,000 GJ로 감소하는 등의 변동을 보였습니다. 이 기간 동안 에너지 소비량은 293,000 GJ에서 300,000 GJ로 다시 증가하는 경향을 나타냈습니다. 이러한 수치는 삼성물산이 설정한 ESG 목표와 전략에 따른 에너지 효율성 개선 및 지속 가능한 경영을 위한 이행 계획의 일환으로 해석될 수 있습니다.\n\n투자자 여러분, 삼성물산은 ESG 목표를 달성하기 위해 에너지 소비를 관리하고 있으며, 최근 6개월 간의 데이터에서 에너지 소비량의 변동이 있음을 확인할 수 있습니다. 이는 기업이 지속 가능성을 추구하는 과정에서 에너지 사용을 최적화하려는 노력의 일환으로 볼 수 있습니다. 그러나 에너지 소비량의 일시적인 증가와 감소는 기업의 운영 효율성에 대한 지속적인 검토와 개선이 필요함을 시사합니다. 이러한 성과는 기업이 ESG 목표를 달성하기 위한 전략적 방향성을 가지고 있음을 보여주지만, 동시에 개선이 필요한 부분도 존재함을 나타냅니다.",
+            "last_modified": null
+          },
+          "data_points": [
+            {
+              "dp_id": 219,
+              "dp_name": "총 에너지 소비량",
+              "unit": "GJ",
+              "data_type": "numeric",
+              "indicator_code": null,
+              "indicator_name": "ESG 목표 및 전략 수립",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3575,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-01-01",
+                  "value": 290000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3576,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-02-01",
+                  "value": 285000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3577,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-03-01",
+                  "value": 295000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3578,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-04-01",
+                  "value": 305000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3579,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-05-01",
+                  "value": 315000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3580,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-06-01",
+                  "value": 320000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3581,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-07-01",
+                  "value": 318000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3582,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-08-01",
+                  "value": 310000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3583,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-09-01",
+                  "value": 302000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3584,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-10-01",
+                  "value": 295000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3585,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-11-01",
+                  "value": 288000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3586,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2024-12-01",
+                  "value": 292000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3839,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 305000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3840,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 400000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3841,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 420000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3842,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 460000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3843,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 302000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3844,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 298000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3845,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 312000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3846,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 318000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3847,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 308000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3848,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 297000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3849,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 293000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3850,
+                  "data_point_id": 219,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 300000,
+                  "unit": "GJ"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "field_id": "s4_i1",
+          "title": "ESG위원회 및 추진 조직",
+          "context": {
+            "original": "ESG 전담 위원회 설치 현황, 구성원, 역할 및 의사결정 구조 공시",
+            "current": "ESG 전담 위원회 설치 현황, 구성원, 역할 및 의사결정 구조 공시",
+            "last_modified": null
+          },
+          "commentary": {
+            "original": "### 데이터 해석\n삼성물산의 에너지 집약도는 2025년 7월부터 12월까지 지속적으로 증가하는 추세를 보이고 있습니다. 7월의 30.5 GJ/억원에서 12월에는 30.75 GJ/억원으로 증가하여, 이는 기업의 에너지 효율성이 다소 저하되고 있음을 나타냅니다. 이러한 변화는 ESG 위원회와 추진 조직의 역할과 의사결정 구조에 영향을 미칠 수 있으며, 지속 가능한 경영을 위한 추가적인 노력이 필요함을 시사합니다.\n\n### 투자자에게 설명\n삼성물산의 ESG 성과를 살펴보면, 에너지 집약도가 2025년 7월 30.5 GJ/억원에서 12월 30.75 GJ/억원으로 증가했습니다. 이는 기업이 에너지 효율성을 개선하는 데 어려움을 겪고 있음을 나타내며, ESG 위원회가 이 문제를 해결하기 위한 전략을 마련해야 할 필요성이 있습니다. 그러나 이러한 수치는 기업이 지속 가능한 경영을 위해 노력하고 있다는 점에서 긍정적인 신호로도 해석될 수 있습니다. ESG 위원회의 구성원과 역할을 명확히 하고, 의사결정 구조를 강화함으로써 향후 더 나은 성과를 기대할 수 있습니다.",
+            "current": "### 데이터 해석\n삼성물산의 에너지 집약도는 2025년 7월부터 12월까지 지속적으로 증가하는 추세를 보이고 있습니다. 7월의 30.5 GJ/억원에서 12월에는 30.75 GJ/억원으로 증가하여, 이는 기업의 에너지 효율성이 다소 저하되고 있음을 나타냅니다. 이러한 변화는 ESG 위원회와 추진 조직의 역할과 의사결정 구조에 영향을 미칠 수 있으며, 지속 가능한 경영을 위한 추가적인 노력이 필요함을 시사합니다.\n\n### 투자자에게 설명\n삼성물산의 ESG 성과를 살펴보면, 에너지 집약도가 2025년 7월 30.5 GJ/억원에서 12월 30.75 GJ/억원으로 증가했습니다. 이는 기업이 에너지 효율성을 개선하는 데 어려움을 겪고 있음을 나타내며, ESG 위원회가 이 문제를 해결하기 위한 전략을 마련해야 할 필요성이 있습니다. 그러나 이러한 수치는 기업이 지속 가능한 경영을 위해 노력하고 있다는 점에서 긍정적인 신호로도 해석될 수 있습니다. ESG 위원회의 구성원과 역할을 명확히 하고, 의사결정 구조를 강화함으로써 향후 더 나은 성과를 기대할 수 있습니다.",
+            "last_modified": null
+          },
+          "data_points": [
+            {
+              "dp_id": 222,
+              "dp_name": "에너지 집약도",
+              "unit": "GJ/억원",
+              "data_type": "numeric",
+              "indicator_code": null,
+              "indicator_name": "ESG위원회 및 추진 조직",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3875,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 30.2,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3876,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 30.25,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3877,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 30.3,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3878,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 30.35,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3879,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 30.4,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3880,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 30.45,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3881,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 30.5,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3882,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 30.55,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3883,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 30.6,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3884,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 30.65,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3885,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 30.7,
+                  "unit": "GJ/억원"
+                },
+                {
+                  "id": 3886,
+                  "data_point_id": 222,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 30.75,
+                  "unit": "GJ/억원"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "field_id": "s4_i2",
+          "title": "이해관계자 의견 수렴",
+          "context": {
+            "original": "내·외부 이해관계자 식별, 참여 방식, 의견 반영 프로세스 공시",
+            "current": "내·외부 이해관계자 식별, 참여 방식, 의견 반영 프로세스 공시",
+            "last_modified": null
+          },
+          "commentary": {
+            "original": "### 한국어 해석\n삼성물산은 2025년 7월부터 12월까지의 연료 에너지 소비량이 매달 증가하는 추세를 보였으며, 7월 121200 GJ에서 12월 122200 GJ로 증가했습니다. 전기 에너지 소비량 또한 같은 기간 동안 증가하여 7월 183800 GJ에서 12월 185300 GJ로 증가했습니다. 이러한 데이터는 기업의 에너지 소비 패턴을 이해관계자에게 투명하게 전달하는 데 중요한 역할을 합니다.\n\n### 투자자에게 설명\n삼성물산은 최근 6개월 동안 연료와 전기 에너지 소비량이 지속적으로 증가했습니다. 연료 에너지는 121200 GJ에서 122200 GJ로 증가했으며, 전기 에너지는 183800 GJ에서 185300 GJ로 증가했습니다. 이는 기업의 운영 확대나 생산 증가와 관련이 있을 수 있지만, 에너지 소비 증가가 환경에 미치는 부정적인 영향도 고려해야 합니다. 따라서, 기업은 이해관계자의 의견을 반영하여 에너지 효율성을 높이고 지속 가능한 경영을 추진할 필요가 있습니다.",
+            "current": "### 한국어 해석\n삼성물산은 2025년 7월부터 12월까지의 연료 에너지 소비량이 매달 증가하는 추세를 보였으며, 7월 121200 GJ에서 12월 122200 GJ로 증가했습니다. 전기 에너지 소비량 또한 같은 기간 동안 증가하여 7월 183800 GJ에서 12월 185300 GJ로 증가했습니다. 이러한 데이터는 기업의 에너지 소비 패턴을 이해관계자에게 투명하게 전달하는 데 중요한 역할을 합니다.\n\n### 투자자에게 설명\n삼성물산은 최근 6개월 동안 연료와 전기 에너지 소비량이 지속적으로 증가했습니다. 연료 에너지는 121200 GJ에서 122200 GJ로 증가했으며, 전기 에너지는 183800 GJ에서 185300 GJ로 증가했습니다. 이는 기업의 운영 확대나 생산 증가와 관련이 있을 수 있지만, 에너지 소비 증가가 환경에 미치는 부정적인 영향도 고려해야 합니다. 따라서, 기업은 이해관계자의 의견을 반영하여 에너지 효율성을 높이고 지속 가능한 경영을 추진할 필요가 있습니다.",
+            "last_modified": null
+          },
+          "data_points": [
+            {
+              "dp_id": 221,
+              "dp_name": "연료 에너지 소비량",
+              "unit": "GJ",
+              "data_type": "numeric",
+              "indicator_code": null,
+              "indicator_name": "이해관계자 의견 수렴",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3863,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 120000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3864,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 120200,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3865,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 120400,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3866,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 120600,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3867,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 120800,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3868,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 121000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3869,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 121200,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3870,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 121400,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3871,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 121600,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3872,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 121800,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3873,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 122000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3874,
+                  "data_point_id": 221,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 122200,
+                  "unit": "GJ"
+                }
+              ]
+            },
+            {
+              "dp_id": 220,
+              "dp_name": "전기 에너지 소비량",
+              "unit": "GJ",
+              "data_type": "numeric",
+              "indicator_code": null,
+              "indicator_name": "이해관계자 의견 수렴",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3851,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 182000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3852,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 182300,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3853,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 182600,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3854,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 182900,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3855,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 183200,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3856,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 183500,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3857,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 183800,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3858,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 184100,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3859,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 184400,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3860,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 184700,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3861,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 185000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3862,
+                  "data_point_id": 220,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 185300,
+                  "unit": "GJ"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "field_id": "s4_i3",
+          "title": "중대성 평가",
+          "context": {
+            "original": "ESG 중대 이슈 식별·우선순위화 프로세스 및 평가 결과 공시",
+            "current": "ESG 중대 이슈 식별·우선순위화 프로세스 및 평가 결과 공시",
+            "last_modified": null
+          },
+          "commentary": {
+            "original": "[해당 항목에 연결된 실측 데이터가 없습니다.]",
+            "current": "[해당 항목에 연결된 실측 데이터가 없습니다.]",
+            "last_modified": null
+          },
+          "data_points": []
+        },
+        {
+          "field_id": "s4_i4",
+          "title": "ESG 공시 원칙 준수 공시",
+          "context": {
+            "original": "ESG 경영보고서 발간, 공시 채널, 검증 여부 및 보고 원칙 준수 공시",
+            "current": "ESG 경영보고서 발간, 공시 채널, 검증 여부 및 보고 원칙 준수 공시",
+            "last_modified": null
+          },
+          "commentary": {
+            "original": "[해당 항목에 연결된 실측 데이터가 없습니다.]",
+            "current": "[해당 항목에 연결된 실측 데이터가 없습니다.]",
+            "last_modified": null
+          },
+          "data_points": []
+        }
+      ]
+    },
+    {
+      "label": "환경(E)",
+      "esg_id": 1,
+      "items": [
+        {
+          "field_id": "s1_i2",
+          "title": "에너지 사용량",
+          "context": {
+            "original": "에너지 사용량 분석 및 절감 목표 수립 여부, 고효율 설비 도입 등 에너지 관리의 지속성과 성과 평가",
+            "current": "에너지 사용량 분석 및 절감 목표 수립 여부, 고효율 설비 도입 등 에너지 관리의 지속성과 성과 평가",
+            "last_modified": null
+          },
+          "commentary": {
+            "original": "### 에너지 사용량에 대한 설명\n삼성물산의 에너지 사용량은 2025년 7월부터 12월까지 매월 증가하는 추세를 보이며, 총 연료 소비량은 121,200 GJ에서 122,200 GJ로 증가했습니다. 재생연료 소비량 또한 같은 기간 동안 12,120 GJ에서 12,220 GJ로 증가하였으며, 비재생연료 소비량은 109,080 GJ에서 109,980 GJ로 증가하여, 재생에너지 전환이 이루어지고 있음을 나타냅니다. 이러한 데이터는 에너지 관리의 지속성과 성과를 평가하는 데 중요한 기초 자료로 활용될 수 있습니다.\n\n### 투자자에게 기업 성과 설명\n삼성물산은 최근 에너지 사용량 증가 추세를 보이고 있으며, 이는 총 연료 소비량이 6개월 동안 121,200 GJ에서 122,200 GJ로 증가한 결과입니다. 재생에너지 사용량도 함께 증가하여, 12,120 GJ에서 12,220 GJ로 상승했습니다. 그러나 비재생에너지 사용량도 증가하고 있어, 에너지 효율성 개선과 지속 가능한 에너지 관리에 대한 추가적인 노력이 필요합니다. 이러한 성과는 기업의 에너지 관리 전략과 이해관계자에게 미치는 영향을 반영하며",
+            "current": "### 에너지 사용량에 대한 설명\n삼성물산의 에너지 사용량은 2025년 7월부터 12월까지 매월 증가하는 추세를 보이며, 총 연료 소비량은 121,200 GJ에서 122,200 GJ로 증가했습니다. 재생연료 소비량 또한 같은 기간 동안 12,120 GJ에서 12,220 GJ로 증가하였으며, 비재생연료 소비량은 109,080 GJ에서 109,980 GJ로 증가하여, 재생에너지 전환이 이루어지고 있음을 나타냅니다. 이러한 데이터는 에너지 관리의 지속성과 성과를 평가하는 데 중요한 기초 자료로 활용될 수 있습니다.\n\n### 투자자에게 기업 성과 설명\n삼성물산은 최근 에너지 사용량 증가 추세를 보이고 있으며, 이는 총 연료 소비량이 6개월 동안 121,200 GJ에서 122,200 GJ로 증가한 결과입니다. 재생에너지 사용량도 함께 증가하여, 12,120 GJ에서 12,220 GJ로 상승했습니다. 그러나 비재생에너지 사용량도 증가하고 있어, 에너지 효율성 개선과 지속 가능한 에너지 관리에 대한 추가적인 노력이 필요합니다. 이러한 성과는 기업의 에너지 관리 전략과 이해관계자에게 미치는 영향을 반영하며",
+            "last_modified": null
+          },
+          "data_points": [
+            {
+              "dp_id": 2,
+              "dp_name": "에너지 효율성 증대 기여 설명",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-1-a",
+              "indicator_name": "에너지 관리 정책",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3599,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3600,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3601,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3602,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3603,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3604,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3605,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3606,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3607,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3608,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3609,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3610,
+                  "data_point_id": 2,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 3,
+              "dp_name": "재생에너지 전환 기여 설명",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-1-a",
+              "indicator_name": "에너지 관리 정책",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3611,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3612,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3613,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3614,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3615,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3616,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3617,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3618,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3619,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3620,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3621,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3622,
+                  "data_point_id": 3,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 1,
+              "dp_name": "에너지 소비 감소 기여 설명",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-1-a",
+              "indicator_name": "에너지 관리 정책",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3587,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3588,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3589,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3590,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3591,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3592,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3593,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3594,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3595,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3596,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3597,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3598,
+                  "data_point_id": 1,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 7,
+              "dp_name": "영향 받는 이해관계자 식별 방법",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-1-b",
+              "indicator_name": "에너지 전환 영향",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3623,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3624,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3625,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3626,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3627,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3628,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3629,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3630,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3631,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3632,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3633,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3634,
+                  "data_point_id": 7,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 8,
+              "dp_name": "참여 활동 설명",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-1-b",
+              "indicator_name": "에너지 전환 영향",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3635,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3636,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3637,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3638,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3639,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3640,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3641,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3642,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3643,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3644,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3645,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3646,
+                  "data_point_id": 8,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 9,
+              "dp_name": "인사이트가 조치에 미친 영향",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-1-b",
+              "indicator_name": "에너지 전환 영향",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3647,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3648,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3649,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3650,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3651,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3652,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3653,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3654,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3655,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3656,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3657,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3658,
+                  "data_point_id": 9,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 10,
+              "dp_name": "경제_영향_설명",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-2-a",
+              "indicator_name": "조직 내 연료 소비",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3659,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3660,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3661,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3662,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3663,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3664,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3665,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3666,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3667,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3668,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3669,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3670,
+                  "data_point_id": 10,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 12,
+              "dp_name": "인권_영향_설명",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-2-a",
+              "indicator_name": "조직 내 연료 소비",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3683,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3684,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3685,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3686,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3687,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3688,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3689,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3690,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3691,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3692,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3693,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3694,
+                  "data_point_id": 12,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 13,
+              "dp_name": "완화_조치_설명",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-2-a",
+              "indicator_name": "조직 내 연료 소비",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3695,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3696,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3697,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3698,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3699,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3700,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3701,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3702,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3703,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3704,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3705,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3706,
+                  "data_point_id": 13,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 11,
+              "dp_name": "환경_영향_설명",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-2-a",
+              "indicator_name": "조직 내 연료 소비",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3671,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3672,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3673,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3674,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3675,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3676,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3677,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3678,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3679,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3680,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3681,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3682,
+                  "data_point_id": 11,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 14,
+              "dp_name": "총_연료_소비량",
+              "unit": "GJ",
+              "data_type": "numeric",
+              "indicator_code": "103-2-b",
+              "indicator_name": "구매 전력 소비",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3887,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 120000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3888,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 120200,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3889,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 120400,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3890,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 120600,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3891,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 120800,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3892,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 121000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3893,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 121200,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3894,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 121400,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3895,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 121600,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3896,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 121800,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3897,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 122000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3898,
+                  "data_point_id": 14,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 122200,
+                  "unit": "GJ"
+                }
+              ]
+            },
+            {
+              "dp_id": 15,
+              "dp_name": "재생연료_소비량",
+              "unit": "GJ",
+              "data_type": "numeric",
+              "indicator_code": "103-2-b",
+              "indicator_name": "구매 전력 소비",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3899,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 12000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3900,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 12020,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3901,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 12040,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3902,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 12060,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3903,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 12080,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3904,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 12100,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3905,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 12120,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3906,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 12140,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3907,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 12160,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3908,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 12180,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3909,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 12200,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3910,
+                  "data_point_id": 15,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 12220,
+                  "unit": "GJ"
+                }
+              ]
+            },
+            {
+              "dp_id": 16,
+              "dp_name": "비재생연료_소비량",
+              "unit": "GJ",
+              "data_type": "numeric",
+              "indicator_code": "103-2-b",
+              "indicator_name": "구매 전력 소비",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3911,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 108000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3912,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 108180,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3913,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 108360,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3914,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 108540,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3915,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 108720,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3916,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 108900,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3917,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 109080,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3918,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 109260,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3919,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 109440,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3920,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 109620,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3921,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 109800,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3922,
+                  "data_point_id": 16,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 109980,
+                  "unit": "GJ"
+                }
+              ]
+            },
+            {
+              "dp_id": 17,
+              "dp_name": "연료_활동별_분류",
+              "unit": "GJ",
+              "data_type": "numeric",
+              "indicator_code": "103-2-b",
+              "indicator_name": "구매 전력 소비",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3923,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 120000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3924,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 120200,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3925,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 120400,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3926,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 120600,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3927,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 120800,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3928,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 121000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3929,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 121200,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3930,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 121400,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3931,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 121600,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3932,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 121800,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3933,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 122000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 3934,
+                  "data_point_id": 17,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 122200,
+                  "unit": "GJ"
+                }
+              ]
+            },
+            {
+              "dp_id": 26,
+              "dp_name": "판매_재생_전기_량",
+              "unit": "MWh",
+              "data_type": "numeric",
+              "indicator_code": "103-3-a",
+              "indicator_name": "가치사슬 에너지 소비",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 4007,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 1000,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4008,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 1005,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4009,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 1010,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4010,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 1015,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4011,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 1020,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4012,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 1025,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4013,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 1030,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4014,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 1035,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4015,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 1040,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4016,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 1045,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4017,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 1050,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4018,
+                  "data_point_id": 26,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 1055,
+                  "unit": "MWh"
+                }
+              ]
+            },
+            {
+              "dp_id": 27,
+              "dp_name": "판매_비재생_전기_량",
+              "unit": "MWh",
+              "data_type": "numeric",
+              "indicator_code": "103-3-a",
+              "indicator_name": "가치사슬 에너지 소비",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 4019,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 500,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4020,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 502,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4021,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 504,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4022,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 506,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4023,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 508,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4024,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 510,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4025,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 512,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4026,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 514,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4027,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 516,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4028,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 518,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4029,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 520,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4030,
+                  "data_point_id": 27,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 522,
+                  "unit": "MWh"
+                }
+              ]
+            },
+            {
+              "dp_id": 29,
+              "dp_name": "표준_방법론",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-4",
+              "indicator_name": "에너지 집약도",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3743,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3744,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3745,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3746,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3747,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3748,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3749,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3750,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3751,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3752,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3753,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3754,
+                  "data_point_id": 29,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 28,
+              "dp_name": "변환율_출처",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-4",
+              "indicator_name": "에너지 집약도",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3731,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3732,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3733,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3734,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3735,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3736,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3737,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3738,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3739,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3740,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3741,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3742,
+                  "data_point_id": 28,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 30,
+              "dp_name": "업스트림_총_에너지_소비량",
+              "unit": "GJ",
+              "data_type": "numeric",
+              "indicator_code": "103-5",
+              "indicator_name": "에너지 소비 감소",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 4031,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 50000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4032,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 50100,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4033,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 50200,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4034,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 50300,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4035,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 50400,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4036,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 50500,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4037,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 50600,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4038,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 50700,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4039,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 50800,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4040,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 50900,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4041,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 51000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4042,
+                  "data_point_id": 30,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 51100,
+                  "unit": "GJ"
+                }
+              ]
+            },
+            {
+              "dp_id": 31,
+              "dp_name": "다운스트림_총_에너지_소비량",
+              "unit": "GJ",
+              "data_type": "numeric",
+              "indicator_code": "103-5",
+              "indicator_name": "에너지 소비 감소",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 4043,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 30000,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4044,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 30050,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4045,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 30100,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4046,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 30150,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4047,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 30200,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4048,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 30250,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4049,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 30300,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4050,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 30350,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4051,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 30400,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4052,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 30450,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4053,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 30500,
+                  "unit": "GJ"
+                },
+                {
+                  "id": 4054,
+                  "data_point_id": 31,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 30550,
+                  "unit": "GJ"
+                }
+              ]
+            },
+            {
+              "dp_id": 32,
+              "dp_name": "주요_카테고리_목록",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-5",
+              "indicator_name": "에너지 소비 감소",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3755,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3756,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3757,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3758,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3759,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3760,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3761,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3762,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3763,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3764,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3765,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3766,
+                  "data_point_id": 32,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "field_id": "s1_i3",
+          "title": "재생에너지 사용 비율",
+          "context": {
+            "original": "에너지 전환 수준 관리 및 투명한 정보공개로 재생에너지 사용 확대를 통한 온실가스 감축 기여",
+            "current": "에너지 전환 수준 관리 및 투명한 정보공개로 재생에너지 사용 확대를 통한 온실가스 감축 기여",
+            "last_modified": null
+          },
+          "commentary": {
+            "original": "### 데이터 해석\n삼성물산의 재생에너지 사용 비율은 2025년 7월부터 12월까지 매월 증가하는 추세를 보이며, 자체 재생 전기 소비량은 3060MWh에서 3110MWh로 증가했습니다. 이는 에너지 전환 수준을 관리하고 재생에너지 사용을 확대하는 데 기여하고 있음을 나타냅니다. 이러한 데이터는 온실가스 감축에 긍정적인 영향을 미칠 것으로 기대됩니다.\n\n### 투자자에게 설명\n삼성물산은 최근 6개월 동안 재생에너지 사용을 지속적으로 확대해왔습니다. 예를 들어, 자체 재생 전기 소비량은 3060MWh에서 3110MWh로 증가하여, 에너지 전환에 대한 노력을 보여주고 있습니다. 그러나 여전히 전체 에너지 소비량에 대한 재생에너지 비율이 낮을 수 있으며, 이는 향후 개선이 필요한 부분입니다. 이러한 긍정적인 성과와 함께, 기업의 지속 가능한 발전을 위한 추가적인 노력이 필요하다는 점도 함께 고려해 주시기 바랍니다.",
+            "current": "### 데이터 해석\n삼성물산의 재생에너지 사용 비율은 2025년 7월부터 12월까지 매월 증가하는 추세를 보이며, 자체 재생 전기 소비량은 3060MWh에서 3110MWh로 증가했습니다. 이는 에너지 전환 수준을 관리하고 재생에너지 사용을 확대하는 데 기여하고 있음을 나타냅니다. 이러한 데이터는 온실가스 감축에 긍정적인 영향을 미칠 것으로 기대됩니다.\n\n### 투자자에게 설명\n삼성물산은 최근 6개월 동안 재생에너지 사용을 지속적으로 확대해왔습니다. 예를 들어, 자체 재생 전기 소비량은 3060MWh에서 3110MWh로 증가하여, 에너지 전환에 대한 노력을 보여주고 있습니다. 그러나 여전히 전체 에너지 소비량에 대한 재생에너지 비율이 낮을 수 있으며, 이는 향후 개선이 필요한 부분입니다. 이러한 긍정적인 성과와 함께, 기업의 지속 가능한 발전을 위한 추가적인 노력이 필요하다는 점도 함께 고려해 주시기 바랍니다.",
+            "last_modified": null
+          },
+          "data_points": [
+            {
+              "dp_id": 18,
+              "dp_name": "구매_전기_소비량",
+              "unit": "MWh",
+              "data_type": "numeric",
+              "indicator_code": "103-2-c",
+              "indicator_name": "자체 발전 재생 에너지",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3935,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 50000,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3936,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 50100,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3937,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 50200,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3938,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 50300,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3939,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 50400,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3940,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 50500,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3941,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 50600,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3942,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 50700,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3943,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 50800,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3944,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 50900,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3945,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 51000,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3946,
+                  "data_point_id": 18,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 51100,
+                  "unit": "MWh"
+                }
+              ]
+            },
+            {
+              "dp_id": 19,
+              "dp_name": "구매_난방_소비량",
+              "unit": "MWh",
+              "data_type": "numeric",
+              "indicator_code": "103-2-c",
+              "indicator_name": "자체 발전 재생 에너지",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3947,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 5000,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3948,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 5010,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3949,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 5020,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3950,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 5030,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3951,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 5040,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3952,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 5050,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3953,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 5060,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3954,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 5070,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3955,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 5080,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3956,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 5090,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3957,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 5100,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3958,
+                  "data_point_id": 19,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 5110,
+                  "unit": "MWh"
+                }
+              ]
+            },
+            {
+              "dp_id": 21,
+              "dp_name": "구매_증기_소비량",
+              "unit": "MWh",
+              "data_type": "numeric",
+              "indicator_code": "103-2-c",
+              "indicator_name": "자체 발전 재생 에너지",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3959,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 3000,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3960,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 3005,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3961,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 3010,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3962,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 3015,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3963,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 3020,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3964,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 3025,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3965,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 3030,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3966,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 3035,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3967,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 3040,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3968,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 3045,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3969,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 3050,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3970,
+                  "data_point_id": 21,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 3055,
+                  "unit": "MWh"
+                }
+              ]
+            },
+            {
+              "dp_id": 20,
+              "dp_name": "구매_냉방_소비량",
+              "unit": "MWh",
+              "data_type": "numeric",
+              "indicator_code": "103-2-c",
+              "indicator_name": "자체 발전 재생 에너지",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3971,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 2000,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3972,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 2005,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3973,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 2010,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3974,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 2015,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3975,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 2020,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3976,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 2025,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3977,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 2030,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3978,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 2035,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3979,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 2040,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3980,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 2045,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3981,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 2050,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3982,
+                  "data_point_id": 20,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 2055,
+                  "unit": "MWh"
+                }
+              ]
+            },
+            {
+              "dp_id": 22,
+              "dp_name": "계약수단_사용_여부",
+              "unit": "Yes/No",
+              "data_type": "text",
+              "indicator_code": "103-2-d",
+              "indicator_name": "판매 에너지",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3707,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3708,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3709,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3710,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3711,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3712,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3713,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3714,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3715,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3716,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3717,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                },
+                {
+                  "id": 3718,
+                  "data_point_id": 22,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Yes/No"
+                }
+              ]
+            },
+            {
+              "dp_id": 23,
+              "dp_name": "계약수단_품질기준_준수_방법",
+              "unit": "Text",
+              "data_type": "text",
+              "indicator_code": "103-2-d",
+              "indicator_name": "판매 에너지",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3719,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3720,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3721,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3722,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3723,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3724,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3725,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3726,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3727,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3728,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3729,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": null,
+                  "unit": "Text"
+                },
+                {
+                  "id": 3730,
+                  "data_point_id": 23,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": null,
+                  "unit": "Text"
+                }
+              ]
+            },
+            {
+              "dp_id": 24,
+              "dp_name": "자체_재생_전기_소비량",
+              "unit": "MWh",
+              "data_type": "numeric",
+              "indicator_code": "103-2-f",
+              "indicator_name": "방법론",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3983,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 3000,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3984,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 3010,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3985,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 3020,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3986,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 3030,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3987,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 3040,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3988,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 3050,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3989,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 3060,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3990,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 3070,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3991,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 3080,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3992,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 3090,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3993,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 3100,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3994,
+                  "data_point_id": 24,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 3110,
+                  "unit": "MWh"
+                }
+              ]
+            },
+            {
+              "dp_id": 25,
+              "dp_name": "자체_재생_활동별_분류",
+              "unit": "MWh",
+              "data_type": "numeric",
+              "indicator_code": "103-2-f",
+              "indicator_name": "방법론",
+              "has_data": true,
+              "rows": [
+                {
+                  "id": 3995,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-01-01",
+                  "value": 3000,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3996,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-02-01",
+                  "value": 3010,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3997,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-03-01",
+                  "value": 3020,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3998,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-04-01",
+                  "value": 3030,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 3999,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-05-01",
+                  "value": 3040,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4000,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-06-01",
+                  "value": 3050,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4001,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-07-01",
+                  "value": 3060,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4002,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-08-01",
+                  "value": 3070,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4003,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-09-01",
+                  "value": 3080,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4004,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-10-01",
+                  "value": 3090,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4005,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-11-01",
+                  "value": 3100,
+                  "unit": "MWh"
+                },
+                {
+                  "id": 4006,
+                  "data_point_id": 25,
+                  "site_id": "삼성물산",
+                  "reporting_date": "2025-12-01",
+                  "value": 3110,
+                  "unit": "MWh"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

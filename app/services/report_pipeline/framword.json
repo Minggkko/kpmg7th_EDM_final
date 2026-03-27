@@ -1,0 +1,377 @@
+{
+  "_meta": {
+    "description": "ESG 가이드라인 보고서 프레임워크 — frame × indicator_id 매핑",
+    "total_sections": 4,
+    "total_items": 42,
+    "unmapped_items": 11
+  },
+  "sections": [
+    {
+      "esg_id": 4,
+      "label": "총괄편",
+      "items": [
+        {
+          "index": "ESG 목표 및 전략 수립",
+          "index_context": "기관장의 ESG 비전, 중장기 목표, 전략 방향 및 이행계획 수립·공시",
+          "indicator_ids": [
+            36
+          ],
+          "mapped": true
+        },
+        {
+          "index": "ESG위원회 및 추진 조직",
+          "index_context": "ESG 전담 위원회 설치 현황, 구성원, 역할 및 의사결정 구조 공시",
+          "indicator_ids": [
+            38
+          ],
+          "mapped": true
+        },
+        {
+          "index": "이해관계자 의견 수렴",
+          "index_context": "내·외부 이해관계자 식별, 참여 방식, 의견 반영 프로세스 공시",
+          "indicator_ids": [
+            37
+          ],
+          "mapped": true
+        },
+        {
+          "index": "중대성 평가",
+          "index_context": "ESG 중대 이슈 식별·우선순위화 프로세스 및 평가 결과 공시",
+          "indicator_ids": [
+            40
+          ],
+          "mapped": true
+        },
+        {
+          "index": "ESG 공시 원칙 준수 공시",
+          "index_context": "ESG 경영보고서 발간, 공시 채널, 검증 여부 및 보고 원칙 준수 공시",
+          "indicator_ids": [
+            39
+          ],
+          "mapped": true
+        }
+      ]
+    },
+    {
+      "esg_id": 1,
+      "label": "환경(E)",
+      "items": [
+        {
+          "index": "환경경영 목표 및 추진체계",
+          "index_context": "기관장의 환경 리더십을 기반으로 명확한 환경목표를 수립하고 실행조직 및 관리체계를 운영하는지 평가",
+          "indicator_ids": [
+            59,
+            60
+          ],
+          "mapped": true
+        },
+        {
+          "index": "온실가스 배출량 및 검증",
+          "index_context": "Scope 1~3 배출량 산정·감축활동 수행여부 검증, 목표 대비 실적 등 정량적 관리 체계 평가",
+          "indicator_ids": [
+            21,
+            22,
+            23,
+            24
+          ],
+          "mapped": true
+        },
+        {
+          "index": "에너지 사용량",
+          "index_context": "에너지 사용량 분석 및 절감 목표 수립 여부, 고효율 설비 도입 등 에너지 관리의 지속성과 성과 평가",
+          "indicator_ids": [
+            1,
+            2,
+            3,
+            4,
+            8,
+            9,
+            10
+          ],
+          "mapped": true
+        },
+        {
+          "index": "재생에너지 사용 비율",
+          "index_context": "에너지 전환 수준 관리 및 투명한 정보공개로 재생에너지 사용 확대를 통한 온실가스 감축 기여",
+          "indicator_ids": [
+            5,
+            6,
+            7,
+            45
+          ],
+          "mapped": true
+        },
+        {
+          "index": "폐기물 배출량",
+          "index_context": "폐기물 발생 억제, 재사용·재활용, 최종 처리까지의 자원순환 전략 수립과 실적 관리 여부 평가",
+          "indicator_ids": [
+            46,
+            47,
+            48
+          ],
+          "mapped": true
+        },
+        {
+          "index": "용수 사용량",
+          "index_context": "물 사용량의 절감 노력, 수질관리 시스템 도입, 재이용 확대 등 수자원의 지속가능한 이용 평가",
+          "indicator_ids": [
+            56,
+            57,
+            58
+          ],
+          "mapped": true
+        },
+        {
+          "index": "환경법 규제위반",
+          "index_context": "행정처분 명령서 기준 법규 위반 내용·조치 사항 공시, 위반 시 재발 방지 노력 공개로 책임경영 실현",
+          "indicator_ids": [
+            61
+          ],
+          "mapped": true
+        },
+        {
+          "index": "녹색제품 구매실적",
+          "index_context": "에너지·자원 투입과 온실가스·오염물질 발생을 최소화하는 녹색제품 구매실적 평가",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "대기오염물질 배출량",
+          "index_context": "대기오염물질 배출량 모니터링과 저감설비 도입 여부, 법정기준 준수 여부로 주변 환경피해 저감 노력 평가",
+          "indicator_ids": [
+            49
+          ],
+          "mapped": true
+        },
+        {
+          "index": "화학물질배출량",
+          "index_context": "유해화학물질 취급·저장·폐기 등 전 과정에 걸쳐 안전관리체계 마련 및 관련 법규 준수 여부 점검",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "수질오염물질 배출량",
+          "index_context": "수질오염물질 관리 및 감축을 위한 기관의 전략 수립 및 이행수준 공개로 식수원·자연환경 보전 기여",
+          "indicator_ids": [
+            50
+          ],
+          "mapped": true
+        },
+        {
+          "index": "기후리스크",
+          "index_context": "기후리스크 식별, 탄소중립 이행전략 수립 여부 등 기관의 기후변화 대응 역량 점검",
+          "indicator_ids": [
+            51,
+            52
+          ],
+          "mapped": true
+        },
+        {
+          "index": "생물다양성",
+          "index_context": "사업장이 위치한 지역의 생태계와 생물종에 대한 영향 최소화를 위해 조사·관리·복원 노력 평가",
+          "indicator_ids": [
+            53,
+            54,
+            55
+          ],
+          "mapped": true
+        }
+      ]
+    },
+    {
+      "esg_id": 2,
+      "label": "사회(S)",
+      "items": [
+        {
+          "index": "결사의 자유 보장",
+          "index_context": "노동기본권 존중, 노동조합 활동 보장, 단체교섭, 고충처리제도 운영 등 근로자 권익 보호를 위한 실질적 조치 수행 점검",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "여성 구성원 및 보수 비율",
+          "index_context": "고용·승진·처우 전반에서 모든 구성원이 성별에 관계없이 동등한 기회와 공정한 보상을 받도록 환경 조성",
+          "indicator_ids": [
+            25,
+            30
+          ],
+          "mapped": true
+        },
+        {
+          "index": "장애인 고용률",
+          "index_context": "고용·승진·처우 전반에서 장애 여부 등의 이유로 차별 없도록 제도화하고, 구체적 목표와 실적 관리 점검",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "일·가정 양립 지원",
+          "index_context": "일·가정 양립 제도의 운용 현황 및 신규 제도 개발, 문화 조성 등의 구체적 활동을 통해 제도적·문화적 지원",
+          "indicator_ids": [
+            68
+          ],
+          "mapped": true
+        },
+        {
+          "index": "안전경영책임",
+          "index_context": "사업장의 위험 요소 식별, 재해 예방 체계 구축, 산업재해율 관리, 협력사 안전관리 예방적 조치 및 대응 시스템 구축",
+          "indicator_ids": [
+            28,
+            29,
+            69
+          ],
+          "mapped": true
+        },
+        {
+          "index": "인권경영",
+          "index_context": "임직원 대상 인권 교육, 조직문화 개선 활동을 통해 인권 감수성 제고 및 인권의식 내재화를 위한 지속적 노력 확인",
+          "indicator_ids": [
+            70
+          ],
+          "mapped": true
+        },
+        {
+          "index": "협력사 ESG 경영",
+          "index_context": "협력사들의 ESG 리스크를 체계적으로 진단·관리·개선하여 공급망 전반의 지속가능성 강화 여부 평가",
+          "indicator_ids": [
+            62
+          ],
+          "mapped": true
+        },
+        {
+          "index": "협력사 ESG 지원",
+          "index_context": "협력사에 대한 ESG 교육·컨설팅, 기술·금융 지원 등 협력사들의 역량 강화를 위한 다양한 형태의 지원 활동 제시",
+          "indicator_ids": [
+            63
+          ],
+          "mapped": true
+        },
+        {
+          "index": "상생협력 구매실적",
+          "index_context": "법령에 따라 조달한 혁신제품, 중증장애인 생산품 및 중소기업 생산품의 연간 구매실적 공개·관리",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "전략적 사회공헌",
+          "index_context": "기관의 전략·핵심사업과 연계된 사회적 가치 창출 여부, 내재화된 조직문화 형성 등을 통해 지속가능한 사회기여 수준 평가",
+          "indicator_ids": [
+            64
+          ],
+          "mapped": true
+        },
+        {
+          "index": "지역사회 환원노력(구성원 봉사)",
+          "index_context": "지역사회에 대한 기부, 자원봉사, 지역 기업과의 협력 등 지역과의 상생을 위한 사회공헌활동 실적 및 전략 평가",
+          "indicator_ids": [
+            65
+          ],
+          "mapped": true
+        },
+        {
+          "index": "정보보호 시스템 구축",
+          "index_context": "대내외 사이버 위협으로부터 기업의 정보자산을 안전하게 보호하기 위한 제도적·조직적 체계, 전담인력 및 활동 현황 공개",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "개인정보 침해 및 구제",
+          "index_context": "기업이 수집·처리하는 대량의 개인정보가 유출 및 오·남용되지 않도록 관리체계 구축 및 안전조치 이행현황 공개",
+          "indicator_ids": [
+            66
+          ],
+          "mapped": true
+        },
+        {
+          "index": "사회 법·규제 위반",
+          "index_context": "기업이 준수해야 할 사회 분야 법·규제 위반 현황 및 재발방지 노력 공시로 신뢰 확보 및 사회적 책임 준수",
+          "indicator_ids": [
+            26,
+            27,
+            67
+          ],
+          "mapped": true
+        }
+      ]
+    },
+    {
+      "esg_id": 3,
+      "label": "지배구조(G)",
+      "items": [
+        {
+          "index": "이사회 내 ESG 안건 상정",
+          "index_context": "ESG 전략이 이사회 수준에서 수립되어 조직 전체로 전개되고, 관련 정책·목표가 설정되어 지속가능경영을 체계적으로 이행하는지 평가",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "이사회 구성 및 다양성",
+          "index_context": "사외이사 비율, 이사회 성별 현황, 이사 후보 자격 등을 기준으로 이사회의 전문성·다양성 확보 여부와 대응력 판단",
+          "indicator_ids": [
+            31
+          ],
+          "mapped": true
+        },
+        {
+          "index": "이사회 책임",
+          "index_context": "이사회의 독립적 운영, 정기적 회의 개최, 이사 출석률 및 안건 논의의 실효성 확보 여부 평가",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "이사회 산하 위원회",
+          "index_context": "이사회 내부에 분야별 전문가 회의체(산하 위원회)를 설치하여 중요한 이슈에 대해 전문적·신속한 의사결정 진행 가능 여건 점검",
+          "indicator_ids": [
+            41
+          ],
+          "mapped": true
+        },
+        {
+          "index": "임원 보수체계",
+          "index_context": "성과에 대한 적절한 평가를 통해 결정된 경영진 보수 내역을 투명하게 공개하고 독립적 평가 등 보수위원회 운영 현황 공개",
+          "indicator_ids": [
+            42
+          ],
+          "mapped": true
+        },
+        {
+          "index": "내부통제 점검",
+          "index_context": "잠재적인 부패·비리 위험 및 부정행위를 예방하기 위한 내부체계 마련 및 의사결정기구 역할 공개로 투명성·신뢰성 확보",
+          "indicator_ids": [
+            43
+          ],
+          "mapped": true
+        },
+        {
+          "index": "윤리규범 위반사항 공시",
+          "index_context": "윤리강령 제정 등 임직원 행동기준 마련, 반부패·이해상충 방지 제도 운영 등을 포함한 윤리경영 문화조성 여부 확인",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "내부감사부서 설치",
+          "index_context": "전문성 있는 감사조직 구성, 감사인의 윤리의식 제고와 함께 내부통제 시스템의 효과성에 대한 독립적 점검 가능 여부 확인",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "감사기구 전문성",
+          "index_context": "감사기구의 독립적 지위 및 전문가 포함 여부, 경영진에 대한 견제 역할의 효과적 수행 등으로 내부통제 충실도 평가",
+          "indicator_ids": [],
+          "mapped": false
+        },
+        {
+          "index": "지배구조 법·규제 위반",
+          "index_context": "관련 법규 준수 여부, 사전 리스크 점검 체계 및 준법감시 전담 조직의 운영 여부 등을 종합 평가하여 법적 안정성 확인",
+          "indicator_ids": [
+            32,
+            33,
+            34,
+            35,
+            44
+          ],
+          "mapped": true
+        }
+      ]
+    }
+  ]
+}
